@@ -5,6 +5,7 @@ import WriteReview from "./writeReview.jsx";
 const ReviewList = () => {
   return (
     <div>
+      <p>Review List</p>
       <ReviewListItem />
     </div>
   )

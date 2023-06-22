@@ -15,9 +15,11 @@ const App = () => {
         <OutfitsAndRelatedItems currentProduct={currentProduct} />
 
       </div>
+      <div class="section">Questions and Answers</div>
+      <div class="section">
+        <RatingsAndReview />
+      </div>
     </>
-
-
   )
 }
 
