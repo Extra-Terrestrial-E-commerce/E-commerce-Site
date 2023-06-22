@@ -1,16 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import RelatedItems from "./RelatedItems.jsx";
-import Outfits from "./Outfits.jsx";
+import OutfitItems from "./OutfitItems.jsx";
+const { useState } = React;
 
-const OutfitsAndRelatedItems = () => {
+const OutfitsAndRelatedItems = ( {currentProduct} ) => {
   return (
     <>
       <div>
-        <RelatedItems />
+        <RelatedItems currentProduct={currentProduct} />
       </div>
       <div>
-        <Outfits />
+        <OutfitItems currentProduct={currentProduct} />
       </div>
     </>
   )
