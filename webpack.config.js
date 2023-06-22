@@ -11,6 +11,9 @@ module.exports = {
   },
   devServer: {
     open: true,
+    static: {
+      directory: path.join(__dirname, '/client/dist'),
+    },
     host: 'localhost'
   },
   devtool: "source-map",
@@ -23,6 +26,17 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
+      }
     ],
   },
 };
