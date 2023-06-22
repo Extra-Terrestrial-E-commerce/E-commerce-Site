@@ -1,16 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Carousel from "./Carousel.jsx";
+import RelatedItems from "./RelatedItems.jsx";
+import OutfitItems from "./OutfitItems.jsx";
 const { useState } = React;
 
 const OutfitsAndRelatedItems = ( {currentProduct} ) => {
   return (
     <>
       <div>
-        <Carousel bool={true} currentProduct={currentProduct} />
+        <RelatedItems currentProduct={currentProduct} />
       </div>
       <div>
-        Outfit carousel go brrrr
+        <OutfitItems currentProduct={currentProduct} />
       </div>
     </>
   )
