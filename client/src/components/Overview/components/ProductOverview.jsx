@@ -1,17 +1,11 @@
 import React from 'react';
 
-const ProductOverview = () => {
+const ProductOverview = ({product}) => {
   return (
     <div>
-      <h3>ProductOverview</h3>
-      <p>Product Overview - This free form text field may exist on some items.
-         If it is available it should be displayed
+      <h3>{product.slogan}</h3>
+      <p> {product.description}
       </p>
-      <div>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </div>
   )
 }

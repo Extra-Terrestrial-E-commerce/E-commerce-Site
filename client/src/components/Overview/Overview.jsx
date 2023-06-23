@@ -1,13 +1,18 @@
 import React from 'react';
 import ProductInfo from './components/ProductInfo.jsx';
 import ProductOverview from './components/ProductOverview.jsx';
-const Overview = () => {
-
+import ProductStyle from './components/ProductStyle.jsx'
+import ImageGallery from './components/ImageGallery.jsx'
+const Overview = ({currentProduct}) => {
+  console.log('this is the current product object', currentProduct);
   return (
     <div className='overview'>
       the following are components of overview:
-      <ProductInfo/>
-      <ProductOverview/>
+      <ImageGallery/>
+      <ProductInfo product ={currentProduct}/>
+      <ProductStyle/>
+      <ProductOverview product={currentProduct}/>
+
     </div>
   )
 }
