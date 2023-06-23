@@ -13,6 +13,8 @@ const ReviewList = () => {
         <button>MORE REVIEWS</button>
         <button>ADD A REVIEW</button>
       </div>
+      <br/>
+      <WriteReview />
     </div>
   )
   }
