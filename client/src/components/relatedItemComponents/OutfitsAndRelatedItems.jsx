@@ -7,16 +7,7 @@ import apiClient from '../config/config.js';
 
 const OutfitsAndRelatedItems = ( {currentProduct} ) => {
 
-  useEffect(() => {
-    apiClient.get('/products', { params: {count: 20} } )
-      .then((data) => {
-        console.log(data.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-  }, [])
-
+  console.log(currentProduct);
 
   return (
     <>
