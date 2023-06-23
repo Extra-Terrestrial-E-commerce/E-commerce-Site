@@ -32,15 +32,12 @@ const WriteReview = () => {
   const addReview = (params) => {
     apiClient.post('/reviews/', params )
         .then((data) => {
-          setCurrentReviews(data);
 
         })
         .catch((error) => {
           console.error(error);
         });
   };
-
-  addReview(addReviewParams);
 
   return (
     <div>
