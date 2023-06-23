@@ -4,12 +4,17 @@ import ReviewList from "./reviewList.jsx"
 
 const RatingsAndReview = () => {
   return (
-    <div>
-      <RatingsBreakdown />
+    <>
+    <div class="row">
+      <div class="oneThird">
+        <RatingsBreakdown />
+      </div>
+      <div class="twoThirds">
+        <ReviewList />
+      </div>
+
     </div>
-    <div>
-      <ReviewList />
-    </div>
+    </>
   )
 }
 
