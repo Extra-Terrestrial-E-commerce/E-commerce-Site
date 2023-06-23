@@ -1,18 +1,20 @@
 import React from "react";
 import ReviewListItem from "./reviewListItem.jsx";
 import WriteReview from "./writeReview.jsx";
+const { useState, useEffect } = React;
 
 const ReviewList = ({currentReviews}) => {
-  console.log("reviewList", currentReviews);
-
 
   return (
     <div>
       <h2>248 reviews, sorted by relevance</h2>
       <p>Review List</p>
-      {/* {currentReviews.results.map((review) => {
-        <ReviewListItem review={review}/>
-      })} */}
+      {currentReviews && currentReviews.map((review) => {
+        return(
+          <ReviewListItem review={review}
+          key={review.review_id} />
+        )
+      })}
       <div class="row">
         <button>MORE REVIEWS</button>
         <button>ADD A REVIEW</button>
