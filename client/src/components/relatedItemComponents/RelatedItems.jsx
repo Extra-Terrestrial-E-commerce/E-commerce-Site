@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RelatedItemCard from "./RelatedItemCard.jsx";
+import ItemCard from "./ItemCard.jsx";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
@@ -80,7 +80,7 @@ const RelatedItems = ( {currentProduct} ) => {
         <div style={carouselStyle}>
           {relatedItemsOnDisplay.map((element) => {
               counter++;
-              return <RelatedItemCard key={counter} product={element} />
+              return <ItemCard key={counter} product={element} type={'related'}/>
             })}
         </div>
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>

@@ -4,11 +4,7 @@ const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 import AllStars from '../Stars/AllStars.jsx';
 
-/// static: product name, category, price, star rating + number of review;
-// preview image: should be the same as the default image of the product description, extra: carousels through 4 images on hover;
-// actionbutton: star on the top right, opens up the comparison modal comparing the item to the current product;
-// these will populate our carousel.
-const RelatedItemCard = ( {product} ) => {
+const ItemCard = ( {product, type} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
 
@@ -49,8 +45,16 @@ const RelatedItemCard = ( {product} ) => {
     flexDirection: 'column'
   }
 
-  const buttonStyle = {
+  const relatedItemButtonStyle = {
     position: 'relative',
+    display: type === 'related' ? 'flex' : 'none',
+    top: '5px',
+    right: '5px',
+  }
+
+  const outfitItemButtonStyle = {
+    position: 'relative',
+    display: type === 'outfit' ? 'flex' : 'none',
     top: '5px',
     right: '5px',
   }
@@ -60,9 +64,14 @@ const RelatedItemCard = ( {product} ) => {
     console.log('to do: comparison modal');
   }
 
+  const handleRemove = () => {
+    event.preventDefault();
+    console.log('handle remove');
+  }
   return (
     <div id="relatedItemContainer" style={containerStyle}>
-      <button sytle={buttonStyle} type="submit" onClick={handleComparison}>compare</button>
+      <button style={relatedItemButtonStyle} type="submit" onClick={handleComparison}>compare</button>
+      <button style={outfitItemButtonStyle} type="submit" onClick={handleRemove}>remove</button>
       <p>
         {product.category}
       </p>
@@ -73,10 +82,10 @@ const RelatedItemCard = ( {product} ) => {
         {product.default_price}
       </p>
       <div>
-        {starRating && <AllStars rating={starRating} size={12} /> }
+        {starRating && <AllStars rating={starRating} size={12} />}
       </div>
     </div>
   )
 }
 
-export default RelatedItemCard;
+export default ItemCard;
