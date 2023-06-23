@@ -12,7 +12,6 @@ const RatingsAndReview = () => {
       <div class="twoThirds">
         <ReviewList />
       </div>
-      <button class="btn">Button</button>
 
     </div>
     </>
