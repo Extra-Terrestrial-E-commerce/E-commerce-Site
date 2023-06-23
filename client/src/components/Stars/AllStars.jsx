@@ -15,6 +15,10 @@ const AllStars = ( {rating, size} ) => {
     fills.push(0);
   }
 
+  const handleHover = () => {
+    console.log('hovering');
+  }
+
   const starStyle = {
     display: 'flex',
     flexDirection: 'row'
@@ -22,7 +26,7 @@ const AllStars = ( {rating, size} ) => {
 
   var counter = 0;
   return (
-    <div syle={starStyle} >
+    <div syle={starStyle} onMouseOver={handleHover}>
       {fills.map((percentFill) => {
         counter++;
         return <OneStar key={counter} size={size} percentFill={percentFill} />
