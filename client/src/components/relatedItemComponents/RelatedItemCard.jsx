@@ -2,14 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
+import AllStars from '../Stars/AllStars.jsx';
 
 /// static: product name, category, price, star rating + number of review;
 // preview image: should be the same as the default image of the product description, extra: carousels through 4 images on hover;
 // actionbutton: star on the top right, opens up the comparison modal comparing the item to the current product;
 // these will populate our carousel.
 const RelatedItemCard = ( {product} ) => {
-  const [numberOfReviews, setNumberOfReviews] = useState('');
-  const [starRating, setStarRating] = useState('');
+  const [numberOfReviews, setNumberOfReviews] = useState(null);
+  const [starRating, setStarRating] = useState(null);
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -29,6 +30,7 @@ const RelatedItemCard = ( {product} ) => {
           var aggregatedData = aggregate(ratings);
           setNumberOfReviews(aggregatedData[0]);
           var stars = aggregatedData[1]/aggregatedData[0];
+
           setStarRating(stars.toFixed(2));
 
         })
@@ -70,9 +72,9 @@ const RelatedItemCard = ( {product} ) => {
       <p>
         {product.default_price}
       </p>
-      <p>
-        {starRating}
-      </p>
+      <div>
+        {starRating && <AllStars rating={starRating} size={12} /> }
+      </div>
     </div>
   )
 }

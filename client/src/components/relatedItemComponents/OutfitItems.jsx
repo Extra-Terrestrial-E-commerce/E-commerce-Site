@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import OutfitItemCard from "./RelatedItemCard.jsx";
+import OutfitCard from "./OutfitCard.jsx";
 import NewOutfitCard from "./NewOutfitCard.jsx";
 const { useState, useEffect } = React;
 
@@ -36,7 +36,7 @@ const OutfitItems = ( {currentProduct} ) => {
           <NewOutfitCard />
           {outfitItemsOnDisplay.map((element) => {
               counter++;
-              return <OutfitItemCard key={counter} product={element} />
+              return <OutfitCard key={counter} product={element} />
             })}
         </div>
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>
