@@ -7,8 +7,6 @@ import apiClient from '../config/config.js';
 
 const OutfitsAndRelatedItems = ( {currentProduct} ) => {
 
-  console.log(currentProduct);
-
   return (
     <>
       <div>

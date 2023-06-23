@@ -2,13 +2,41 @@ import React from "react";
 import ReactDOM from "react-dom";
 import RelatedItemCard from "./RelatedItemCard.jsx";
 const { useState, useEffect } = React;
+import apiClient from '../config/config.js';
 
 const RelatedItems = ( {currentProduct} ) => {
-  const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([{}, {}, {}, {}]);
-  const [allRelatedItems, setAllRelatedItems] = useState([{}, {}, {}, {}, {}]);
+  const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
+  const [allRelatedItems, setAllRelatedItems] = useState([]);
   const [leftmostItem, setLeftmostItem] = useState(0);
 
-  // now how do we get the scroll functionality, ignoring how many we want displayed
+  useEffect(() => {
+    if (currentProduct.id) {
+      const url = '/products/' + currentProduct.id + '/related'
+      apiClient.get(url)
+        .then((data) => {
+          var relatedIds = data.data;
+          var queries = [];
+          relatedIds.forEach((id) => {
+            queries.push(apiClient.get('/products/' + id))
+          })
+          var finalData = [];
+          Promise.all(queries)
+            .then((values) => {
+              for (var i = 0; i < values.length; i++) {
+                finalData.push(values[i].data);
+              }
+              setAllRelatedItems(finalData);
+              setRelatedItemsOnDisplay(finalData.slice(0, 3))
+            })
+            .catch((error) => {
+              console.error(error);
+            })
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+    }
+  }, [currentProduct])
 
   const carouselStyle = {
     width: '100%',
@@ -17,7 +45,7 @@ const RelatedItems = ( {currentProduct} ) => {
     flexDirection: 'row'
   }
   const scrollButton = {
-    display: leftmostItem >= allRelatedItems.length - 4 ? 'none' : 'flex',
+    display: leftmostItem >= allRelatedItems.length - 3 ? 'none' : 'flex',
     height: '100%',
     width: '5px'
   }
@@ -31,7 +59,7 @@ const RelatedItems = ( {currentProduct} ) => {
   const scrollLeft = () => {
     console.log('scrolling left');
     var nextLeft = leftmostItem - 1;
-    var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 4);
+    var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 3);
     setLeftmostItem(nextLeft);
     setRelatedItemsOnDisplay(nextDisplay);
   }
@@ -39,7 +67,7 @@ const RelatedItems = ( {currentProduct} ) => {
   const scrollRight = () => {
     console.log('scrolling right');
     var nextLeft = leftmostItem + 1;
-    var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 4);
+    var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 3);
     setLeftmostItem(nextLeft);
     setRelatedItemsOnDisplay(nextDisplay);
   }
