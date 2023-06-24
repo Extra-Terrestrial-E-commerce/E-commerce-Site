@@ -30,8 +30,8 @@ const App = () => {
       </div>
       <div class="section">Questions and Answers</div>
       <div class="section">
-        <a id="RatingsAndReview"></a>
-        <RatingsAndReview currentProduct={currentProduct}/>
+       <a id="RatingsAndReview"></a>
+       <RatingsAndReview currentProduct={currentProduct}/>
       </div>
     </>
   )
