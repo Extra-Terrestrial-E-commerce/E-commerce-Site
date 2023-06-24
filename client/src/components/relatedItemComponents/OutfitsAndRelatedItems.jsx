@@ -4,10 +4,10 @@ import RelatedItems from "./RelatedItems.jsx";
 import OutfitItems from "./OutfitItems.jsx";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
+import AllStars from '../Stars/AllStars.jsx';
 
 const OutfitsAndRelatedItems = ( {currentProduct} ) => {
 
-  console.log(currentProduct);
 
   return (
     <>

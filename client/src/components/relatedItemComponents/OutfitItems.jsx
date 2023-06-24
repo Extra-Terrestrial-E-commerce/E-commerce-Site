@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import OutfitItemCard from "./RelatedItemCard.jsx";
+import ItemCard from "./ItemCard.jsx";
 import NewOutfitCard from "./NewOutfitCard.jsx";
 const { useState, useEffect } = React;
 
 const OutfitItems = ( {currentProduct} ) => {
-  const [outfitItemsOnDisplay, setOutfitItemsOnDisplay] = useState([{}, {}, {}]);
-  const [allOutfitItems, setAllOutfitItems] = useState([{}, {}, {}, {}, {}]);
+  const [outfitItemsOnDisplay, setOutfitItemsOnDisplay] = useState([]);
+  const [allOutfitItems, setAllOutfitItems] = useState([]);
+
+  useEffect(() => {
+    var newDisplayItems = allOutfitItems.slice(0, 3);
+    setOutfitItemsOnDisplay(newDisplayItems)
+  }, [allOutfitItems])
 
   const carouselStyle = {
     width: '100%',
@@ -33,10 +38,10 @@ const OutfitItems = ( {currentProduct} ) => {
       <div style={carouselStyle}>
         <button style={scrollButton} type="submit" onClick={scrollLeft} >l</button>
         <div style={carouselStyle}>
-          <NewOutfitCard />
+          <NewOutfitCard currentProduct={currentProduct} allOutfitItems={allOutfitItems} setAllOutfitItems={setAllOutfitItems}/>
           {outfitItemsOnDisplay.map((element) => {
               counter++;
-              return <OutfitItemCard key={counter} product={element} />
+              return <ItemCard key={counter} product={element} type={'outfit'}/>
             })}
         </div>
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>
