@@ -1,16 +1,15 @@
 import React from 'react';
-
-const ProductStyle = () => {
+import Style from './Style.jsx'
+const ProductStyle = ({styles}) => {
 
   return (
     <div className ='overview'>
       <span>Style > </span>
       <span>Style Selected</span>
-      <div></div>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div>
+        {styles.map(style => <Style  style={style}/>)}
+      </div>
+
     </div>
   )
 }
