@@ -2,10 +2,18 @@ import React from "react";
 
 const ReviewListItem = ({review}) => {
 
+  const truncate = (text) => {
+    if (text.length > 30) {
+
+      return text.slice(0, 30)+ '...';
+    }
+    return text;
+  }
+
   return (
     <div>
-      <p>{review.rating}</p>
-      <h2>{review.body}</h2>
+      <p>{review.rating} stars </p>
+      <h2>{truncate(review.body)}</h2>
       <p>{review.body}</p>
       <div class="row">
         <p>Helpful?</p>

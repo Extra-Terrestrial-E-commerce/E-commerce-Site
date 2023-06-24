@@ -7,7 +7,7 @@ const ReviewList = ({currentReviews}) => {
 
   return (
     <div>
-      <h2>248 reviews, sorted by relevance</h2>
+      <h2>{currentReviews.length} reviews, sorted by nothing yet!</h2>
       <p>Review List</p>
       {currentReviews && currentReviews.map((review) => {
         return(
