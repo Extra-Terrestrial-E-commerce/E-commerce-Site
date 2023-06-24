@@ -1,8 +1,12 @@
 import React from 'react';
-
-const ProductOverview = () => {
+import Socials from './Socials.jsx';
+const ProductOverview = ({product}) => {
   return (
-    <div>ProductOverview</div>
+    <div>
+      <h3>{product.slogan}</h3>
+      <p> {product.description}</p>
+      <Socials slogan = {product.slogan} />
+    </div>
   )
 }
 

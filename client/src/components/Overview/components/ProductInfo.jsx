@@ -1,8 +1,19 @@
 import React from 'react';
 
-const ProductInfo = () => {
+const ProductInfo = ({product}) => {
+
+  const starStyles = {
+    color:'white'
+  }
+
   return (
-    <div>ProductInfo</div>
+    <div className='overview'>
+      <span>stars</span>
+      <a href='#RatingsAndReview'>Read all reviews</a>
+      <div>{product.category}</div>
+      <h3>{product.name}</h3>
+      <p>{product.default_price}</p>
+    </div>
   )
 }
 
