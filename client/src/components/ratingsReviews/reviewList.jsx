@@ -16,6 +16,12 @@ const customStyles = {
   },
 };
 
+const scrollStyles = {
+    'overflow-x': 'hidden',
+    'overflow-y': 'scroll',
+    'height': '400px'
+};
+
 Modal.setAppElement('#root');
 
 const ReviewList = ({currentReviews, currentProduct}) => {
@@ -44,6 +50,8 @@ const ReviewList = ({currentReviews, currentProduct}) => {
     <div>
       <h2>{currentReviews.length} reviews, sorted by nothing yet!</h2>
       <p>Review List</p>
+      <div style={scrollStyles}>
+
       {displayAllReviews === false && currentReviews.slice(0, 2).map((review) => {
         return(
           <ReviewListItem review={review}
@@ -56,6 +64,7 @@ const ReviewList = ({currentReviews, currentProduct}) => {
           key={review.review_id} />
         )
       })}
+      </div>
       <div class="row">
         <button id="moreReviews"
         onClick={(e)=>{displayReviews(e.target)}}>{buttonText}</button>
