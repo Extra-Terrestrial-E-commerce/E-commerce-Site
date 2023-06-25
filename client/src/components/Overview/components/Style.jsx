@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Style = ({style}) => {
-
+  console.log('this is the style: ', style);
   return (
-    <div></div>
+    <img src={style.photos[0]}/>
   )
 }
 
