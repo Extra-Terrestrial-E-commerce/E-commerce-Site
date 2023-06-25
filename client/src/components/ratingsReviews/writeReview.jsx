@@ -46,7 +46,9 @@ const WriteReview = ({currentProduct, closeModal}) => {
         <br />
 
         <textarea placeholder="description"
-        onChange={(e)=>{setAddReviewParams.body(e.target.value)}}></textarea>
+        minLength="50"
+        maxLength="1000"
+        onChange={(e)=>{setAddReviewParams(addReviewParams.body= e.target.value)}}></textarea>
         <br/>
 
         <input placeholder="name"
