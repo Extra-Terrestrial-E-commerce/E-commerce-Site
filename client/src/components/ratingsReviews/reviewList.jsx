@@ -39,8 +39,6 @@ const ReviewList = ({currentReviews, currentProduct}) => {
       setButtonText("LESS")
     }
   }
-  console.log("currentProduct", currentProduct)
-  console.log("currentReviews", currentReviews);
 
   return (
     <div>
@@ -65,13 +63,13 @@ const ReviewList = ({currentReviews, currentProduct}) => {
       </div>
       <br/>
       <Modal
-        currentProduct = {currentProduct}
         isOpen={modalIsOpen}
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal">
-      <WriteReview />
+      <WriteReview
+      currentProduct={currentProduct}/>
       </Modal>
 
     </div>
