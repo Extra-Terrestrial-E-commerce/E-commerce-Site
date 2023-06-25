@@ -33,7 +33,7 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
   return (
     <div>
-      <h3>Write your review</h3>
+      <h3>Write your review for {currentProduct.name} here: </h3>
 
       <form>
         <button onClick={closeModal}>close</button>
