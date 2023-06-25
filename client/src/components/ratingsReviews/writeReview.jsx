@@ -2,7 +2,6 @@ import React from "react";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
-
 const WriteReview = ({currentProduct, closeModal}) => {
 
   const [addReviewParams, setAddReviewParams] = useState({
