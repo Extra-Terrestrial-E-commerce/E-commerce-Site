@@ -2,7 +2,7 @@ import React from "react";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
-const WriteReview = ({currentProduct, closeModal}) => {
+
 const WriteReview = ({currentProduct, closeModal}) => {
 
   const [addReviewParams, setAddReviewParams] = useState({
@@ -30,9 +30,12 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
   console.log("currentProduct", currentProduct);
 
+  console.log("currentProduct", currentProduct);
+
   return (
     <div>
       <h3>Write your review</h3>
+
       <form>
         <button onClick={closeModal}>close</button>
 
