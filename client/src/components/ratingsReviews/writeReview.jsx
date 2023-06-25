@@ -6,7 +6,7 @@ import apiClient from '../config/config.js';
 const WriteReview = ({currentProduct, closeModal}) => {
 
   const [addReviewParams, setAddReviewParams] = useState({
-    product_id: 0,
+    product_id: currentProduct.id,
     rating: 0,
     summary: "",
     body: "",
