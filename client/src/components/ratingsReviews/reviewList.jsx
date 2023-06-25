@@ -18,7 +18,8 @@ const customStyles = {
 
 
 const ReviewList = ({currentReviews, currentProduct}) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [displayAllReviews, setDisplayAllReviews] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);

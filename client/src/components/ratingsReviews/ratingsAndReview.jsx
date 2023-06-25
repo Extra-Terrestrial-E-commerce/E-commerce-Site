@@ -41,8 +41,9 @@ const RatingsAndReview = ({currentProduct}) => {
       </div>
       <div class="twoThirds">
         <ReviewList
+        currentProduct={currentProduct}
         currentReviews={currentReviews}
-        currentProduct={currentProduct}/>
+        />
       </div>
 
     </div>

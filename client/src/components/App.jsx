@@ -31,7 +31,8 @@ const App = () => {
       <div class="section">Questions and Answers</div>
       <div class="section">
        <a id="RatingsAndReview"></a>
-       <RatingsAndReview currentProduct={currentProduct}/>
+       {currentProduct.name && <RatingsAndReview currentProduct={currentProduct}/>}
+
       </div>
     </>
   )
