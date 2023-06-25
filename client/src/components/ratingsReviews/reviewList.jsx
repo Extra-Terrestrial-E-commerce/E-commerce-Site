@@ -3,6 +3,8 @@ import ReviewListItem from "./reviewListItem.jsx";
 import WriteReview from "./writeReview.jsx";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
+import ReactDOM from "react-dom";
+import Modal from "react-modal";
 const { useState, useEffect } = React;
 
 const customStyles = {
