@@ -10,6 +10,7 @@ const Style = ({style, setStyle, selected}) => {
   }
 
   return (
+    <img className='style-thumbnail' src={style.photos[0].thumbnail_url}/>
     <div className='style-parent'>
       {selected &&
         <ImCheckmark className='checkmark'/>
