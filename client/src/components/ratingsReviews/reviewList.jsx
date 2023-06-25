@@ -1,9 +1,31 @@
 import React from "react";
 import ReviewListItem from "./reviewListItem.jsx";
 import WriteReview from "./writeReview.jsx";
+import ReactDOM from "react-dom";
+import Modal from "react-modal";
 const { useState, useEffect } = React;
 
-const ReviewList = ({currentReviews}) => {
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+
+const ReviewList = ({currentReviews, currentProduct}) => {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  }
+  const closeModal = () => {
+    setIsOpen(false);
+  }
 
   return (
     <div>
@@ -17,10 +39,19 @@ const ReviewList = ({currentReviews}) => {
       })}
       <div class="row">
         <button>MORE REVIEWS</button>
-        <button>ADD A REVIEW</button>
+        <button onClick={openModal}>ADD A REVIEW</button>
       </div>
       <br/>
+      <Modal
+        currentProduct = {currentProduct}
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal">
       <WriteReview />
+      </Modal>
+
     </div>
   )
   }

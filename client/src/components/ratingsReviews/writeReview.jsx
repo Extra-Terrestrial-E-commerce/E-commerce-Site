@@ -2,31 +2,19 @@ import React from "react";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
-const WriteReview = () => {
+const WriteReview = ({currentProduct, closeModal}) => {
 
-  // const [addReviewParams, setAddReviewParams] = useState {
-  //   product_id: 0,
-  //   rating: 0,
-  //   summary: "",
-  //   body: "",
-  //   recommend: true,
-  //   name: "",
-  //   email: "",
-  //   photos: [],
-  //   characteristics: {}
-  // }
-
-  const addReviewParams = {
-      product_id: 40344,
-      rating: 3.5,
-      summary: "I liked the camo onsie",
-      body: "it was a great fit for my baby",
-      recommend: true,
-      name: "satisfiedCustomer1",
-      email: "example@example.com",
-      photos: [],
-      characteristics: {}
-    }
+  const [addReviewParams, setAddReviewParams] = useState({
+    product_id: 0,
+    rating: 0,
+    summary: "",
+    body: "",
+    recommend: true,
+    name: "",
+    email: "",
+    photos: [],
+    characteristics: {}
+  });
 
 
   const addReview = (params) => {
@@ -41,17 +29,34 @@ const WriteReview = () => {
 
   return (
     <div>
+      <h3>Write your review</h3>
       <form>
-        <input placeholder="star rating"></input>
+        <button onClick={closeModal}>close</button>
+
+        <input placeholder="star rating"
+        onChange={(e)=>{setAddReviewParams.rating(e.target.value)}}></input>
         <br/>
-        <input placeholder="title"></input>
+
+        <input placeholder="title"
+        onChange={(e)=>{setAddReviewParams.summary(e.target.value)}}></input>
         <br />
-        <input placeholder="description"></input>
+
+        <textarea placeholder="description"
+        onChange={(e)=>{setAddReviewParams.body(e.target.value)}}></textarea>
         <br/>
-        <div class="row">
-          <input placeholder="size"></input>
-          <input placeholder="confort"></input>
-        </div>
+
+        <input placeholder="name"
+        onChange={(e)=>{setAddReviewParams.name(e.target.value)}}></input>
+
+        <input
+        placeholder="email"
+        onChange={(e)=>{setAddReviewParams.email(e.target.value)}}></input>
+
+          <input placeholder="size"
+          ></input>
+          <input placeholder="confort"
+          ></input>
+        <button>Submit</button>
 
       </form>
     </div>
