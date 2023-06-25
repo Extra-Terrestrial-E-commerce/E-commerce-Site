@@ -2,16 +2,6 @@ import React from "react";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
-const formStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 
 const WriteReview = ({currentProduct, closeModal}) => {
 
@@ -43,11 +33,7 @@ const WriteReview = ({currentProduct, closeModal}) => {
   return (
     <div>
       <h3>Write your review</h3>
-      {currentProduct && (() => {
-        return(
-          <p>about {currentProduct.name} here</p>
-        )})
-      }
+
       <form>
         <button onClick={closeModal}>close</button>
 
