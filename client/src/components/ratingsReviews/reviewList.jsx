@@ -27,13 +27,23 @@ const scrollStyles = {
 Modal.setAppElement('#root');
 
 const ReviewList = ({currentReviews, currentProduct}) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const [buttonText, setButtonText] = useState('MORE REVIEWS');
+  const [reviewCount, setReveiwCount] = useState(2);
 
   const openModal = () => {
     setIsOpen(true);
   }
   const closeModal = () => {
     setIsOpen(false);
+  }
+  const displayReviews = (target) => {
+    var buttonText = "";
+    if (currentReviews.length > reviewCount-1) {
+      setReveiwCount(reviewCount + 2)
+      setButtonText("MORE REVIEWS")
+    }
   }
 
   return (
@@ -42,13 +52,7 @@ const ReviewList = ({currentReviews, currentProduct}) => {
       <p>Review List</p>
       <div style={scrollStyles}>
 
-      {displayAllReviews === false && currentReviews.slice(0, 2).map((review) => {
-        return(
-          <ReviewListItem review={review}
-          key={review.review_id} />
-        )
-      })}
-      {displayAllReviews && currentReviews.map((review) => {
+      {currentReviews.slice(0, reviewCount).map((review) => {
         return(
           <ReviewListItem review={review}
           key={review.review_id} />
@@ -56,7 +60,8 @@ const ReviewList = ({currentReviews, currentProduct}) => {
       })}
       </div>
       <div class="row">
-        <button>MORE REVIEWS</button>
+        {currentReviews.length > reviewCount-1 && <button id="moreReviews"
+        onClick={displayReviews}>{buttonText}</button>}
         <button onClick={openModal}>ADD A REVIEW</button>
       </div>
       <br/>
