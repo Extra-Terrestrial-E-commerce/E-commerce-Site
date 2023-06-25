@@ -40,10 +40,11 @@ const RatingsAndReview = ({currentProduct}) => {
         currentProduct={currentProduct}/>
       </div>
       <div class="twoThirds">
-        <ReviewList
+        {currentReviews.length && <ReviewList
         currentProduct={currentProduct}
         currentReviews={currentReviews}
-        />
+        />}
+
       </div>
 
     </div>
