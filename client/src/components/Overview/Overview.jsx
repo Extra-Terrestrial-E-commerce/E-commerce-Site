@@ -11,24 +11,30 @@ const Overview = ({currentProduct}) => {
 
   React.useEffect(() => {
     if (Object.keys(currentProduct).length) {
-      console.log(currentProduct.id)
       apiClient.get(`/products/${currentProduct.id}/styles`)
         .then(result => setStyles(result.data.results))
         .catch(err => console.log('failed to get styles, ', err));
     }
   }, [currentProduct])
 
-  console.log(styles);
+  console.log('these are all the styles: ', styles);
 
   return (
     <div className='overview'>
+
+
       <ImageGallery/>
       <ProductInfo product ={currentProduct}/>
       <ProductStyle styles ={styles}/>
       <ProductOverview product={currentProduct}/>
 
+
     </div>
+
   )
+
+
+
 }
 
 export default Overview;
