@@ -7,10 +7,9 @@ import apiClient from '../config/config.js';
 const RatingsAndReview = ({currentProduct}) => {
   const [currentReviews, setCurrentReviews] = useState([]);
 
-
-  const reviewparams = {
+  var reviewparams = {
     params : {
-      product_id: 40344
+      product_id: currentProduct.id
 
     }
   }
@@ -31,26 +30,25 @@ const RatingsAndReview = ({currentProduct}) => {
       .catch((error) => {
         console.error(error);
       })
-  }, [])
-
-
-
-
-
+  }, [currentProduct])
 
   return (
     <>
     <div class="row">
       <div class="oneThird">
-        <RatingsBreakdown />
+        <RatingsBreakdown
+        currentProduct={currentProduct}/>
       </div>
       <div class="twoThirds">
-        <ReviewList currentReviews={currentReviews}/>
+        <ReviewList
+        currentReviews={currentReviews}
+        currentProduct={currentProduct}/>
       </div>
 
     </div>
     </>
   )
 }
+
 
 export default RatingsAndReview;
