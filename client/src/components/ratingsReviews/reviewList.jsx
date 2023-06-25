@@ -3,8 +3,6 @@ import ReviewListItem from "./reviewListItem.jsx";
 import WriteReview from "./writeReview.jsx";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
-import ReactDOM from "react-dom";
-import Modal from "react-modal";
 const { useState, useEffect } = React;
 
 const customStyles = {
@@ -18,32 +16,15 @@ const customStyles = {
   },
 };
 
-const scrollStyles = {
-    'overflow-x': 'hidden',
-    'overflow-y': 'scroll',
-    'height': '400px'
-};
-
-Modal.setAppElement('#root');
 
 const ReviewList = ({currentReviews, currentProduct}) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const [buttonText, setButtonText] = useState('MORE REVIEWS');
-  const [reviewCount, setReveiwCount] = useState(2);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   const openModal = () => {
     setIsOpen(true);
   }
   const closeModal = () => {
     setIsOpen(false);
-  }
-  const displayReviews = (target) => {
-    var buttonText = "";
-    if (currentReviews.length > reviewCount-1) {
-      setReveiwCount(reviewCount + 2)
-      setButtonText("MORE REVIEWS")
-    }
   }
 
   return (
@@ -60,10 +41,10 @@ const ReviewList = ({currentReviews, currentProduct}) => {
       })}
       </div>
       <div class="row">
-        {currentReviews.length > reviewCount-1 && <button id="moreReviews"
-        onClick={displayReviews}>{buttonText}</button>}
+        <button>MORE REVIEWS</button>
         <button onClick={openModal}>ADD A REVIEW</button>
       </div>
+      <br/>
       <Modal
         currentProduct = {currentProduct}
         isOpen={modalIsOpen}
@@ -72,6 +53,8 @@ const ReviewList = ({currentReviews, currentProduct}) => {
         style={customStyles}
         contentLabel="Example Modal">
       <WriteReview />
+      </Modal>
+
       </Modal>
 
     </div>

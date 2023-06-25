@@ -3,9 +3,10 @@ const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
 const WriteReview = ({currentProduct, closeModal}) => {
+const WriteReview = ({currentProduct, closeModal}) => {
 
   const [addReviewParams, setAddReviewParams] = useState({
-    product_id: currentProduct.id,
+    product_id: 0,
     rating: 0,
     summary: "",
     body: "",
@@ -31,9 +32,12 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
   return (
     <div>
-      <h3>Write your review for {currentProduct.name} here: </h3>
-
+      <h3>Write your review</h3>
       <form>
+        <button onClick={closeModal}>close</button>
+
+        <input placeholder="star rating"
+        onChange={(e)=>{setAddReviewParams.rating(e.target.value)}}></input>
         <button onClick={closeModal}>close</button>
 
         <input placeholder="star rating"
@@ -42,13 +46,27 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
         <input placeholder="title"
         onChange={(e)=>{setAddReviewParams.summary(e.target.value)}}></input>
+
+        <input placeholder="title"
+        onChange={(e)=>{setAddReviewParams.summary(e.target.value)}}></input>
         <br />
 
         <textarea placeholder="description"
-        minLength="50"
-        maxLength="1000"
-        onChange={(e)=>{setAddReviewParams(addReviewParams.body= e.target.value)}}></textarea>
+        onChange={(e)=>{setAddReviewParams.body(e.target.value)}}></textarea>
         <br/>
+
+        <input placeholder="name"
+        onChange={(e)=>{setAddReviewParams.name(e.target.value)}}></input>
+
+        <input
+        placeholder="email"
+        onChange={(e)=>{setAddReviewParams.email(e.target.value)}}></input>
+
+          <input placeholder="size"
+          ></input>
+          <input placeholder="confort"
+          ></input>
+        <button>Submit</button>
 
         <input placeholder="name"
         onChange={(e)=>{setAddReviewParams.name(e.target.value)}}></input>
