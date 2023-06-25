@@ -16,6 +16,7 @@ const customStyles = {
   },
 };
 
+Modal.setAppElement('#root');
 
 const ReviewList = ({currentReviews, currentProduct}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
