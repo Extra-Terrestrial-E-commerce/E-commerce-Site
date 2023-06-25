@@ -6,8 +6,8 @@ const ProductStyle = ({styles}) => {
     <div className ='overview'>
       <span>Style > </span>
       <span>Style Selected</span>
-      <div>
-        {styles.length && <Style style ={styles[0]} />}
+      <div className='style-display'>
+        {styles.length && styles.map(style => <Style style ={style} />)}
       </div>
 
     </div>

@@ -98,3 +98,16 @@ p {
   font-style: small-caps;
   letter-spacing: .5px;
 }
+
+.style-display {
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.style-thumbnail {
+
+  width: 70px;
+  height:70px;
+  border-radius: 50%;
+  margin:10px;
+}
