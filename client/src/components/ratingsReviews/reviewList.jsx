@@ -62,7 +62,6 @@ const ReviewList = ({currentReviews, currentProduct}) => {
         onClick={displayReviews}>{buttonText}</button>}
         <button onClick={openModal}>ADD A REVIEW</button>
       </div>
-      <br/>
       <Modal
         isOpen={modalIsOpen}
         // onAfterOpen={afterOpenModal}
