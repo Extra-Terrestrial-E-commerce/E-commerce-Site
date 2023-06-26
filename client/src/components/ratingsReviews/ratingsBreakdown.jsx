@@ -3,12 +3,28 @@ import RatingsBar from "./ratingBar.jsx";
 
 const RatingsBreakdown = ({reviewMeta}) => {
   console.log("review meta", reviewMeta);
+  const getPercentRecommend = (recommend) =>{
+    const noRec = Number(recommend.false);
+    const yesRec = Number(recommend.true);
+    return Math.floor((yesRec / (noRec + yesRec)) * 100);
+  }
+
+  const getAvRating = (ratings) => {
+    const five = Number(ratings['5']);
+    const four = Number(ratings['4']);
+    const three = Number(ratings['3']);
+    const two = Number(ratings['2']);
+    const one = Number(ratings['1']);
+    const total = five+four+three+two+one;
+    const average = (5*five + 4*four + 3*three + 2*two + one)/total;
+    return average.toFixed(1);
+  }
 
   return (
     <div>
       <h3>RATINGS & REVIEWS</h3>
-      <h1>3.5</h1>
-      <p>100% of reviews recommend this product</p>
+      <h1>{getAvRating(reviewMeta.ratings)}</h1>
+      <p>{getPercentRecommend(reviewMeta.recommended)}% of reviews recommend this product</p>
 
         <div class="row">
           <p>5 stars </p>
