@@ -7,7 +7,7 @@ import XButton from './XButton.jsx';
 import OneStar from '../Stars/OneStar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 
-const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems} ) => {
+const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentProduct} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
   const [isComparing, setIsComparing] = useState(false);
@@ -87,7 +87,7 @@ const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems} ) => {
   return (
     <div id="relatedItemContainer" style={containerStyle}>
       <div style={comparisonStyle}>
-        <ComparisonModal />
+        <ComparisonModal product={product} currentProduct={currentProduct} />
       </div>
       <div style={relatedItemButtonStyle} onClick={handleComparison}>
         <OneStar percentFill={0} size={15} />

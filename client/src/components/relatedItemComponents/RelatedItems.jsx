@@ -80,7 +80,7 @@ const RelatedItems = ( {currentProduct} ) => {
         <div style={carouselStyle}>
           {relatedItemsOnDisplay.map((element) => {
               counter++;
-              return <ItemCard key={counter} product={element} type={'related'}/>
+              return <ItemCard key={counter} product={element} type={'related'} currentProduct={currentProduct}/>
             })}
         </div>
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>

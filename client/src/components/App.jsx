@@ -12,7 +12,13 @@ const App = () => {
   useEffect(() => {
     apiClient.get('/products')
       .then((data) => {
-        setCurrentProduct(data.data[2]);
+        apiClient.get('/products/' + data.data[2].id)
+          .then((data) => {
+            setCurrentProduct(data.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          })
       })
       .catch((error) => {
         console.error(error);
