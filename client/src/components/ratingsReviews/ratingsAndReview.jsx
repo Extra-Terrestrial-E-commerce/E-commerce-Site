@@ -50,6 +50,7 @@ const RatingsAndReview = ({currentProduct}) => {
         currentReviews={currentReviews}
         />}
 
+      main
       </div>
 
     </div>

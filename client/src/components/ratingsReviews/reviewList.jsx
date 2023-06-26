@@ -30,12 +30,14 @@ const ReviewList = ({currentReviews, currentProduct}) => {
   const [buttonText, setButtonText] = useState('MORE REVIEWS');
   const [reviewCount, setReveiwCount] = useState(2);
 
+
   const openModal = () => {
     setIsOpen(true);
   }
   const closeModal = () => {
     setIsOpen(false);
   }
+
   const displayReviews = (target) => {
     var buttonText = "";
     if (currentReviews.length > reviewCount-1) {
