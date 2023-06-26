@@ -6,6 +6,7 @@ import apiClient from '../config/config.js';
 
 const RatingsAndReview = ({currentProduct}) => {
   const [currentReviews, setCurrentReviews] = useState([]);
+  const [reviewMeta, setReviewMeta] = useState({});
 
   var reviewparams = {
     params : {
@@ -24,7 +25,7 @@ const RatingsAndReview = ({currentProduct}) => {
       });
       apiClient.get('/reviews/meta', reviewparams )
       .then((data) => {
-        //console.log("review meta", data);
+        setReviewMeta(data.data);
 
       })
       .catch((error) => {
@@ -32,15 +33,19 @@ const RatingsAndReview = ({currentProduct}) => {
       })
   }, [currentProduct])
 
+
   return (
     <>
     <div class="row">
       <div class="oneThird">
+        {reviewMeta.ratings &&
         <RatingsBreakdown
-        currentProduct={currentProduct}/>
+        reviewMeta={reviewMeta}/>}
+
       </div>
       <div class="twoThirds">
-        {currentReviews.length && <ReviewList
+        {currentReviews.length &&
+        <ReviewList
         currentProduct={currentProduct}
         currentReviews={currentReviews}
         />}
