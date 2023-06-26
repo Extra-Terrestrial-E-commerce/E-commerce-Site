@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RelatedItems from "./RelatedItems.jsx";
-import OutfitItems from "./OutfitItems.jsx";
+import RelatedItems from "./relatedItems/RelatedItems.jsx";
+import OutfitItems from "./outfitItems/OutfitItems.jsx";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 import AllStars from '../Stars/AllStars.jsx';

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ItemCard from "./ItemCard.jsx";
 const { useState, useEffect } = React;
-import apiClient from '../config/config.js';
+import apiClient from '../../config/config.js';
+import RelatedCard from "./RelatedCard.jsx";
 
 const RelatedItems = ( {currentProduct} ) => {
   const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
@@ -80,7 +80,7 @@ const RelatedItems = ( {currentProduct} ) => {
         <div style={carouselStyle}>
           {relatedItemsOnDisplay.map((element) => {
               counter++;
-              return <ItemCard key={counter} product={element} type={'related'} currentProduct={currentProduct}/>
+              return <RelatedCard key={counter} product={element} currentProduct={currentProduct}/>
             })}
         </div>
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>

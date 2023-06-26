@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 const { useState, useEffect } = React;
-import apiClient from '../config/config.js';
-import AllStars from '../Stars/AllStars.jsx';
-import XButton from './XButton.jsx';
-import OneStar from '../Stars/OneStar.jsx';
+import apiClient from '../../config/config.js';
+import AllStars from '../../Stars/AllStars.jsx';
+import OneStar from '../../Stars/OneStar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 
-const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentProduct} ) => {
+const RelatedCard = ( {product, currentProduct} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
   const [isComparing, setIsComparing] = useState(false);
@@ -51,7 +50,6 @@ const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentPro
 
   const relatedItemButtonStyle = {
     position: 'relative',
-    display: type === 'related' ? 'flex' : 'none',
     textAlign: 'right',
     top: '5px',
     right: '5px',
@@ -59,15 +57,7 @@ const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentPro
 
   const comparisonStyle = {
     position: 'relative',
-    display: type === 'related' && isComparing ? 'flex' : 'none',
-    top: '5px',
-    right: '5px',
-  }
-
-  const outfitItemButtonStyle = {
-    position: 'relative',
-    display: type === 'outfit' ? 'flex' : 'none',
-    textAlign: 'right',
+    display: isComparing ? 'flex' : 'none',
     top: '5px',
     right: '5px',
   }
@@ -77,13 +67,6 @@ const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentPro
     setIsComparing(!isComparing);
   }
 
-  const handleRemove = () => {
-    event.preventDefault();
-    const updatedItems = allOutfitItems.filter(item => item.id !== product.id);
-    setAllOutfitItems(updatedItems);
-  };
-
-
   return (
     <div id="relatedItemContainer" style={containerStyle}>
       <div style={comparisonStyle}>
@@ -91,9 +74,6 @@ const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentPro
       </div>
       <div style={relatedItemButtonStyle} onClick={handleComparison}>
         <OneStar percentFill={0} size={15} />
-      </div>
-      <div style={outfitItemButtonStyle}>
-        <XButton size={10} toDoOnClick={handleRemove} />
       </div>
       <p>
         {product.category}
@@ -111,4 +91,4 @@ const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems, currentPro
   )
 }
 
-export default ItemCard;
+export default RelatedCard;
