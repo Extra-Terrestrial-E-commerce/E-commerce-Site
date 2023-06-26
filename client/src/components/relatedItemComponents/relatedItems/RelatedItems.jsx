@@ -87,5 +87,3 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
     </>
   )
 }
-
-export default RelatedItems;
