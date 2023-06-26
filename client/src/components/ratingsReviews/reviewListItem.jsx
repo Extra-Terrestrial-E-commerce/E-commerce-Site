@@ -29,7 +29,7 @@ const ReviewListItem = ({review}) => {
     return text;
   }
 
-  console.log("review", review);
+  // console.log("review", review);
 
   return (
     <div>
