@@ -1,17 +1,15 @@
 import React from 'react';
+import QuantityAndSize from './QuantityAndSize.jsx'
+const ProductCheckout = ({style}) => {
+  if (style) {
+    console.log('these are the skus, ', style.skus);
 
-const ProductCheckout = () => {
-
-
+  }
   return (
     <div>
-      <select>
-      </select>
-      <select>
-
-      </select>
+      {style && <QuantityAndSize skus = {style.skus} />}
       <button>
-
+        Add to Cart
       </button>
 
     </div>

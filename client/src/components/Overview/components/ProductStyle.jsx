@@ -18,11 +18,16 @@ const ProductStyle = ({styles}) => {
       <span>Style &#62; </span>
       <span>{selectedStyle.name}</span>
       <div className='style-display'>
-        {styles.length && styles.map(style =>
-          <Style style ={style} setStyle = {setStyle} selected ={style.style_id === selectedStyle.style_id}/>
+        {styles.length && styles.map((style, i) =>
+          <Style
+            style ={style}
+            setStyle = {setStyle}
+            selected ={style.style_id === selectedStyle.style_id}
+            key={style.style_id}/>
         )}
       </div>
-      <ProductCheckout/>
+      <ProductCheckout style = {selectedStyle} />
+
     </div>
   )
 }
