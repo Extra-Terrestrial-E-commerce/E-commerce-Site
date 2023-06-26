@@ -1,4 +1,5 @@
 import React from "react";
+import AllStars from "../Stars/AllStars.jsx";
 
 
 
@@ -33,7 +34,8 @@ const ReviewListItem = ({review}) => {
 
   return (
     <div>
-      <p>{review.rating} stars </p>
+      <AllStars rating={review.stars}
+      size={12}/>
       <p>{getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
       <h2>{truncate(review.body)}</h2>
       <p>{review.body}</p>
