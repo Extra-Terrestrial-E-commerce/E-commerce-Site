@@ -40,7 +40,6 @@ const NewOutfitCard = ( {currentProduct, allOutfitItems, setAllOutfitItems} ) =>
     }
     if (tester) {
       currentItems = [currentProduct, ...currentItems];
-      console.log('item pushed');
       setAllOutfitItems(currentItems);
     }
   }

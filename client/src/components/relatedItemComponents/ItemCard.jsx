@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 import AllStars from '../Stars/AllStars.jsx';
+import XButton from './XButton.jsx';
 
-const ItemCard = ( {product, type} ) => {
+const ItemCard = ( {product, type, allOutfitItems, setAllOutfitItems} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
 
@@ -55,6 +56,7 @@ const ItemCard = ( {product, type} ) => {
   const outfitItemButtonStyle = {
     position: 'relative',
     display: type === 'outfit' ? 'flex' : 'none',
+    textAlign: 'right',
     top: '5px',
     right: '5px',
   }
@@ -66,12 +68,21 @@ const ItemCard = ( {product, type} ) => {
 
   const handleRemove = () => {
     event.preventDefault();
-    console.log('handle remove');
-  }
+    console.log('removing item');
+
+    const updatedItems = allOutfitItems.filter(item => item.id !== product.id);
+    console.log(updatedItems);
+
+    setAllOutfitItems(updatedItems);
+  };
+
+
   return (
     <div id="relatedItemContainer" style={containerStyle}>
       <button style={relatedItemButtonStyle} type="submit" onClick={handleComparison}>compare</button>
-      <button style={outfitItemButtonStyle} type="submit" onClick={handleRemove}>remove</button>
+      <div style={outfitItemButtonStyle}>
+        <XButton size={10} toDoOnClick={handleRemove} />
+      </div>
       <p>
         {product.category}
       </p>
