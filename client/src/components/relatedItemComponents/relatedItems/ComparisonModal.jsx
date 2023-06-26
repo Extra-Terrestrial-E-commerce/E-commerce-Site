@@ -28,6 +28,12 @@ const ComparisonModal = ({ product, currentProduct }) => {
     overflow: 'scroll'
   }
 
+  const headerStyle = {
+    position: 'sticky',
+    top: 0,
+    backgroundColor: 'gray'
+  }
+
   useEffect(() => {
     const tableHeader = document.getElementById('header' + product.id);
     tableHeader.innerHTML = '';
@@ -62,7 +68,7 @@ const ComparisonModal = ({ product, currentProduct }) => {
   return (
     <div style={popUpDiv}>
       <table >
-        <thead id={'header' + product.id}>
+        <thead style={headerStyle} id={'header' + product.id}>
         </thead>
         <tbody id={product.id}>
         </tbody>

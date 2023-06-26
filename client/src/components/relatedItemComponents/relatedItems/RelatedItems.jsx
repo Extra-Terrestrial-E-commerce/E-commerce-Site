@@ -4,11 +4,11 @@ const { useState, useEffect } = React;
 import apiClient from '../../config/config.js';
 import RelatedCard from "./RelatedCard.jsx";
 
-const RelatedItems = ( {currentProduct} ) => {
+const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
   const [allRelatedItems, setAllRelatedItems] = useState([]);
   const [leftmostItem, setLeftmostItem] = useState(0);
-  const [toDisplay, setToDisplay] = useState(<></>)
+  const [isAnyComparing, setIsAnyComparing] = useState(false);
 
   useEffect(() => {
     if (currentProduct.id) {
@@ -38,18 +38,6 @@ const RelatedItems = ( {currentProduct} ) => {
         })
     }
   }, [currentProduct])
-
-  useEffect(() => {
-    console.log('display change');
-    setToDisplay(
-      <div style={carouselStyle}>
-        {relatedItemsOnDisplay.map((element) => {
-            counter++;
-            return <RelatedCard key={counter} product={element} currentProduct={currentProduct}/>
-          })}
-      </div>
-    )
-  }, [relatedItemsOnDisplay])
 
   const carouselStyle = {
     width: '100%',
@@ -90,7 +78,10 @@ const RelatedItems = ( {currentProduct} ) => {
     <>
       <div style={carouselStyle}>
         <button style={scrollLeftButton} type="submit" onClick={scrollLeft} >l</button>
-        {toDisplay}
+        {relatedItemsOnDisplay.map((element) => {
+            counter++;
+            return <RelatedCard key={counter} product={element} currentProduct={currentProduct} isAnyComparing={isAnyComparing} setIsAnyComparing={setIsAnyComparing} setCurrentProduct={setCurrentProduct}/>
+          })}
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>
       </div>
     </>

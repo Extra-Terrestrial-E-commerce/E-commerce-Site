@@ -6,7 +6,7 @@ import AllStars from '../../Stars/AllStars.jsx';
 import OneStar from '../../Stars/OneStar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 
-const RelatedCard = ( {product, currentProduct} ) => {
+const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
   const [isComparing, setIsComparing] = useState(false);
@@ -61,20 +61,39 @@ const RelatedCard = ( {product, currentProduct} ) => {
     right: '5px',
   }
 
-  const handleComparison = () => {
-    event.preventDefault();
-    setIsComparing(!isComparing);
+  const handleComparison = (event) => {
+    console.log('handling compare');
+    event.stopPropagation();
+    if (!isAnyComparing) {
+      if (!isComparing) {
+        setIsComparing(true);
+        setIsAnyComparing(true);
+      }
+    } else {
+      if (isComparing) {
+        setIsComparing(false);
+        setIsAnyComparing(false);
+      }
+    }
   }
 
-  // maybe we want get the info for the comparison modal on a click by click basis, but this wouldn't affect hte issue we're having with the stars
+  const handleProductChange = (event) => {
+    event.preventDefault();
+    setCurrentProduct(product)
+  }
 
 
   return (
-    <div id="relatedItemContainer" style={containerStyle}>
+    <div id="relatedItemContainer" style={containerStyle} onClick={(event) => {
+      handleProductChange(event)
+      }
+    } >
       <div style={comparisonStyle}>
         <ComparisonModal product={product} currentProduct={currentProduct} />
       </div>
-      <div style={relatedItemButtonStyle} onClick={handleComparison}>
+      <div style={relatedItemButtonStyle} onClick={(event) => {
+        handleComparison(event);
+      }}>
         <OneStar percentFill={0} size={15} />
       </div>
       <p>

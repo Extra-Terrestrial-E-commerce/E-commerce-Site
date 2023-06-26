@@ -32,7 +32,7 @@ const App = () => {
         <Overview currentProduct={currentProduct}/>
       </div>
       <div class="section">
-        <OutfitsAndRelatedItems currentProduct={currentProduct} />
+        <OutfitsAndRelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct}/>
       </div>
       <div class="section">Questions and Answers</div>
       <div class="section">
