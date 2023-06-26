@@ -67,7 +67,7 @@ const OneStar = ( {percentFill, size} ) => {
     } else if (percentFill !== 0) {
       context.fill();
     }
-  }, []);
+  }, [percentFill, size]);
   return (
     <canvas ref={canvasRef} width={size} height={size}></canvas>
   )

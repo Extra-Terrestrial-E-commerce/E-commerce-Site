@@ -8,6 +8,7 @@ const RelatedItems = ( {currentProduct} ) => {
   const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
   const [allRelatedItems, setAllRelatedItems] = useState([]);
   const [leftmostItem, setLeftmostItem] = useState(0);
+  const [toDisplay, setToDisplay] = useState(<></>)
 
   useEffect(() => {
     if (currentProduct.id) {
@@ -37,6 +38,18 @@ const RelatedItems = ( {currentProduct} ) => {
         })
     }
   }, [currentProduct])
+
+  useEffect(() => {
+    console.log('display change');
+    setToDisplay(
+      <div style={carouselStyle}>
+        {relatedItemsOnDisplay.map((element) => {
+            counter++;
+            return <RelatedCard key={counter} product={element} currentProduct={currentProduct}/>
+          })}
+      </div>
+    )
+  }, [relatedItemsOnDisplay])
 
   const carouselStyle = {
     width: '100%',
@@ -77,12 +90,7 @@ const RelatedItems = ( {currentProduct} ) => {
     <>
       <div style={carouselStyle}>
         <button style={scrollLeftButton} type="submit" onClick={scrollLeft} >l</button>
-        <div style={carouselStyle}>
-          {relatedItemsOnDisplay.map((element) => {
-              counter++;
-              return <RelatedCard key={counter} product={element} currentProduct={currentProduct}/>
-            })}
-        </div>
+        {toDisplay}
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>
       </div>
     </>

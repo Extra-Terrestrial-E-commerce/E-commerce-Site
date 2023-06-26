@@ -31,7 +31,6 @@ const RelatedCard = ( {product, currentProduct} ) => {
           var stars = aggregatedData[1]/aggregatedData[0];
 
           setStarRating(stars.toFixed(2));
-
         })
         .catch((error) => {
           console.error(error);
@@ -66,6 +65,9 @@ const RelatedCard = ( {product, currentProduct} ) => {
     event.preventDefault();
     setIsComparing(!isComparing);
   }
+
+  // maybe we want get the info for the comparison modal on a click by click basis, but this wouldn't affect hte issue we're having with the stars
+
 
   return (
     <div id="relatedItemContainer" style={containerStyle}>

@@ -16,7 +16,6 @@ const ComparisonModal = ({ product, currentProduct }) => {
     }
   }
 
-
   const popUpDiv = {
     position: 'absolute',
     left: 5,
@@ -31,6 +30,7 @@ const ComparisonModal = ({ product, currentProduct }) => {
 
   useEffect(() => {
     const tableHeader = document.getElementById('header' + product.id);
+    tableHeader.innerHTML = '';
     var headerRow = document.createElement('tr');
     var currentProductName = document.createElement('th');
     var blank = document.createElement('th');
@@ -43,6 +43,7 @@ const ComparisonModal = ({ product, currentProduct }) => {
     tableHeader.append(headerRow);
 
     const tableBody = document.getElementById(product.id);
+    tableBody.innerHTML = '';
     for (let key in characteristics) {
       var newRow = document.createElement('tr');
       var currentProductCell = document.createElement('td');
@@ -56,7 +57,7 @@ const ComparisonModal = ({ product, currentProduct }) => {
       newRow.append(compProductCell);
       tableBody.append(newRow);
     }
-  }, [])
+  }, [product])
 
   return (
     <div style={popUpDiv}>
@@ -71,13 +72,4 @@ const ComparisonModal = ({ product, currentProduct }) => {
 }
 
 
-
 export default ComparisonModal;
-
-
-//// current product name ||||| ____________ |||||| product being compared name
-////     __value__    ||||| characteristic name ||||| ___compared value___
-//// ...
-
-/// to do: make it a table, make it scrollable, fix names on top of list;
-
