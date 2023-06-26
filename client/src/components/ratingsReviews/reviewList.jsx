@@ -23,12 +23,14 @@ const ReviewList = ({currentReviews, currentProduct}) => {
   const [displayAllReviews, setDisplayAllReviews] = useState(false);
   const [buttonText, setButtonText] = useState('MORE REVIEWS');
 
+
   const openModal = () => {
     setIsOpen(true);
   }
   const closeModal = () => {
     setIsOpen(false);
   }
+
   const displayReviews = (target) => {
     var buttonText = "";
     if (displayAllReviews === true) {

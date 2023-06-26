@@ -40,11 +40,13 @@ const RatingsAndReview = ({currentProduct}) => {
         currentProduct={currentProduct}/>
       </div>
       <div class="twoThirds">
+      ProductDetailPage
         {currentReviews.length && <ReviewList
         currentProduct={currentProduct}
         currentReviews={currentReviews}
         />}
 
+      main
       </div>
 
     </div>
