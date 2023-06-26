@@ -38,18 +38,6 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
     }
   }, [currentProduct])
 
-  useEffect(() => {
-    console.log('display change');
-    setToDisplay(
-      <div style={carouselStyle}>
-        {relatedItemsOnDisplay.map((element) => {
-            counter++;
-            return <RelatedCard key={counter} product={element} currentProduct={currentProduct}/>
-          })}
-      </div>
-    )
-  }, [relatedItemsOnDisplay])
-
   const carouselStyle = {
     width: '100%',
     height: '200px',
