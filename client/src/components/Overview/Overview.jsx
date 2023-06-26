@@ -4,7 +4,7 @@ import ProductOverview from './components/ProductOverview.jsx';
 import ProductStyle from './components/ProductStyle.jsx'
 import ImageGallery from './components/ImageGallery.jsx'
 import apiClient from '../config/config.js';
-
+import ProductCheckout from './components/ProductCheckout.jsx'
 const Overview = ({currentProduct}) => {
 
   const[styles, setStyles] = React.useState([]);

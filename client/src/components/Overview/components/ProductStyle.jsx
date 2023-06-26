@@ -1,5 +1,6 @@
 import React from 'react';
 import Style from './Style.jsx'
+import ProductCheckout from './ProductCheckout.jsx'
 const ProductStyle = ({styles}) => {
   const[selectedStyle, setSelectedStyle] = React.useState({});
 
@@ -12,7 +13,6 @@ const ProductStyle = ({styles}) => {
   const setStyle = (style) => {
     setSelectedStyle (style);
   }
-
   return (
     <div className ='overview'>
       <span>Style &#62; </span>
@@ -22,7 +22,7 @@ const ProductStyle = ({styles}) => {
           <Style style ={style} setStyle = {setStyle} selected ={style.style_id === selectedStyle.style_id}/>
         )}
       </div>
-
+      <ProductCheckout/>
     </div>
   )
 }
