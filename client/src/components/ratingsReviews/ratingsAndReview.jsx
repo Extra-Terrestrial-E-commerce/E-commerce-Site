@@ -8,11 +8,8 @@ const RatingsAndReview = ({currentProduct}) => {
   const [currentReviews, setCurrentReviews] = useState([]);
 
   var reviewparams = {
-  var reviewparams = {
     params : {
       product_id: currentProduct.id
-      product_id: currentProduct.id
-
     }
   }
 
@@ -32,7 +29,6 @@ const RatingsAndReview = ({currentProduct}) => {
       .catch((error) => {
         console.error(error);
       })
-  }, [currentProduct])
   }, [currentProduct])
 
   return (

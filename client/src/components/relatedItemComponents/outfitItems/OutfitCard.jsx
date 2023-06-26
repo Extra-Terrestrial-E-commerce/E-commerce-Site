@@ -80,4 +80,4 @@ const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct
   )
 }
 
-export default ItemCard;
+export default OutfitCard;
