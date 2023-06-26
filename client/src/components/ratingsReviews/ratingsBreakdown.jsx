@@ -1,5 +1,6 @@
 import React from "react";
 import RatingsBar from "./ratingBar.jsx";
+import AllStars from "../Stars/AllStars.jsx";
 
 const RatingsBreakdown = ({reviewMeta}) => {
   console.log("review meta", reviewMeta);
@@ -23,7 +24,15 @@ const RatingsBreakdown = ({reviewMeta}) => {
   return (
     <div>
       <h3>RATINGS & REVIEWS</h3>
+      <div class="row">
       <h1>{getAvRating(reviewMeta.ratings)}</h1>
+      <h1>
+      <AllStars rating={getAvRating(reviewMeta.ratings)}
+      size={12}/>
+
+      </h1>
+
+      </div>
       <p>{getPercentRecommend(reviewMeta.recommended)}% of reviews recommend this product</p>
 
         <div class="row">
