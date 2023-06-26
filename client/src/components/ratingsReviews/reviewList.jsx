@@ -16,9 +16,13 @@ const customStyles = {
   },
 };
 
+Modal.setAppElement('#root');
 
 const ReviewList = ({currentReviews, currentProduct}) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [displayAllReviews, setDisplayAllReviews] = useState(false);
+  const [buttonText, setButtonText] = useState('MORE REVIEWS');
+
 
   const openModal = () => {
     setIsOpen(true);
@@ -27,29 +31,47 @@ const ReviewList = ({currentReviews, currentProduct}) => {
     setIsOpen(false);
   }
 
+  const displayReviews = (target) => {
+    var buttonText = "";
+    if (displayAllReviews === true) {
+      setDisplayAllReviews(false);
+      setButtonText("MORE REVIEWS")
+    } if (displayAllReviews === false) {
+      setDisplayAllReviews(true);
+      setButtonText("LESS")
+    }
+  }
+
   return (
     <div>
       <h2>{currentReviews.length} reviews, sorted by nothing yet!</h2>
       <p>Review List</p>
-      {currentReviews && currentReviews.map((review) => {
+      {displayAllReviews === false && currentReviews.slice(0, 2).map((review) => {
+        return(
+          <ReviewListItem review={review}
+          key={review.review_id} />
+        )
+      })}
+      {displayAllReviews && currentReviews.map((review) => {
         return(
           <ReviewListItem review={review}
           key={review.review_id} />
         )
       })}
       <div class="row">
-        <button>MORE REVIEWS</button>
+        <button id="moreReviews"
+        onClick={(e)=>{displayReviews(e.target)}}>{buttonText}</button>
         <button onClick={openModal}>ADD A REVIEW</button>
       </div>
       <br/>
       <Modal
-        currentProduct = {currentProduct}
         isOpen={modalIsOpen}
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal">
-      <WriteReview />
+      <WriteReview
+      currentProduct={currentProduct}/>
       </Modal>
 
     </div>
