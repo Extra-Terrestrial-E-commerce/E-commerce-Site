@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 const { useState, useEffect } = React;
-import apiClient from '../../config/config.js';
-import RelatedCard from "./RelatedCard.jsx";
+import apiClient from '../config/config.js';
 
 const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
