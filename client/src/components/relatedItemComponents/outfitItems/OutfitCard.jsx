@@ -79,3 +79,5 @@ const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct
     </div>
   )
 }
+
+export default ItemCard;
