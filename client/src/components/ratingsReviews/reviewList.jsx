@@ -24,7 +24,7 @@ const scrollStyles = {
 
 if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
-const ReviewList = ({currentReviews, currentProduct}) => {
+const ReviewList = ({currentReviews, currentProduct, setSortParam}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [buttonText, setButtonText] = useState('MORE REVIEWS');
@@ -48,7 +48,14 @@ const ReviewList = ({currentReviews, currentProduct}) => {
 
   return (
     <div>
-      <h2>{currentReviews.length} reviews, sorted by nothing yet!</h2>
+      <h2>{currentReviews.length} reviews, sorted by
+      <select name="sort" id="sort"
+      onChange={(e)=>{setSortParam(e.target.value)}}>
+        <option value="relevant">relevant</option>
+        <option value="helpful">helpful</option>
+        <option value="newest">newest</option>
+      </select>
+      </h2>
       <p>Review List</p>
       <div style={scrollStyles}>
 

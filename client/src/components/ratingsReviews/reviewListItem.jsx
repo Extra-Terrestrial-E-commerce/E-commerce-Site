@@ -1,9 +1,12 @@
 import React from "react";
 import AllStars from "../Stars/AllStars.jsx";
+import apiClient from '../config/config.js';
+const { useState } = React;
 
 
 
 const ReviewListItem = ({review}) => {
+  const [helpfulStatus, setHelpfulStatus] = useState(false);
 
   const getMonthName = (monthNumber) => {
     const date2 = new Date();
@@ -30,19 +33,60 @@ const ReviewListItem = ({review}) => {
     return text;
   }
 
-  // console.log("review", review);
+  const handleReviewHelpful = (e) => {
+    setHelpfulStatus(true);
+    apiClient.put(`/reviews/${review.review_id}/helpful`, {params: {review_id: review.review_id} } )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+  }
+
+  const handleReviewReport = (e) => {
+    setHelpfulStatus(true);
+    console.log("helpfulStatus", helpfulStatus);
+    apiClient.put(`/reviews/${review.review_id}/report`, {params: {review_id: review.review_id} } )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+  }
+
+   console.log("review", review);
+
 
   return (
     <div>
-      <AllStars rating={review.stars}
-      size={12}/>
-      <p>{getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
+      <div class="row">
+        <p>
+          <AllStars rating={review.stars}
+          size={12}/>
+        </p>
+
+        {review.reviewer_name ? <p>{review.reviewer_name}  </p> : <p>Incognito</p>}
+        <p>  {getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
+
+
+      </div>
       <h2>{truncate(review.body)}</h2>
       <p>{review.body}</p>
+      {review.recommend && <p>I recommend this product</p>}
       <div class="row">
         <p>Helpful?</p>
-        <button>Yes</button>
-        <button>No</button>
+        {helpfulStatus && <p>Thank you</p>}
+        {helpfulStatus === false &&
+        <>
+          <button onClick={handleReviewHelpful}>Yes </button>
+          <button onClick={handleReviewReport}>No </button>
+        </>
+        }
+
       </div>
       <p>_______________________________</p>
     </div>
