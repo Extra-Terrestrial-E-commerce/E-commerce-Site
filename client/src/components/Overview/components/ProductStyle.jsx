@@ -7,9 +7,14 @@ const ProductStyle = ({styles}) => {
   React.useEffect (() => {
     if (styles.length) {
       var defaultStyle = styles.find(style => style['default?']);
-      setSelectedStyle(defaultStyle);
+      if(!defaultStyle) {
+        setSelectedStyle(styles[0]);
+      } else {
+        setSelectedStyle(defaultStyle);
+      }
     }
   }, [styles])
+
   const setStyle = (style) => {
     setSelectedStyle (style);
   }
@@ -26,7 +31,7 @@ const ProductStyle = ({styles}) => {
             key={style.style_id}/>
         )}
       </div>
-      <ProductCheckout style = {selectedStyle} />
+      <ProductCheckout skus = {selectedStyle.skus} id={selectedStyle.style_id}/>
 
     </div>
   )
