@@ -22,7 +22,7 @@ const scrollStyles = {
     'height': '400px'
 };
 
-Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
 const ReviewList = ({currentReviews, currentProduct}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
