@@ -8,15 +8,6 @@ const Style = ({style, setStyle, selected}) => {
   const handleClick = () => {
     setStyle(style);
   }
-import {ImCheckmark} from 'react-icons/im'
-
-const Style = ({style, setStyle, selected}) => {
-
-
-
-  const handleClick = () => {
-    setStyle(style);
-  }
 
   return (
     <div className='style-parent'>

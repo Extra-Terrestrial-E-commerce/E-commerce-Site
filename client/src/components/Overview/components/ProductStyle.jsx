@@ -13,17 +13,11 @@ const ProductStyle = ({styles}) => {
   const setStyle = (style) => {
     setSelectedStyle (style);
   }
-
   return (
     <div className ='overview'>
       <span>Style &#62; </span>
       <span>{selectedStyle.name}</span>
-      <span>Style &#62; </span>
-      <span>{selectedStyle.name}</span>
       <div className='style-display'>
-        {styles.length && styles.map(style =>
-          <Style style ={style} setStyle = {setStyle} selected ={style.style_id === selectedStyle.style_id}/>
-        )}
         {styles.length && styles.map(style =>
           <Style style ={style} setStyle = {setStyle} selected ={style.style_id === selectedStyle.style_id}/>
         )}

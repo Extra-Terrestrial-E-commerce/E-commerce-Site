@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 const { useState, useEffect } = React;
-import apiClient from '../../../config/config.js';
-import AllStars from '../../../Stars/AllStars.jsx';
-import OneStar from '../../../Stars/OneStar.jsx';
+import apiClient from '../../config/config.js';
+import AllStars from '../../Stars/AllStars.jsx';
+import OneStar from '../../Stars/OneStar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 
 const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {

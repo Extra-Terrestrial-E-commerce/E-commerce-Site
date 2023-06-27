@@ -6,14 +6,14 @@ import apiClient from '../config/config.js';
 
 const RatingsAndReview = ({currentProduct}) => {
   const [currentReviews, setCurrentReviews] = useState([]);
-  const [reveiwParams, setReviewParams] = useState({ params: {product_id: 0}})
+  const [reviewMeta, setReviewMeta] = useState({});
 
   var reviewparams = {
     params : {
       product_id: currentProduct.id
+
     }
   }
-
 
   useEffect(() => {
     apiClient.get('/reviews/', reviewparams )
@@ -34,30 +34,29 @@ const RatingsAndReview = ({currentProduct}) => {
   }, [currentProduct])
 
 
-
   return (
     <>
     <div class="row">
       <div class="oneThird">
+        {reviewMeta.ratings &&
         <RatingsBreakdown
-        currentProduct={currentProduct}/>
+        reviewMeta={reviewMeta}/>}
+
       </div>
       <div class="twoThirds">
+        {currentReviews.length &&
         <ReviewList
         currentProduct={currentProduct}
-        <ReviewList
         currentReviews={currentReviews}
         />}
 
       main
-        currentProduct={currentProduct}/>
       </div>
 
     </div>
     </>
   )
 }
-
 
 
 export default RatingsAndReview;

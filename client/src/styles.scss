@@ -103,29 +103,25 @@ p {
 .style-display {
   display: flex;
   flex-wrap:wrap;
+  width: 320px;
 }
 
 .style-thumbnail {
-
   width: 70px;
   height:70px;
   border-radius: 50%;
-  margin:10px;
+  margin:5px;
 }
 
-
-
-td, th {
-  border: 1px solid white;
+.checkmark {
+  position: absolute;
+  left: 80%;
+  color:green;
 }
 
 .style-parent {
   position: relative;
 }
-
-
-
-
 
 td, th {
   border: 1px solid white;
