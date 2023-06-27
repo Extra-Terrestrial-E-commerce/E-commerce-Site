@@ -7,11 +7,12 @@ import apiClient from '../config/config.js';
 const RatingsAndReview = ({currentProduct}) => {
   const [currentReviews, setCurrentReviews] = useState([]);
   const [reviewMeta, setReviewMeta] = useState({});
+  const [sortParam, setSortParam] = useState("relevant");
 
   var reviewparams = {
     params : {
-      product_id: currentProduct.id
-
+      product_id: currentProduct.id,
+      sort: sortParam
     }
   }
 
@@ -31,7 +32,9 @@ const RatingsAndReview = ({currentProduct}) => {
       .catch((error) => {
         console.error(error);
       })
-  }, [currentProduct])
+  }, [currentProduct, sortParam])
+
+  console.log(currentReviews);
 
 
   return (
@@ -48,6 +51,7 @@ const RatingsAndReview = ({currentProduct}) => {
         <ReviewList
         currentProduct={currentProduct}
         currentReviews={currentReviews}
+        setSortParam={setSortParam}
         />}
       </div>
 
