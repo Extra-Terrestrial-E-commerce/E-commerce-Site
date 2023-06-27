@@ -34,11 +34,18 @@ const ReviewListItem = ({review}) => {
 
   return (
     <div>
+      <div class="row">
       <AllStars rating={review.stars}
       size={12}/>
-      <p>{getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
+
+        {review.reviewer_name ? <p>{review.reviewer_name}  </p> : <p>Incognito</p>}
+        <p>  {getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
+
+
+      </div>
       <h2>{truncate(review.body)}</h2>
       <p>{review.body}</p>
+      {review.recommend && <p>I recommend this product</p>}
       <div class="row">
         <p>Helpful?</p>
         <button>Yes</button>
