@@ -5,7 +5,7 @@ import apiClient from '../config/config.js';
 const WriteReview = ({currentProduct, closeModal}) => {
 
   const [addReviewParams, setAddReviewParams] = useState({
-    product_id: 0,
+    product_id: currentProduct.id,
     rating: 0,
     summary: "",
     body: "",
@@ -33,6 +33,7 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
   return (
     <div>
+
       <h3>Write your review for {currentProduct.name} here: </h3>
 
       <form>
@@ -54,7 +55,9 @@ const WriteReview = ({currentProduct, closeModal}) => {
         <br />
 
         <textarea placeholder="description"
-        onChange={(e)=>{setAddReviewParams.body(e.target.value)}}></textarea>
+        minLength="50"
+        maxLength="1000"
+        onChange={(e)=>{setAddReviewParams(addReviewParams.body= e.target.value)}}></textarea>
         <br/>
 
         <input placeholder="name"
