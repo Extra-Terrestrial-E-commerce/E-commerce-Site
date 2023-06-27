@@ -17,7 +17,6 @@ const Overview = ({currentProduct}) => {
     }
   }, [currentProduct])
 
-  console.log('these are all the styles: ', styles);
 
   return (
     <div className='overview'>
