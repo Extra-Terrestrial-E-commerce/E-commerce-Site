@@ -24,12 +24,11 @@ import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import App from '../../App.jsx';
 
-// modal somethine
-
 describe('should run tests on npm script', () => {
 
-  it('should not throw any errors', () => {
-    expect(true).toBeTruthy();
+  it('should render the app element', () => {
+    render(<App />)
+    expect(screen.getByText('hello world, mars')).toBeTruthy();
   })
 
 })
