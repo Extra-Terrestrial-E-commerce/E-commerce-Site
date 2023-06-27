@@ -10,6 +10,8 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   const [leftmostItem, setLeftmostItem] = useState(0);
   const [isAnyComparing, setIsAnyComparing] = useState(false);
 
+  console.log(currentProduct);
+
   useEffect(() => {
     if (currentProduct.id) {
       const url = '/products/' + currentProduct.id + '/related'
