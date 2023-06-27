@@ -49,8 +49,6 @@ const RatingsAndReview = ({currentProduct}) => {
         currentProduct={currentProduct}
         currentReviews={currentReviews}
         />}
-
-      main
       </div>
 
     </div>

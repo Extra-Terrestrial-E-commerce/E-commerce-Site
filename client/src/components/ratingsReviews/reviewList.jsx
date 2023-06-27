@@ -17,8 +17,8 @@ const customStyles = {
 };
 
 const scrollStyles = {
-    'overflow-x': 'hidden',
-    'overflow-y': 'scroll',
+    'overflowX': 'hidden',
+    'overflowY': 'scroll',
     'height': '400px'
 };
 

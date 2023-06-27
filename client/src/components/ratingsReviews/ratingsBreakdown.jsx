@@ -1,9 +1,10 @@
 import React from "react";
 import RatingsBar from "./ratingBar.jsx";
 import AllStars from "../Stars/AllStars.jsx";
+import CharacteristicsBars from "./characteristicsBars.jsx";
 
 const RatingsBreakdown = ({reviewMeta}) => {
-  console.log("review meta", reviewMeta);
+
   const getPercentRecommend = (recommend) =>{
     const noRec = Number(recommend.false);
     const yesRec = Number(recommend.true);
@@ -56,8 +57,7 @@ const RatingsBreakdown = ({reviewMeta}) => {
           <RatingsBar completed={reviewMeta.ratings['1']}/>
         </div>
         <br/>
-        <p>Size</p>
-        <p>Comfort</p>
+        < CharacteristicsBars characteristics={reviewMeta.characteristics}/>
 
 
 
