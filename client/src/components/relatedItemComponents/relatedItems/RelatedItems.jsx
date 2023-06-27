@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ItemCard from "./ItemCard.jsx";
 const { useState, useEffect } = React;
-import apiClient from '../config/config.js';
+import apiClient from '../../config/config.js';
+import RelatedCard from './RelatedCard.jsx';
 
-const RelatedItems = ( {currentProduct} ) => {
+const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
   const [allRelatedItems, setAllRelatedItems] = useState([]);
   const [leftmostItem, setLeftmostItem] = useState(0);
+  const [isAnyComparing, setIsAnyComparing] = useState(false);
 
   useEffect(() => {
     if (currentProduct.id) {
@@ -77,12 +78,10 @@ const RelatedItems = ( {currentProduct} ) => {
     <>
       <div style={carouselStyle}>
         <button style={scrollLeftButton} type="submit" onClick={scrollLeft} >l</button>
-        <div style={carouselStyle}>
-          {relatedItemsOnDisplay.map((element) => {
-              counter++;
-              return <ItemCard key={counter} product={element} type={'related'}/>
-            })}
-        </div>
+        {relatedItemsOnDisplay.map((element) => {
+            counter++;
+            return <RelatedCard key={counter} product={element} currentProduct={currentProduct} isAnyComparing={isAnyComparing} setIsAnyComparing={setIsAnyComparing} setCurrentProduct={setCurrentProduct}/>
+          })}
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>
       </div>
     </>

@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 const { useState, useEffect } = React;
-import apiClient from '../config/config.js';
-import AllStars from '../Stars/AllStars.jsx';
+import apiClient from '../../config/config.js';
+import AllStars from '../../Stars/AllStars.jsx';
+import OneStar from '../../Stars/OneStar.jsx';
+import ComparisonModal from './ComparisonModal.jsx';
 
-const ItemCard = ( {product, type} ) => {
+const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
+  const [isComparing, setIsComparing] = useState(false);
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -28,7 +31,6 @@ const ItemCard = ( {product, type} ) => {
           var stars = aggregatedData[1]/aggregatedData[0];
 
           setStarRating(stars.toFixed(2));
-
         })
         .catch((error) => {
           console.error(error);
@@ -47,31 +49,53 @@ const ItemCard = ( {product, type} ) => {
 
   const relatedItemButtonStyle = {
     position: 'relative',
-    display: type === 'related' ? 'flex' : 'none',
+    textAlign: 'right',
     top: '5px',
     right: '5px',
   }
 
-  const outfitItemButtonStyle = {
+  const comparisonStyle = {
     position: 'relative',
-    display: type === 'outfit' ? 'flex' : 'none',
+    display: isComparing ? 'flex' : 'none',
     top: '5px',
     right: '5px',
   }
 
-  const handleComparison = () => {
-    event.preventDefault();
-    console.log('to do: comparison modal');
+  const handleComparison = (event) => {
+    console.log('handling compare');
+    event.stopPropagation();
+    if (!isAnyComparing) {
+      if (!isComparing) {
+        setIsComparing(true);
+        setIsAnyComparing(true);
+      }
+    } else {
+      if (isComparing) {
+        setIsComparing(false);
+        setIsAnyComparing(false);
+      }
+    }
   }
 
-  const handleRemove = () => {
+  const handleProductChange = (event) => {
     event.preventDefault();
-    console.log('handle remove');
+    setCurrentProduct(product)
   }
+
+
   return (
-    <div id="relatedItemContainer" style={containerStyle}>
-      <button style={relatedItemButtonStyle} type="submit" onClick={handleComparison}>compare</button>
-      <button style={outfitItemButtonStyle} type="submit" onClick={handleRemove}>remove</button>
+    <div id="relatedItemContainer" style={containerStyle} onClick={(event) => {
+      handleProductChange(event)
+      }
+    } >
+      <div style={comparisonStyle}>
+        <ComparisonModal product={product} currentProduct={currentProduct} />
+      </div>
+      <div style={relatedItemButtonStyle} onClick={(event) => {
+        handleComparison(event);
+      }}>
+        <OneStar percentFill={0} size={15} />
+      </div>
       <p>
         {product.category}
       </p>
@@ -88,4 +112,4 @@ const ItemCard = ( {product, type} ) => {
   )
 }
 
-export default ItemCard;
+export default RelatedCard;

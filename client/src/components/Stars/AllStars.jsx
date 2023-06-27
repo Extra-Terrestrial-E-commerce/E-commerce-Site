@@ -11,7 +11,7 @@ const AllStars = ( {rating, size} ) => {
     fills.push(1);
   }
   fills.push(rating - lowerBound);
-  while (fills.length < 6) {
+  while (fills.length < 5) {
     fills.push(0);
   }
 

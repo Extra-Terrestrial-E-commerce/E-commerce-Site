@@ -12,7 +12,13 @@ const App = () => {
   useEffect(() => {
     apiClient.get('/products')
       .then((data) => {
-        setCurrentProduct(data.data[2]);
+        apiClient.get('/products/' + data.data[2].id)
+          .then((data) => {
+            setCurrentProduct(data.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          })
       })
       .catch((error) => {
         console.error(error);
@@ -26,7 +32,7 @@ const App = () => {
         <Overview currentProduct={currentProduct}/>
       </div>
       <div class="section">
-        <OutfitsAndRelatedItems currentProduct={currentProduct} />
+        <OutfitsAndRelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct}/>
       </div>
       <div class="section">Questions and Answers</div>
       <div class="section">

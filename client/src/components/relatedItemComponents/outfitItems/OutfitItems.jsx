@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ItemCard from "./ItemCard.jsx";
 import NewOutfitCard from "./NewOutfitCard.jsx";
+import OutfitCard from './OutfitCard.jsx';
 const { useState, useEffect } = React;
 
 const OutfitItems = ( {currentProduct} ) => {
   const [outfitItemsOnDisplay, setOutfitItemsOnDisplay] = useState([]);
   const [allOutfitItems, setAllOutfitItems] = useState([]);
+
 
   useEffect(() => {
     var newDisplayItems = allOutfitItems.slice(0, 3);
@@ -41,7 +42,7 @@ const OutfitItems = ( {currentProduct} ) => {
           <NewOutfitCard currentProduct={currentProduct} allOutfitItems={allOutfitItems} setAllOutfitItems={setAllOutfitItems}/>
           {outfitItemsOnDisplay.map((element) => {
               counter++;
-              return <ItemCard key={counter} product={element} type={'outfit'}/>
+              return <OutfitCard key={counter} product={element} allOutfitItems={allOutfitItems} setAllOutfitItems={setAllOutfitItems}/>
             })}
         </div>
         <button style={scrollButton} type="submit" onClick={scrollRight}>r</button>

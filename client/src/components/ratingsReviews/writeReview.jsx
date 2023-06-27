@@ -2,7 +2,6 @@ import React from "react";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 
-
 const WriteReview = ({currentProduct, closeModal}) => {
 
   const [addReviewParams, setAddReviewParams] = useState({
@@ -30,6 +29,8 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
   console.log("currentProduct", currentProduct);
 
+  console.log("currentProduct", currentProduct);
+
   return (
     <div>
 
@@ -40,7 +41,14 @@ const WriteReview = ({currentProduct, closeModal}) => {
 
         <input placeholder="star rating"
         onChange={(e)=>{setAddReviewParams.rating(e.target.value)}}></input>
+        <button onClick={closeModal}>close</button>
+
+        <input placeholder="star rating"
+        onChange={(e)=>{setAddReviewParams.rating(e.target.value)}}></input>
         <br/>
+
+        <input placeholder="title"
+        onChange={(e)=>{setAddReviewParams.summary(e.target.value)}}></input>
 
         <input placeholder="title"
         onChange={(e)=>{setAddReviewParams.summary(e.target.value)}}></input>
@@ -51,6 +59,19 @@ const WriteReview = ({currentProduct, closeModal}) => {
         maxLength="1000"
         onChange={(e)=>{setAddReviewParams(addReviewParams.body= e.target.value)}}></textarea>
         <br/>
+
+        <input placeholder="name"
+        onChange={(e)=>{setAddReviewParams.name(e.target.value)}}></input>
+
+        <input
+        placeholder="email"
+        onChange={(e)=>{setAddReviewParams.email(e.target.value)}}></input>
+
+          <input placeholder="size"
+          ></input>
+          <input placeholder="confort"
+          ></input>
+        <button>Submit</button>
 
         <input placeholder="name"
         onChange={(e)=>{setAddReviewParams.name(e.target.value)}}></input>
