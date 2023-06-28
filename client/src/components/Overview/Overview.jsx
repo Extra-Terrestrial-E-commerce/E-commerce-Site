@@ -9,6 +9,7 @@ import ProductCheckout from './components/ProductCheckout.jsx';
 const Overview = ({currentProduct}) => {
 
   const[styles, setStyles] = React.useState([]);
+  const[selectedStyle, setSelectedStyle] = React.useState({});
 
   React.useEffect(() => {
     if (Object.keys(currentProduct).length) {
@@ -23,9 +24,9 @@ const Overview = ({currentProduct}) => {
     <div className='overview'>
 
 
-      <ImageGallery/>
+      {selectedStyle.name && <ImageGallery style = {selectedStyle}/>}
       <ProductInfo product ={currentProduct}/>
-      <ProductStyle styles ={styles}/>
+      <ProductStyle styles ={styles} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle}/>
       <ProductOverview product={currentProduct}/>
 
 
