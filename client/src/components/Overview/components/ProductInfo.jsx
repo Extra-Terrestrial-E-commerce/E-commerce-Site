@@ -6,6 +6,7 @@ const ProductInfo = ({product}) => {
     color:'white'
   }
 
+  console.log('this is the product, ', product);
   return (
     <div className='overview'>
       <span>stars</span>
