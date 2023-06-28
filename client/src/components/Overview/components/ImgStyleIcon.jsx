@@ -16,7 +16,6 @@ const ImgStyleIcon = ({photo, updatingMainImage, id, selected}) => {
     margin:'5px'
   }
 
-
   return(
     <img style ={styles} src ={photo.thumbnail_url} onClick={()=>updatingMainImage(id) }/>
   )

@@ -3,18 +3,12 @@ import {ImCheckmark} from 'react-icons/im'
 
 const Style = ({style, setStyle, selected}) => {
 
-
-
-  const handleClick = () => {
-    setStyle(style);
-  }
-
   return (
     <div className='style-parent'>
       {selected &&
         <ImCheckmark className='checkmark'/>
       }
-      <img className='style-thumbnail' src={style.photos[0].thumbnail_url} onClick ={handleClick}/>
+      <img className='style-thumbnail' src={style.photos[0].thumbnail_url} onClick ={()=> setStyle(style)}/>
     </div>
   )
 }

@@ -19,7 +19,6 @@ const Overview = ({currentProduct}) => {
     }
   }, [currentProduct])
 
-
   return (
     <div className='overview'>
 
