@@ -8,10 +8,14 @@ const ImageGallery = ({style}) => {
     flexDirection:'column'
   }
   console.log('this is the img gal style, ', style);
+
+  const updatingMainImage = (photo) => {
+    setMainImage(photo);
+  }
   return (
     <div className='row'>
-      <div className=''>
-        {style.photos && style.photos.map((photo, i) => <ImgStyleIcon key ={i} photo ={photo}/>)}
+      <div className='oneThird'>
+        {style.photos && style.photos.map((photo, i) => <ImgStyleIcon key ={i} photo ={photo} updatingMainImage={updatingMainImage}/>)}
         <button>down</button>
       </div>
       <div className=''>
