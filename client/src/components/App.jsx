@@ -29,7 +29,7 @@ const App = () => {
     <>
       <div>hello world, mars</div>
       <div class="section">
-        <Overview currentProduct={currentProduct}/>
+        {currentProduct.name && <Overview currentProduct={currentProduct}/>}
       </div>
       <div class="section">
         <OutfitsAndRelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct}/>

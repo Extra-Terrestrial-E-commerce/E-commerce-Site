@@ -1,8 +1,7 @@
 import React from 'react';
 import Style from './Style.jsx'
 import ProductCheckout from './ProductCheckout.jsx'
-const ProductStyle = ({styles}) => {
-  const[selectedStyle, setSelectedStyle] = React.useState({});
+const ProductStyle = ({styles, selectedStyle, setSelectedStyle}) => {
 
   React.useEffect (() => {
     if (styles.length) {

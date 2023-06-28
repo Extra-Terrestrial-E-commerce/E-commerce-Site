@@ -1,26 +1,33 @@
 import React from 'react';
+import ImgStyleIcon from './ImgStyleIcon.jsx';
 
-const ImageGallery = () => {
-  const styles = {
-    display:'flex',
-    flexDirection:'column'
+const ImageGallery = ({style}) => {
+  const[mainImageId, setMainImageId] = React.useState(0);
+
+  console.log('this is the img gal style, ', style);
+
+  const updatingMainImage = (id) => {
+    setMainImageId(id);
   }
   return (
-    <>
-      <div style = {styles}>
-       <img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/2048px-Grey_Square.svg.png' width='50' length='50' />
-       <img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/2048px-Grey_Square.svg.png' width='50' length='50'/>
-       <img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/2048px-Grey_Square.svg.png' width='50' length='50'/>
-       <img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/2048px-Grey_Square.svg.png' width='50' length='50'/>
-       <img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Grey_Square.svg/2048px-Grey_Square.svg.png' width='50' length='50'/>
-       <button>down</button>
+    <div className='row'>
+      <div className='oneThird'>
+        {style.photos && style.photos.map((photo, i) => <ImgStyleIcon
+        key ={i}
+        id={i}
+        photo ={photo}
+        updatingMainImage={updatingMainImage}
+        selected ={i === mainImageId}
+        />
+        )}
+        <button>down</button>
       </div>
-      <div>
+      <div className=''>
         <button>left </button>
-        <img />
+        <img src ={style.photos[mainImageId].thumbnail_url}/>
         <button> right </button>
       </div>
-    </>
+    </div>
   )
 }
 
