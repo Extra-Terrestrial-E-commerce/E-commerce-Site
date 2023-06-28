@@ -48,8 +48,14 @@ const RatingsAndReview = ({currentProduct}) => {
     } if (filterNumbers[number] === 1) {
       copyofFilterNumbers[number] = 0;
       setFilterNumbers(copyofFilterNumbers);
-      filterReviews(filterNumbers);
-      return;
+      for (var keys in filterNumbers) {
+        if (filterNumbers[keys] === 1) {
+          filterReivews(filterNumbers);
+          return;
+        } else {
+          setFilteredList(currentReviews);
+        }
+      }
     }
   }
 
@@ -63,7 +69,6 @@ const RatingsAndReview = ({currentProduct}) => {
       }
     }
     setFilteredList(matching);
-
   }
 
 
