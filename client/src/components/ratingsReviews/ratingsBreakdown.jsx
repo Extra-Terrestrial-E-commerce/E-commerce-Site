@@ -27,7 +27,6 @@ const RatingsBreakdown = ({reviewMeta, filterHandler}) => {
 
   return (
     <div>
-      <h3>RATINGS & REVIEWS</h3>
       <div class="row">
       <h1>{getAvRating(reviewMeta.ratings)}</h1>
       <h1>

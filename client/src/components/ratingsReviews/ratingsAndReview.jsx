@@ -10,6 +10,7 @@ const RatingsAndReview = ({currentProduct}) => {
   const [sortParam, setSortParam] = useState("relevant");
   const [filterNumbers, setFilterNumbers] = useState({5: 0, 4: 0, 3: 0, 2: 0, 1: 0});
   const [filteredList, setFilteredList] = useState(currentReviews);
+  const [filtersAdded, setFiltersAdded] = useState(false);
 
   var reviewparams = {
     params : {
@@ -42,6 +43,7 @@ const RatingsAndReview = ({currentProduct}) => {
     if (filterNumbers[number] === 0) {
       copyofFilterNumbers[number] = 1;
       setFilterNumbers(copyofFilterNumbers);
+      setFiltersAdded(true);
       filterReviews(filterNumbers);
       return;
 
@@ -53,6 +55,7 @@ const RatingsAndReview = ({currentProduct}) => {
           filterReivews(filterNumbers);
           return;
         } else {
+          setFiltersAdded(false);
           setFilteredList(currentReviews);
         }
       }
@@ -71,11 +74,18 @@ const RatingsAndReview = ({currentProduct}) => {
     setFilteredList(matching);
   }
 
+  const removeFiltersHandler = () => {
+    setFilteredList(currentReviews);
+    setFilterNumbers({5: 0, 4: 0, 3: 0, 2: 0, 1: 0});
+  }
+
 
   return (
     <>
     <div class="row">
       <div class="oneThird">
+        <h3>RATINGS & REVIEWS</h3>
+        {filtersAdded && <><p>filters have been added </p><button onClick={()=>{removeFiltersHandler()}}>Remove Filters</button></>}
         {reviewMeta.ratings &&
         <RatingsBreakdown
         reviewMeta={reviewMeta}
