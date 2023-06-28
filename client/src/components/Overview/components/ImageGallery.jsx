@@ -4,14 +4,16 @@ import ImgStyleIcon from './ImgStyleIcon.jsx';
 const ImageGallery = ({style}) => {
   const[mainImageId, setMainImageId] = React.useState(0);
 
-  console.log('this is the img gal style, ', style);
-
+  const thumbNailStyles = {
+    display:'flex',
+    flexDirection: 'column'
+  }
   const updatingMainImage = (id) => {
     setMainImageId(id);
   }
   return (
-    <div className='row'>
-      <div className='oneThird'>
+    <div  className='row'>
+      <div style ={thumbNailStyles} className=''>
         {style.photos && style.photos.map((photo, id) => <ImgStyleIcon
         key ={id}
         id={id}
