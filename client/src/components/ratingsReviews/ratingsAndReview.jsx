@@ -8,6 +8,8 @@ const RatingsAndReview = ({currentProduct}) => {
   const [currentReviews, setCurrentReviews] = useState([]);
   const [reviewMeta, setReviewMeta] = useState({});
   const [sortParam, setSortParam] = useState("relevant");
+  const [filterNumbers, setFilterNumbers] = useState({5: 0, 4: 0, 3: 0, 2: 0, 1: 0});
+  const [filteredList, setFilteredList] = useState(currentReviews);
 
   var reviewparams = {
     params : {
@@ -20,6 +22,7 @@ const RatingsAndReview = ({currentProduct}) => {
     apiClient.get('/reviews/', reviewparams )
       .then((data) => {
         setCurrentReviews(data.data['results']);
+        setFilteredList(data.data['results']);
       })
       .catch((error) => {
         console.error(error);
@@ -34,7 +37,39 @@ const RatingsAndReview = ({currentProduct}) => {
       })
   }, [currentProduct, sortParam])
 
-  console.log(currentReviews);
+  const filterHandler = (number) => {
+    var copyofFilterNumbers = filterNumbers;
+    if (filterNumbers[number] === 0) {
+      copyofFilterNumbers[number] = 1;
+      setFilterNumbers(copyofFilterNumbers);
+      filterReviews(filterNumbers);
+      return;
+
+    } if (filterNumbers[number] === 1) {
+      copyofFilterNumbers[number] = 0;
+      setFilterNumbers(copyofFilterNumbers);
+      for (var keys in filterNumbers) {
+        if (filterNumbers[keys] === 1) {
+          filterReivews(filterNumbers);
+          return;
+        } else {
+          setFilteredList(currentReviews);
+        }
+      }
+    }
+  }
+
+
+  const filterReviews = (args) => {
+    var matching = [];
+    for (var i = 0; i < currentReviews.length; i++) {
+      var key = currentReviews[i].rating;
+      if(filterNumbers[key] === 1) {
+        matching.push(currentReviews[i]);
+      }
+    }
+    setFilteredList(matching);
+  }
 
 
   return (
@@ -43,14 +78,15 @@ const RatingsAndReview = ({currentProduct}) => {
       <div class="oneThird">
         {reviewMeta.ratings &&
         <RatingsBreakdown
-        reviewMeta={reviewMeta}/>}
+        reviewMeta={reviewMeta}
+        filterHandler={filterHandler}/>}
 
       </div>
       <div class="twoThirds">
-        {currentReviews.length &&
+        {filterReviews.length &&
         <ReviewList
         currentProduct={currentProduct}
-        currentReviews={currentReviews}
+        currentReviews={filteredList}
         setSortParam={setSortParam}
         />}
       </div>

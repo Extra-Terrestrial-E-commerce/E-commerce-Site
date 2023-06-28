@@ -3,7 +3,8 @@ import RatingsBar from "./ratingBar.jsx";
 import AllStars from "../Stars/AllStars.jsx";
 import CharacteristicsBars from "./characteristicsBars.jsx";
 
-const RatingsBreakdown = ({reviewMeta}) => {
+const RatingsBreakdown = ({reviewMeta, filterHandler}) => {
+
 
   const getPercentRecommend = (recommend) =>{
     const noRec = Number(recommend.false);
@@ -22,6 +23,8 @@ const RatingsBreakdown = ({reviewMeta}) => {
     return average.toFixed(1);
   }
 
+
+
   return (
     <div>
       <h3>RATINGS & REVIEWS</h3>
@@ -37,23 +40,23 @@ const RatingsBreakdown = ({reviewMeta}) => {
       <p>{getPercentRecommend(reviewMeta.recommended)}% of reviews recommend this product</p>
 
         <div class="row">
-          <p>5 stars </p>
+          <button onClick={()=>{filterHandler(5)}}>5 stars </button>
           <RatingsBar completed={reviewMeta.ratings['5']}/>
         </div>
         <div class="row">
-          <p>4 stars </p>
+          <button onClick={()=>{filterHandler(4)}}>4 stars </button>
           <RatingsBar completed={reviewMeta.ratings['4']}/>
         </div>
         <div class="row">
-          <p>3 stars </p>
+          <button onClick={()=>{filterHandler(3)}}>3 stars </button>
           <RatingsBar completed={reviewMeta.ratings['3']}/>
         </div>
         <div class="row">
-          <p>2 stars </p>
+          <button onClick={()=>{filterHandler(2)}}>2 stars </button>
           <RatingsBar completed={reviewMeta.ratings['2']}/>
         </div>
         <div class="row">
-          <p>1 star </p>
+          <button onClick={()=>{filterHandler(1)}}>1 star </button>
           <RatingsBar completed={reviewMeta.ratings['1']}/>
         </div>
         <br/>
