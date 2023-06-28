@@ -12,12 +12,12 @@ const ImageGallery = ({style}) => {
   return (
     <div className='row'>
       <div className='oneThird'>
-        {style.photos && style.photos.map((photo, i) => <ImgStyleIcon
-        key ={i}
-        id={i}
+        {style.photos && style.photos.map((photo, id) => <ImgStyleIcon
+        key ={id}
+        id={id}
         photo ={photo}
         updatingMainImage={updatingMainImage}
-        selected ={i === mainImageId}
+        selected = {id === mainImageId}
         />
         )}
         <button>down</button>
