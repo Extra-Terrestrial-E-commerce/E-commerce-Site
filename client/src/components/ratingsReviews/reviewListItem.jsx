@@ -58,8 +58,6 @@ const ReviewListItem = ({review}) => {
 
   }
 
-   console.log("review", review);
-
 
   return (
     <div>
