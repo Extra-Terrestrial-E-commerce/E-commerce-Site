@@ -2,25 +2,29 @@ import React from 'react';
 import ImgStyleIcon from './ImgStyleIcon.jsx';
 
 const ImageGallery = ({style}) => {
-  const[mainImage, setMainImage] = React.useState(style.photos[0])
-  const styles = {
-    display:'flex',
-    flexDirection:'column'
-  }
+  const[mainImageId, setMainImageId] = React.useState(0);
+
   console.log('this is the img gal style, ', style);
 
-  const updatingMainImage = (photo) => {
-    setMainImage(photo);
+  const updatingMainImage = (id) => {
+    setMainImageId(id);
   }
   return (
     <div className='row'>
       <div className='oneThird'>
-        {style.photos && style.photos.map((photo, i) => <ImgStyleIcon key ={i} photo ={photo} updatingMainImage={updatingMainImage}/>)}
+        {style.photos && style.photos.map((photo, i) => <ImgStyleIcon
+        key ={i}
+        id={i}
+        photo ={photo}
+        updatingMainImage={updatingMainImage}
+        selected ={i === mainImageId}
+        />
+        )}
         <button>down</button>
       </div>
       <div className=''>
         <button>left </button>
-        <img src ={mainImage.thumbnail_url}/>
+        <img src ={style.photos[mainImageId].thumbnail_url}/>
         <button> right </button>
       </div>
     </div>
