@@ -12,29 +12,6 @@ const CharacteristicsBars = ({characteristics}) => {
     return (value/5)*100;
   }
 
-  const comfortStyles = {
-    height: '100%',
-    width: `${characteristicValue(characteristics.Comfort.value)}%`,
-    'borderRight': 'solid grey 2px'
-  }
-
-  const fitStyles = {
-    height: '100%',
-    width: `${characteristicValue(characteristics.Fit.value)}%`,
-    'borderRight': 'solid grey 2px'
-  }
-
-  const lengthStyles = {
-    height: '100%',
-    width: `${characteristicValue(characteristics.Length.value)}%`,
-    'borderRight': 'solid grey 2px'
-  }
-
-  const qualityStyles = {
-    height: '100%',
-    width: `${characteristicValue(characteristics.Quality.value)}%`,
-    'borderRight': 'solid grey 2px'
-  }
 
   return (
     <>
@@ -42,7 +19,8 @@ const CharacteristicsBars = ({characteristics}) => {
     <div>
       <p>Comfort</p>
       <div style={containerStyles}>
-        <div style={comfortStyles}>
+        <div style={{height: '100%', width: `${characteristicValue(characteristics.Comfort.value)}%`,
+    'borderRight': 'solid grey 2px'}}>
         </div>
       </div>
     </div>
@@ -52,7 +30,8 @@ const CharacteristicsBars = ({characteristics}) => {
     <div>
       <p>Fit</p>
       <div style={containerStyles}>
-        <div style={fitStyles}>
+        <div style={{height: '100%', width: `${characteristicValue(characteristics.Fit.value)}%`,
+    'borderRight': 'solid grey 2px'}}>
         </div>
       </div>
     {/* <p>{completed}</p> */}
@@ -63,7 +42,8 @@ const CharacteristicsBars = ({characteristics}) => {
     <div>
       <p>Length</p>
       <div style={containerStyles}>
-        <div style={lengthStyles}>
+        <div style={{height: '100%', width: `${characteristicValue(characteristics.Length.value)}%`,
+    'borderRight': 'solid grey 2px'}}>
         </div>
       </div>
     {/* <p>{completed}</p> */}
@@ -74,7 +54,8 @@ const CharacteristicsBars = ({characteristics}) => {
     <div>
       <p>Quality</p>
       <div style={containerStyles}>
-        <div style={qualityStyles}>
+        <div style={{height: '100%', width: `${characteristicValue(characteristics.Quality.value)}%`,
+    'borderRight': 'solid grey 2px'}}>
         </div>
       </div>
     {/* <p>{completed}</p> */}
