@@ -4,6 +4,8 @@ const { useState, useEffect } = React;
 
 const ComparisonModal = ({ product, currentProduct }) => {
 
+  console.log(product);
+
   var characteristics = {Category: [currentProduct.category, product.category], Price: [currentProduct.default_price, product.default_price] };
   for (let element of currentProduct.features) {
     characteristics[element.feature] = [element.value, null];

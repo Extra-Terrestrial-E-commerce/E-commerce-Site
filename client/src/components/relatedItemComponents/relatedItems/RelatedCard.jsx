@@ -62,8 +62,8 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
   }
 
   const handleComparison = (event) => {
-    console.log('handling compare');
     event.stopPropagation();
+    console.log('booleans in handle compare: ', isAnyComparing, isComparing);
     if (!isAnyComparing) {
       if (!isComparing) {
         setIsComparing(true);
@@ -88,10 +88,10 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
       handleProductChange(event)
       }
     } >
-      <div style={comparisonStyle}>
+      <div data-testid="comparisonModalContainer" style={comparisonStyle}>
         <ComparisonModal product={product} currentProduct={currentProduct} />
       </div>
-      <div style={relatedItemButtonStyle} onClick={(event) => {
+      <div role="openCompare" style={relatedItemButtonStyle} onClick={(event) => {
         handleComparison(event);
       }}>
         <OneStar percentFill={0} size={15} />

@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent, screen, act } from '@testing-library/react';
+const { useState } = React;
+import { render, fireEvent, screen, act, waitFor } from '@testing-library/react';
 import App from '../../App.jsx';
 import RelatedItems from '../relatedItems/RelatedItems.jsx';
 import ComparisonModal from '../relatedItems/ComparisonModal.jsx';
@@ -10,13 +11,15 @@ import sampleData from './sampleData.js';
 jest.mock('../../config/config.js');
 const currentProduct = sampleData.currentProduct;
 const relatedItems = sampleData.relatedItems;
-// blanking out the comparison modal so we don't get errors;
-jest.mock('../relatedItems/ComparisonModal', () => ({
-  __esModule: true,
-  default: jest.fn(() => <></>),
-}));
+
+jest.mock('../relatedItems/ComparisonModal', () => {
+  return jest.fn().mockImplementation(({ product, currentProduct }) => {
+    return <div>Mocked comparison modal</div>;
+  });
+});
 
 describe('should display related items', () => {
+
   it('should make an api call for related items and turn them into relatedItemCards', async () => {
     apiClient.get.mockResolvedValue({ data: relatedItems });
     await act(async () => {
@@ -31,9 +34,13 @@ describe('should display related items', () => {
   })
 
   it('should render the name, price, category, stars on a relatedItemCard', async () => {
-    await act(async() => {
-      render(<RelatedCard product={relatedItems[0]} />)
-    })
+    await act(async () => {
+      render(
+        <RelatedCard product={relatedItems[0]}>
+          <ComparisonModal product={relatedItems[0]} currentProduct={currentProduct} />
+        </RelatedCard>
+      );
+    });
     var name = screen.getByText('Heir Force Ones');
     var category = screen.getByText('Kicks');
     var price = screen.getByText('99.00');
@@ -43,17 +50,53 @@ describe('should display related items', () => {
     expect(price).toBeTruthy();
     expect(stars).toBeTruthy();
   })
+
+  it('should toggle visibility of comparison modal', async () => {
+
+    function TestWrapper({ initialIsAnyComparing }) {
+      const [isAnyComparing, setIsAnyComparing] = useState(initialIsAnyComparing);
+      return (
+        <RelatedCard
+          product={relatedItems[0]}
+          isAnyComparing={isAnyComparing}
+          setIsAnyComparing={setIsAnyComparing}
+        >
+          <ComparisonModal product={relatedItems[0]} currentProduct={currentProduct} />
+        </RelatedCard>
+      );
+    }
+
+    await act(async () => {
+      render(
+        <TestWrapper initialIsAnyComparing={false} />
+      );
+    });
+
+    var modalContainer = screen.getByTestId("comparisonModalContainer");
+    var currentStyle = window.getComputedStyle(modalContainer);
+    expect(currentStyle._values.display).toBe('none');
+
+    const starButton = screen.getByRole('openCompare');
+    fireEvent.click(starButton);
+    var currentStyle = window.getComputedStyle(modalContainer);
+    expect(currentStyle._values.display).toBe('flex');
+
+    fireEvent.click(starButton);
+    var currentStyle = window.getComputedStyle(modalContainer);
+    expect(currentStyle._values.display).toBe('none');
+  })
+
 })
 
 //// tests to write:
 // related items:
-// 1) test if the list comes up, if it consists of cards;
+// 1) test if the list comes up, if it consists of cards; ///// DONE
 // 2) test if on click it changes the current product;
-// 3) read only info on card: product name, category, price, stars
+// 3) read only info on card: product name, category, price, stars ///// DONE
 // 4) test stars, should fill appropriately;
 // 5) should display a preview image //// NOT IMPLEMENTED
 // action button:
-// 6) related items action button should be a star and should open up the comparison modal
+// 6) related items action button should be a star and should open up the comparison modal ///// DONE
 
 // carousel functionality:
 // 1) arrows should appear on the right and left hand side for navigation
