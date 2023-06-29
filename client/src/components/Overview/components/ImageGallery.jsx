@@ -9,18 +9,6 @@ const ImageGallery = ({style}) => {
   const[view, setView] = React.useState('default')
   const [modalIsOpen, setIsOpen] = React.useState(false);
   let subtitle;
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
   const customStyles = {
     content: {
       top: '50%',
@@ -36,9 +24,23 @@ const ImageGallery = ({style}) => {
 
 
   const LIST_MAX = 7;
+  const mainImageUrl = style.photos[mainImageId].thumbnail_url;
   const thumbNailStyles = {
     display:'flex',
     flexDirection: 'column'
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
   }
   const updatingMainImage = (id) => {
     setMainImageId(id);
@@ -78,7 +80,7 @@ const ImageGallery = ({style}) => {
         selected = {id === mainImageId}
         />
         )}
-        <button onClick={moveDown}>down</button>
+        {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
       <div className=''>
         {mainImageId > 0 && <button onClick ={selectBefore}>left </button>}
@@ -89,7 +91,13 @@ const ImageGallery = ({style}) => {
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="ExpandedViewModal">
-            <ExpandedView/>
+            <ExpandedView
+              imageUrl = {mainImageUrl}
+              selectNext ={selectNext}
+              selectBefore ={selectBefore}
+              enableBefore = {mainImageId > 0}
+              enableNext = {mainImageId < style.photos.length -1}
+            />
           </Modal>
         {mainImageId < style.photos.length -1 && <button onClick ={selectNext}> right </button>}
       </div>
