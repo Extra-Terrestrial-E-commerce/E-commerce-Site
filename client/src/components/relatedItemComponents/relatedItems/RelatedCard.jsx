@@ -84,7 +84,7 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
 
 
   return (
-    <div id="relatedItemContainer" style={containerStyle} onClick={(event) => {
+    <div role="relatedItemCard" id="relatedItemContainer" style={containerStyle} onClick={(event) => {
       handleProductChange(event)
       }
     } >

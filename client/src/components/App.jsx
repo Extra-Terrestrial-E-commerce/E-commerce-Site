@@ -12,7 +12,8 @@ const App = () => {
   useEffect(() => {
     apiClient.get('/products')
       .then((data) => {
-        apiClient.get('/products/' + data.data[2].id)
+        console.log(data);
+        apiClient.get('/products/' + data.data[3].id)
           .then((data) => {
             setCurrentProduct(data.data);
           })

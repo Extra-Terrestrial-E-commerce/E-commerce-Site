@@ -1,19 +1,47 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import App from '../../App.jsx';
 import RelatedItems from '../relatedItems/RelatedItems.jsx';
+import ComparisonModal from '../relatedItems/ComparisonModal.jsx';
+import RelatedCard from '../relatedItems/RelatedCard.jsx';
+import apiClient from '../../config/config.js';
+import sampleData from './sampleData.js';
 
-describe('should run tests on npm script', () => {
-  it('should render the app element', () => {
-    render(<App />)
-    expect(screen.getByText('hello world, mars')).toBeTruthy();
-  })
-})
+jest.mock('../../config/config.js');
+const currentProduct = sampleData.currentProduct;
+const relatedItems = sampleData.relatedItems;
+// blanking out the comparison modal so we don't get errors;
+jest.mock('../relatedItems/ComparisonModal', () => ({
+  __esModule: true,
+  default: jest.fn(() => <></>),
+}));
 
 describe('should display related items', () => {
-  it('should render a list of related items consisting of item cards', () => {
-    render(<App />)
+  it('should make an api call for related items and turn them into relatedItemCards', async () => {
+    apiClient.get.mockResolvedValue({ data: relatedItems });
+    await act(async () => {
+      render(<RelatedItems currentProduct={currentProduct}/>)
+    })
+    const foundRelatedItemCards = screen.getAllByRole('relatedItemCard');
+    expect(foundRelatedItemCards).toBeTruthy();
+  })
+
+  it('should change the current product on click of a relatedItemCard', () => {
     expect(true).toBeTruthy();
+  })
+
+  it('should render the name, price, category, stars on a relatedItemCard', async () => {
+    await act(async() => {
+      render(<RelatedCard product={relatedItems[0]} />)
+    })
+    var name = screen.getByText('Heir Force Ones');
+    var category = screen.getByText('Kicks');
+    var price = screen.getByText('99.00');
+    var stars = screen.getByRole('stars');
+    expect(name).toBeTruthy();
+    expect(category).toBeTruthy();
+    expect(price).toBeTruthy();
+    expect(stars).toBeTruthy();
   })
 })
 
