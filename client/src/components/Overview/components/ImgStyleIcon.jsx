@@ -18,7 +18,7 @@ const ImgStyleIcon = ({photo, updatingMainImage, id, selected}) => {
 
   return(
     <div >
-      <img style ={styles} src ={photo.thumbnail_url} onClick={()=>updatingMainImage(id) }/>
+      <img  style ={styles} src ={photo.thumbnail_url} onClick={()=>updatingMainImage(id) }/>
     </div>
   )
 }
