@@ -45,26 +45,31 @@ const ImageGallery = ({style}) => {
   }
   const updatingMainImage = (id) => {
     setMainImageId(id);
-    if (id < styleStart) {
-      moveUp();
-    }
-    if (id >= styleStart + LIST_MAX) {
-      moveDown();
-    }
+
+    // if (id >= styleStart + LIST_MAX) {
+    //   moveUp();
+    // }
   }
   const moveDown = () => {
-    if (styleStart < style.photos.length -1 ) {
-      setStyleStart(styleStart + 1);
-    }
+    setStyleStart(styleStart + 1);
   }
   const moveUp = () => {
     setStyleStart(styleStart -1);
   }
   const selectBefore = () => {
+    if(mainImageId <= styleStart) {
+      moveUp();
+    }
     setMainImageId(mainImageId - 1)
+
   }
 
   const selectNext = () => {
+    console.log('this is the previous mainImageId, ', mainImageId)
+    if(mainImageId >= styleStart + LIST_MAX - 1) {
+      moveDown();
+    }
+
     setMainImageId(mainImageId + 1);
   }
   return (
