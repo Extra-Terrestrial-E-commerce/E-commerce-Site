@@ -1,9 +1,40 @@
 import React from 'react';
 import ImgStyleIcon from './ImgStyleIcon.jsx';
+import ExpandedView from './ExpandedView.jsx'
+import Modal from 'react-modal';
 
 const ImageGallery = ({style}) => {
   const[mainImageId, setMainImageId] = React.useState(0);
   const[styleStart, setStyleStart] = React.useState(0);
+  const[view, setView] = React.useState('default')
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  let subtitle;
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      height: '80vh',
+      width:'80vw'
+    },
+  };
+
+
   const LIST_MAX = 7;
   const thumbNailStyles = {
     display:'flex',
@@ -51,7 +82,15 @@ const ImageGallery = ({style}) => {
       </div>
       <div className=''>
         {mainImageId > 0 && <button onClick ={selectBefore}>left </button>}
-        <img id ='img' src ={style.photos[mainImageId].thumbnail_url}/>
+        <img id ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="ExpandedViewModal">
+            <ExpandedView/>
+          </Modal>
         {mainImageId < style.photos.length -1 && <button onClick ={selectNext}> right </button>}
       </div>
     </div>
