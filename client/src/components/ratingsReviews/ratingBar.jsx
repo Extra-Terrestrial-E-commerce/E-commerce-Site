@@ -1,6 +1,6 @@
 import React from "react";
 
-const RatingsBar = ({completed}) => {
+const RatingsBar = ({completed, actualNumber}) => {
   const containerStyles = {
     height: 10,
     width: '50%',
@@ -16,13 +16,13 @@ const RatingsBar = ({completed}) => {
     borderRadius: 'inherit',
     textAlign: 'right'
   }
+
   return (
     <>
     <div style={containerStyles}>
-      <div style={fillerStyles}>
-      </div>
+      <div style={fillerStyles}></div>
     </div>
-    <p>{completed}</p>
+    <p>{actualNumber}</p>
     </>
   )
 

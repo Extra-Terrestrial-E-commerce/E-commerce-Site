@@ -1,12 +1,14 @@
 import React from "react";
 import AllStars from "../Stars/AllStars.jsx";
 import apiClient from '../config/config.js';
-const { useState } = React;
+const { useState, useEffect } = React;
 
 
 
 const ReviewListItem = ({review}) => {
   const [helpfulStatus, setHelpfulStatus] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
 
   const getMonthName = (monthNumber) => {
     const date2 = new Date();
@@ -73,7 +75,9 @@ const ReviewListItem = ({review}) => {
 
       </div>
       <h2>{truncate(review.body)}</h2>
-      <p>{review.body}</p>
+      {showMore ? <p>{review.body}</p> : <p>{`${review.body.substring(0, 251)}`}</p>}
+      {review.body.length > 250 & showMore === false ? <button onClick={()=>{setShowMore(true)}}>Read More</button> : <p></p> }
+      {review.body.length > 250 & showMore === true ? <button onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
       {review.recommend && <p>I recommend this product</p>}
       <div class="row">
         <p>Helpful?</p>
