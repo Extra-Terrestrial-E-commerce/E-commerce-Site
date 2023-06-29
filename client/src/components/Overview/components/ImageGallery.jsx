@@ -11,12 +11,6 @@ const ImageGallery = ({style}) => {
   }
   const updatingMainImage = (id) => {
     setMainImageId(id);
-    if (id < styleStart) {
-      moveUp();
-    }
-    if (id >= styleStart + LIST_MAX) {
-      moveDown();
-    }
   }
   const moveDown = () => {
     if (styleStart < style.photos.length -1 ) {
@@ -47,11 +41,11 @@ const ImageGallery = ({style}) => {
         selected = {id === mainImageId}
         />
         )}
-        <button onClick={moveDown}>down</button>
+        {style.photos.length > LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
       <div className=''>
         {mainImageId > 0 && <button onClick ={selectBefore}>left </button>}
-        <img id ='img' src ={style.photos[mainImageId].thumbnail_url}/>
+        <img src ={style.photos[mainImageId].thumbnail_url}/>
         {mainImageId < style.photos.length -1 && <button onClick ={selectNext}> right </button>}
       </div>
     </div>
