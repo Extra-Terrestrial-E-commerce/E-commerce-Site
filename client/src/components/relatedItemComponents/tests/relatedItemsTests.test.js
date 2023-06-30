@@ -22,6 +22,16 @@ jest.mock('../relatedItems/ComparisonModal', () => ({
 }));
 
 describe('should display related items', () => {
+
+=======
+// blanking out the comparison modal so we don't get errors;
+jest.mock('../relatedItems/ComparisonModal', () => ({
+  __esModule: true,
+  default: jest.fn(() => <></>),
+}));
+
+describe('should display related items', () => {
+>>>>>>> 938fc66 (api call test made, static info rendered on relatedItemCard test made)
   it('should make an api call for related items and turn them into relatedItemCards', async () => {
     apiClient.get.mockResolvedValue({ data: relatedItems });
     await act(async () => {
@@ -39,6 +49,19 @@ describe('should display related items', () => {
     await act(async() => {
       render(<RelatedCard product={relatedItems[0]} />)
     })
+<<<<<<< HEAD
+    await act(async () => {
+      render(
+        <RelatedCard product={relatedItems[0]}>
+          <ComparisonModal product={relatedItems[0]} currentProduct={currentProduct} />
+        </RelatedCard>
+      );
+    });
+=======
+    await act(async() => {
+      render(<RelatedCard product={relatedItems[0]} />)
+    })
+>>>>>>> 938fc66 (api call test made, static info rendered on relatedItemCard test made)
     var name = screen.getByText('Heir Force Ones');
     var category = screen.getByText('Kicks');
     var price = screen.getByText('99.00');
@@ -113,6 +136,8 @@ describe('should display related items', () => {
 
   })
 
+=======
+>>>>>>> 938fc66 (api call test made, static info rendered on relatedItemCard test made)
 })
 
 describe('should display a rating as an image of filled stars', () => {
