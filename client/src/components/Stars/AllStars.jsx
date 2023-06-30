@@ -26,11 +26,7 @@ const AllStars = ( {rating, size} ) => {
 
   var counter = 0;
   return (
-<<<<<<< HEAD
-    <div data-testid="allStars" role="stars" syle={starStyle} onMouseOver={handleHover}>
-=======
     <div role="stars" syle={starStyle} onMouseOver={handleHover}>
->>>>>>> 938fc66 (api call test made, static info rendered on relatedItemCard test made)
       {fills.map((percentFill) => {
         counter++;
         return <OneStar key={counter} size={size} percentFill={percentFill} />
