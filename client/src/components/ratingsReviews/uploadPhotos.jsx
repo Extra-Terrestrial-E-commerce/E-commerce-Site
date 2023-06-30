@@ -7,9 +7,11 @@ const ImageUpload = () => {
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    console.log("image list", imageList, addUpdateIndex);
     setImages(imageList);
   };
+
+  console.log("images", images);
 
   return (
     <div className="App">
