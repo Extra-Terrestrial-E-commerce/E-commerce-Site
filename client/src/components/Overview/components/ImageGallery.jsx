@@ -25,6 +25,7 @@ const ImageGallery = ({style}) => {
 
   const LIST_MAX = 7;
   const mainImageUrl = style.photos[mainImageId].thumbnail_url;
+  const currentPhotoArray = style.photos.slice(styleStart, styleStart + 7);
   const thumbNailStyles = {
     display:'flex',
     flexDirection: 'column'
@@ -72,12 +73,12 @@ const ImageGallery = ({style}) => {
       <div style ={thumbNailStyles} className=''>
         {styleStart > 0 && <button onClick={moveUp}>up</button> }
 
-        {style.photos && style.photos.slice(styleStart, styleStart + 7).map((photo, id) => <ImgStyleIcon
-        key ={id}
-        id={id}
+        {style.photos && currentPhotoArray.map((photo, id) => <ImgStyleIcon
+        key ={styleStart + id}
+        id={styleStart +id}
         photo ={photo}
         updatingMainImage={updatingMainImage}
-        selected = {id === mainImageId}
+        selected = {styleStart + id === mainImageId}
         />
         )}
         {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
