@@ -66,15 +66,13 @@ const ReviewListItem = ({review}) => {
 
   }
 
-<<<<<<< HEAD
+
   const buttonStyle = {
     'backgroundColor': 'white',
     'border': '0px',
     'textDecoration': 'underline'
 }
 
-=======
->>>>>>> bd27f64 (writeReview form formatting)
   return (
     <div>
       <div class="row">

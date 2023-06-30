@@ -69,7 +69,7 @@ const OneStar = ( {percentFill, size} ) => {
     }
   }, [percentFill, size]);
   return (
-    <canvas ref={canvasRef} width={size} height={size}></canvas>
+    <canvas role="oneStar" ref={canvasRef} width={size} height={size}></canvas>
   )
 }
 
