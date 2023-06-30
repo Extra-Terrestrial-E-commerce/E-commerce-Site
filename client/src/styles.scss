@@ -137,6 +137,11 @@ table {
   cursor:url('./mglass.png'), pointer;
 }
 
+#main-img-expanded:hover {
+  cursor: zoom-in;
+}
+
+
 .shadow-box {
   margin: 20px;
   padding: 10px;
