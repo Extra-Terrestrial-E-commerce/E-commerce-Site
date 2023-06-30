@@ -6,9 +6,8 @@ import Modal from 'react-modal';
 const ImageGallery = ({style}) => {
   const[mainImageId, setMainImageId] = React.useState(0);
   const[styleStart, setStyleStart] = React.useState(0);
-  const[view, setView] = React.useState('default')
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  let subtitle;
+
   const customStyles = {
     content: {
       top: '50%',
@@ -35,10 +34,7 @@ const ImageGallery = ({style}) => {
     setIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
+
 
   function closeModal() {
     setIsOpen(false);
@@ -65,12 +61,20 @@ const ImageGallery = ({style}) => {
   }
 
   const selectNext = () => {
-    console.log('this is the previous mainImageId, ', mainImageId)
     if(mainImageId >= styleStart + LIST_MAX - 1) {
       moveDown();
     }
-
     setMainImageId(mainImageId + 1);
+  }
+
+  const thumbNailGallery = () => {
+    return currentPhotoArray.map((photo, id) => <ImgStyleIcon
+        key ={styleStart + id}
+        id={styleStart +id}
+        photo ={photo}
+        updatingMainImage={updatingMainImage}
+        selected = {styleStart + id === mainImageId}
+        />)
   }
   return (
     <div  className='row'>
@@ -78,14 +82,7 @@ const ImageGallery = ({style}) => {
       <div style ={thumbNailStyles} className=''>
         {styleStart > 0 && <button onClick={moveUp}>up</button> }
 
-        {style.photos && currentPhotoArray.map((photo, id) => <ImgStyleIcon
-        key ={styleStart + id}
-        id={styleStart +id}
-        photo ={photo}
-        updatingMainImage={updatingMainImage}
-        selected = {styleStart + id === mainImageId}
-        />
-        )}
+        {style.photos && thumbNailGallery()}
         {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
       <div className=''>
@@ -93,7 +90,7 @@ const ImageGallery = ({style}) => {
         <img id ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
         <Modal
           isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
+          // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="ExpandedViewModal">
@@ -103,6 +100,7 @@ const ImageGallery = ({style}) => {
               selectBefore ={selectBefore}
               enableBefore = {mainImageId > 0}
               enableNext = {mainImageId < style.photos.length -1}
+              thumbNailGallery = {thumbNailGallery}
             />
           </Modal>
         {mainImageId < style.photos.length -1 && <button onClick ={selectNext}> right </button>}
