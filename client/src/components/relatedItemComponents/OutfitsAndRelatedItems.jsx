@@ -11,9 +11,11 @@ const OutfitsAndRelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   return (
     <>
       <div>
+        Related Items
         <RelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />
       </div>
       <div>
+        Your Outfit
         <OutfitItems currentProduct={currentProduct} />
       </div>
     </>
