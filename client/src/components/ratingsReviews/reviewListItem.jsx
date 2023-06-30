@@ -9,6 +9,12 @@ const ReviewListItem = ({review}) => {
   const [helpfulStatus, setHelpfulStatus] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
+  const styles = {
+    width: '100px',
+    height:'100px',
+    borderRadius: '10%',
+    margin:'5px'
+  }
 
   const getMonthName = (monthNumber) => {
     const date2 = new Date();
@@ -60,7 +66,6 @@ const ReviewListItem = ({review}) => {
 
   }
 
-
   return (
     <div>
       <div class="row">
@@ -68,9 +73,12 @@ const ReviewListItem = ({review}) => {
           <AllStars rating={review.stars}
           size={12}/>
         </p>
-
+        <div className="row" style={{'position': 'relative', 'left': '350px'}}>
         {review.reviewer_name ? <p>{review.reviewer_name}  </p> : <p>Incognito</p>}
         <p>  {getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
+
+        </div>
+
 
 
       </div>
@@ -79,6 +87,7 @@ const ReviewListItem = ({review}) => {
       {review.body.length > 250 & showMore === false ? <button onClick={()=>{setShowMore(true)}}>Read More</button> : <p></p> }
       {review.body.length > 250 & showMore === true ? <button onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
       {review.recommend && <p>I recommend this product</p>}
+      {review.photos && review.photos.map((photo) => <img style={styles} id={photo.id} src={photo.url}/>)}
       <div class="row">
         <p>Helpful?</p>
         {helpfulStatus && <p>Thank you</p>}
@@ -90,7 +99,6 @@ const ReviewListItem = ({review}) => {
         }
 
       </div>
-      <p>_______________________________</p>
     </div>
   )
   }

@@ -56,13 +56,14 @@ const ReviewList = ({currentReviews, currentProduct, setSortParam}) => {
         <option value="newest">newest</option>
       </select>
       </h2>
-      <p>Review List</p>
       <div style={scrollStyles}>
 
       {currentReviews.slice(0, reviewCount).map((review) => {
         return(
+          <div className="shadow-box">
           <ReviewListItem review={review}
           key={review.review_id} />
+          </div>
         )
       })}
       </div>
