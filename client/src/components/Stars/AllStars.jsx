@@ -26,7 +26,7 @@ const AllStars = ( {rating, size} ) => {
 
   var counter = 0;
   return (
-    <div data-testid="allStars" role="stars" syle={starStyle} onMouseOver={handleHover}>
+    <div role="stars" syle={starStyle} onMouseOver={handleHover}>
       {fills.map((percentFill) => {
         counter++;
         return <OneStar key={counter} size={size} percentFill={percentFill} />
