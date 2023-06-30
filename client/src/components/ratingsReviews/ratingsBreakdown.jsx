@@ -32,6 +32,8 @@ const RatingsBreakdown = ({reviewMeta, filterHandler}) => {
     return five+four+three+two+one;
   }
 
+  console.log('reviewMeta', reviewMeta);
+
   return (
     <div>
       <div class="row">
