@@ -1,6 +1,7 @@
 import React from "react";
 const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
+import ImageUpload from './uploadPhotos.jsx';
 
 const WriteReview = ({currentProduct, closeModal}) => {
   const [product_id, setProduct_id] = useState(currentProduct.id);
@@ -169,6 +170,8 @@ const WriteReview = ({currentProduct, closeModal}) => {
                 <option value="5">Too Long</option>
               </select>
 <br/>
+            <ImageUpload />
+            <br/>
         <button onClick={(e)=> {clickHandler(e)}}>Submit</button>
 
       </form>
