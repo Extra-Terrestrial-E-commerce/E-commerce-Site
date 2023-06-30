@@ -3,8 +3,7 @@ import ImgStyleIcon from './ImgStyleIcon.jsx';
 const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableNext, thumbNailGallery}) => {
   const expandedThumbnailStyles = {
     display:'flex',
-    flexDirection: 'row',
-    border: 'solid'
+    flexDirection: 'row'
   }
   return(
     <div>
@@ -12,7 +11,7 @@ const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableN
       <img src ={imageUrl}></img>
       {enableNext && <button onClick ={selectNext}>right</button>}
       <div style ={expandedThumbnailStyles}>
-        {thumbNailGallery('thumbnail')}
+        {thumbNailGallery()}
       </div>
     </div>
   )
