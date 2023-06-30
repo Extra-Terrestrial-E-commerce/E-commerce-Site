@@ -15,12 +15,6 @@ const ReviewListItem = ({review}) => {
     borderRadius: '10%',
     margin:'5px'
   }
-  const styles = {
-    width: '100px',
-    height:'100px',
-    borderRadius: '10%',
-    margin:'5px'
-  }
 
   const getMonthName = (monthNumber) => {
     const date2 = new Date();
@@ -92,15 +86,10 @@ const ReviewListItem = ({review}) => {
         </div>
 
 
-        </div>
-
-
 
       </div>
       <h2>{truncate(review.body)}</h2>
       {showMore ? <p>{review.body}</p> : <p>{`${review.body.substring(0, 251)}`}</p>}
-      {review.body.length > 250 & showMore === false ? <button style={buttonStyle} onClick={()=>{setShowMore(true)}}>Read More</button> : <p></p> }
-      {review.body.length > 250 & showMore === true ? <button style={buttonStyle} onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
       {review.body.length > 250 & showMore === false ? <button style={buttonStyle} onClick={()=>{setShowMore(true)}}>Read More</button> : <p></p> }
       {review.body.length > 250 & showMore === true ? <button style={buttonStyle} onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
       {review.recommend && <p>I recommend this product</p>}
@@ -110,8 +99,6 @@ const ReviewListItem = ({review}) => {
         {helpfulStatus && <p>Thank you</p>}
         {helpfulStatus === false &&
         <>
-          <button style={buttonStyle} onClick={handleReviewHelpful}>Yes </button>
-          <button style={buttonStyle} onClick={handleReviewReport}>No </button>
           <button style={buttonStyle} onClick={handleReviewHelpful}>Yes </button>
           <button style={buttonStyle} onClick={handleReviewReport}>No </button>
         </>
