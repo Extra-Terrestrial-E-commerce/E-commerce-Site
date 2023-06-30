@@ -32,7 +32,11 @@ const RatingsBreakdown = ({reviewMeta, filterHandler}) => {
     return five+four+three+two+one;
   }
 
-  console.log('reviewMeta', reviewMeta);
+  const buttonStyle = {
+        'backgroundColor': 'white',
+        'border': '0px',
+        'textDecoration': 'underline'
+  }
 
   return (
     <div>
@@ -48,27 +52,27 @@ const RatingsBreakdown = ({reviewMeta, filterHandler}) => {
       <p>{getPercentRecommend(reviewMeta.recommended)}% of reviews recommend this product</p>
 
         <div class="row">
-          <button onClick={()=>{filterHandler(5)}}>5 stars </button>
+          <button style={buttonStyle} onClick={()=>{filterHandler(5)}}>5 stars </button>
           <RatingsBar completed={reviewMeta.ratings['5']/getTotalRatings(reviewMeta.ratings)*100}
           actualNumber={reviewMeta.ratings['5']}/>
         </div>
         <div class="row">
-          <button onClick={()=>{filterHandler(4)}}>4 stars </button>
+          <button style={buttonStyle} onClick={()=>{filterHandler(4)}}>4 stars </button>
           <RatingsBar completed={reviewMeta.ratings['4']/getTotalRatings(reviewMeta.ratings)*100}
           actualNumber={reviewMeta.ratings['4']}/>
         </div>
         <div class="row">
-          <button onClick={()=>{filterHandler(3)}}>3 stars </button>
+          <button style={buttonStyle} onClick={()=>{filterHandler(3)}}>3 stars </button>
           <RatingsBar completed={reviewMeta.ratings['3']/getTotalRatings(reviewMeta.ratings)*100}
           actualNumber={reviewMeta.ratings['3']}/>
         </div>
         <div class="row">
-          <button onClick={()=>{filterHandler(2)}}>2 stars </button>
+          <button style={buttonStyle} onClick={()=>{filterHandler(2)}}>2 stars </button>
           <RatingsBar completed={reviewMeta.ratings['2']/getTotalRatings(reviewMeta.ratings)*100}
           actualNumber={reviewMeta.ratings['2']}/>
         </div>
         <div class="row">
-          <button onClick={()=>{filterHandler(1)}}>1 star </button>
+          <button style={buttonStyle} onClick={()=>{filterHandler(1)}}>1 star </button>
           <RatingsBar completed={reviewMeta.ratings['1']/getTotalRatings(reviewMeta.ratings)*100}
           actualNumber={reviewMeta.ratings['1']}/>
         </div>
