@@ -32,7 +32,11 @@ const RatingsBreakdown = ({reviewMeta, filterHandler}) => {
     return five+four+three+two+one;
   }
 
-  console.log('reviewMeta', reviewMeta);
+  const buttonStyle = {
+        'backgroundColor': 'white',
+        'border': '0px',
+        'textDecoration': 'underline'
+  }
 
   return (
     <div>

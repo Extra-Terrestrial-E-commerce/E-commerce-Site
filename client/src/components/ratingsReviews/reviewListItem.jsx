@@ -72,6 +72,12 @@ const ReviewListItem = ({review}) => {
 
   }
 
+  const buttonStyle = {
+    'backgroundColor': 'white',
+    'border': '0px',
+    'textDecoration': 'underline'
+}
+
   return (
     <div>
       <div class="row">
@@ -79,8 +85,7 @@ const ReviewListItem = ({review}) => {
           <AllStars rating={review.stars}
           size={12}/>
         </p>
-        <div className="row" style={{'position': 'relative', 'left': '350px'}}>
-        <div className="row" style={{'position': 'relative', 'left': '350px'}}>
+        <div className="row" style={{'position': 'relative', 'right': '-10px'}}>
         {review.reviewer_name ? <p>{review.reviewer_name}  </p> : <p>Incognito</p>}
         <p>  {getMonthNumber(review.date)} {getDay(review.date)}, {review.date.slice(0, 4)}</p>
 
@@ -96,14 +101,17 @@ const ReviewListItem = ({review}) => {
       {showMore ? <p>{review.body}</p> : <p>{`${review.body.substring(0, 251)}`}</p>}
       {review.body.length > 250 & showMore === false ? <button style={buttonStyle} onClick={()=>{setShowMore(true)}}>Read More</button> : <p></p> }
       {review.body.length > 250 & showMore === true ? <button style={buttonStyle} onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
+      {review.body.length > 250 & showMore === false ? <button style={buttonStyle} onClick={()=>{setShowMore(true)}}>Read More</button> : <p></p> }
+      {review.body.length > 250 & showMore === true ? <button style={buttonStyle} onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
       {review.recommend && <p>I recommend this product</p>}
-      {review.photos && review.photos.map((photo) => <img style={styles} id={photo.id} src={photo.url}/>)}
-      {review.photos && review.photos.map((photo) => <img style={styles} id={photo.id} src={photo.url}/>)}
+      {review.photos && review.photos.map((photo) => <img style={styles} key={photo.id} id={photo.id} src={photo.url}/>)}
       <div class="row">
         <p>Helpful?</p>
         {helpfulStatus && <p>Thank you</p>}
         {helpfulStatus === false &&
         <>
+          <button style={buttonStyle} onClick={handleReviewHelpful}>Yes </button>
+          <button style={buttonStyle} onClick={handleReviewReport}>No </button>
           <button style={buttonStyle} onClick={handleReviewHelpful}>Yes </button>
           <button style={buttonStyle} onClick={handleReviewReport}>No </button>
         </>
