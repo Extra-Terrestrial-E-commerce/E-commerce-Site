@@ -67,13 +67,14 @@ const ImageGallery = ({style}) => {
     setMainImageId(mainImageId + 1);
   }
 
-  const thumbNailGallery = () => {
+  const thumbNailGallery = (type) => {
     return currentPhotoArray.map((photo, id) => <ImgStyleIcon
         key ={styleStart + id}
         id={styleStart +id}
         photo ={photo}
         updatingMainImage={updatingMainImage}
         selected = {styleStart + id === mainImageId}
+        style={type}
         />)
   }
   return (
@@ -82,7 +83,7 @@ const ImageGallery = ({style}) => {
       <div style ={thumbNailStyles} className=''>
         {styleStart > 0 && <button onClick={moveUp}>up</button> }
 
-        {style.photos && thumbNailGallery()}
+        {style.photos && thumbNailGallery('default')}
         {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
       <div className=''>
