@@ -14,6 +14,7 @@ import OneStar from '../../Stars/OneStar.jsx';
 jest.mock('../../config/config.js');
 const currentProduct = sampleData.currentProduct;
 const relatedItems = sampleData.relatedItems;
+const review = sampleData.review;
 // blanking out the comparison modal so we don't get errors;
 jest.mock('../relatedItems/ComparisonModal', () => ({
   __esModule: true,
