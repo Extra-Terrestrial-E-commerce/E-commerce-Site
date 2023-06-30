@@ -15,7 +15,7 @@ const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableN
   return(
     <div>
       {enableBefore && <button onClick ={selectBefore}>left</button> }
-      <img id ='main-img-expanded' src ={imageUrl} style={zoomInStyle()} onClick={()=> setZoomIn(!zoomIn)}></img>
+      <img id ={zoomIn ? 'main-img-zoom-out': 'main-img-zoom-in'} src ={imageUrl} style={zoomInStyle()} onClick={()=> setZoomIn(!zoomIn)}></img>
       {enableNext && <button onClick ={selectNext}>right</button>}
       <div style ={expandedThumbnailStyles}>
         {thumbNailGallery('thumbnail')}
