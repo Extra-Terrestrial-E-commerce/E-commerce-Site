@@ -150,6 +150,7 @@ export default {
           "value": "Skinny"
       }
   ]
+<<<<<<< HEAD
   },
   // for product_id: 40345, relatedItems[3]
   review: {
@@ -171,5 +172,7 @@ export default {
             "value": "3.5208333333333333"
         }
     }
+=======
+>>>>>>> 938fc66 (api call test made, static info rendered on relatedItemCard test made)
   }
 }

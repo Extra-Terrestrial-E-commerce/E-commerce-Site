@@ -66,6 +66,7 @@ const ReviewListItem = ({review}) => {
 
   }
 
+
   const buttonStyle = {
     'backgroundColor': 'white',
     'border': '0px',

@@ -1,6 +1,8 @@
 import React from 'react';
 const { useState } = React;
 import { render, fireEvent, screen, act, waitFor, cleanup } from '@testing-library/react';
+
+
 import App from '../../App.jsx';
 import RelatedItems from '../relatedItems/RelatedItems.jsx';
 import ComparisonModal from '../relatedItems/ComparisonModal.jsx';
@@ -14,7 +16,9 @@ import OneStar from '../../Stars/OneStar.jsx';
 jest.mock('../../config/config.js');
 const currentProduct = sampleData.currentProduct;
 const relatedItems = sampleData.relatedItems;
+
 const review = sampleData.review;
+
 // blanking out the comparison modal so we don't get errors;
 jest.mock('../relatedItems/ComparisonModal', () => ({
   __esModule: true,
@@ -48,6 +52,7 @@ describe('should display related items', () => {
     expect(price).toBeTruthy();
     expect(stars).toBeTruthy();
   })
+
 
   it('should toggle visibility of comparison modal', async () => {
     function TestWrapper({ initialIsAnyComparing }) {
@@ -112,6 +117,7 @@ describe('should display related items', () => {
     expect(setState).toHaveBeenCalledWith(stars);
 
   })
+
 
 })
 
