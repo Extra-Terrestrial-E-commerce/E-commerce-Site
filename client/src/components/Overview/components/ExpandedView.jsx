@@ -11,7 +11,7 @@ const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableN
       <img src ={imageUrl}></img>
       {enableNext && <button onClick ={selectNext}>right</button>}
       <div style ={expandedThumbnailStyles}>
-        {thumbNailGallery()}
+        {thumbNailGallery('thumbnail')}
       </div>
     </div>
   )
