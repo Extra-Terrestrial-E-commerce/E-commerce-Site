@@ -297,6 +297,8 @@ const WriteReview = ({currentProduct, closeModal}) => {
                 <option value="5">Too Long</option>
               </select>
 <br/>
+            <ImageUpload />
+            <br/>
         <button onClick={(e)=> {clickHandler(e)}}>Submit</button>
 
       </form>
