@@ -1,37 +1,82 @@
 import React from 'react';
 import ImgStyleIcon from './ImgStyleIcon.jsx';
+import ExpandedView from './ExpandedView.jsx'
+import Modal from 'react-modal';
 
 const ImageGallery = ({style}) => {
   const[mainImageId, setMainImageId] = React.useState(0);
   const[styleStart, setStyleStart] = React.useState(0);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      height: '80vh',
+      width:'80vw'
+    },
+  };
+
+
   const LIST_MAX = 7;
+  const mainImageUrl = style.photos[mainImageId].thumbnail_url;
+  const currentPhotoArray = style.photos.slice(styleStart, styleStart + 7);
   const thumbNailStyles = {
     display:'flex',
     flexDirection: 'column'
   }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const updatingMainImage = (id) => {
     setMainImageId(id);
-    if (id < styleStart) {
-      moveUp();
-    }
-    if (id >= styleStart + LIST_MAX) {
-      moveDown();
-    }
+
+    // if (id >= styleStart + LIST_MAX) {
+    //   moveUp();
+    // }
   }
+
   const moveDown = () => {
-    if (styleStart < style.photos.length -1 ) {
-      setStyleStart(styleStart + 1);
-    }
+    setStyleStart(styleStart + 1);
   }
   const moveUp = () => {
     setStyleStart(styleStart -1);
   }
   const selectBefore = () => {
+    if(mainImageId <= styleStart) {
+      moveUp();
+    }
     setMainImageId(mainImageId - 1)
+
   }
 
   const selectNext = () => {
+    if(mainImageId >= styleStart + LIST_MAX - 1) {
+      moveDown();
+    }
     setMainImageId(mainImageId + 1);
+  }
+
+  const thumbNailGallery = (type) => {
+    return currentPhotoArray.map((photo, id) => <ImgStyleIcon
+        key ={styleStart + id}
+        id={styleStart +id}
+        photo ={photo}
+        updatingMainImage={updatingMainImage}
+        selected = {styleStart + id === mainImageId}
+        style={type}
+        />)
   }
   return (
     <div  className='row'>
@@ -39,19 +84,27 @@ const ImageGallery = ({style}) => {
       <div style ={thumbNailStyles} className=''>
         {styleStart > 0 && <button onClick={moveUp}>up</button> }
 
-        {style.photos && style.photos.slice(styleStart, styleStart + 7).map((photo, id) => <ImgStyleIcon
-        key ={id}
-        id={id}
-        photo ={photo}
-        updatingMainImage={updatingMainImage}
-        selected = {id === mainImageId}
-        />
-        )}
-        <button onClick={moveDown}>down</button>
+        {style.photos && thumbNailGallery('default')}
+        {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
       <div className=''>
         {mainImageId > 0 && <button onClick ={selectBefore}>left </button>}
-        <img id ='img' src ={style.photos[mainImageId].thumbnail_url}/>
+        <img id ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
+        <Modal
+          isOpen={modalIsOpen}
+          // onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="ExpandedViewModal">
+            <ExpandedView
+              imageUrl = {mainImageUrl}
+              selectNext ={selectNext}
+              selectBefore ={selectBefore}
+              enableBefore = {mainImageId > 0}
+              enableNext = {mainImageId < style.photos.length -1}
+              thumbNailGallery = {thumbNailGallery}
+            />
+          </Modal>
         {mainImageId < style.photos.length -1 && <button onClick ={selectNext}> right </button>}
       </div>
     </div>
