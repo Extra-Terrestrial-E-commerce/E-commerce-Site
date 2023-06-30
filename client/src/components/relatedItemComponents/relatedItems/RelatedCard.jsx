@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-const { useState, useEffect } = React;
+const { useEffect } = React;
 import apiClient from '../../config/config.js';
 import AllStars from '../../Stars/AllStars.jsx';
 import OneStar from '../../Stars/OneStar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 
 const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {
-  const [numberOfReviews, setNumberOfReviews] = useState(null);
-  const [starRating, setStarRating] = useState(null);
-  const [isComparing, setIsComparing] = useState(false);
+  const [starRating, setStarRating] = React.useState(null);
+  const [isComparing, setIsComparing] = React.useState(false);
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -27,9 +26,7 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
         .then((data) => {
           var ratings = data.data.ratings;
           var aggregatedData = aggregate(ratings);
-          setNumberOfReviews(aggregatedData[0]);
           var stars = aggregatedData[1]/aggregatedData[0];
-
           setStarRating(stars.toFixed(2));
         })
         .catch((error) => {
@@ -62,7 +59,6 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
   }
 
   const handleComparison = (event) => {
-    console.log('handling compare');
     event.stopPropagation();
     if (!isAnyComparing) {
       if (!isComparing) {
@@ -84,14 +80,14 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
 
 
   return (
-    <div id="relatedItemContainer" style={containerStyle} onClick={(event) => {
+    <div role="relatedItemCard" id="relatedItemContainer" style={containerStyle} onClick={(event) => {
       handleProductChange(event)
       }
     } >
-      <div style={comparisonStyle}>
+      <div data-testid="comparisonModalContainer" style={comparisonStyle}>
         <ComparisonModal product={product} currentProduct={currentProduct} />
       </div>
-      <div style={relatedItemButtonStyle} onClick={(event) => {
+      <div role="openCompare" style={relatedItemButtonStyle} onClick={(event) => {
         handleComparison(event);
       }}>
         <OneStar percentFill={0} size={15} />

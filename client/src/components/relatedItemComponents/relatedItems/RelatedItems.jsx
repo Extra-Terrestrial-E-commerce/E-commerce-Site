@@ -10,8 +10,6 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   const [leftmostItem, setLeftmostItem] = useState(0);
   const [isAnyComparing, setIsAnyComparing] = useState(false);
 
-  console.log(currentProduct);
-
   useEffect(() => {
     if (currentProduct.id) {
       const url = '/products/' + currentProduct.id + '/related'
@@ -78,7 +76,7 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   var counter = 0;
   return (
     <>
-      <div style={carouselStyle}>
+      <div role="relatedItemsCarousel" style={carouselStyle}>
         <button style={scrollLeftButton} type="submit" onClick={scrollLeft} >l</button>
         {relatedItemsOnDisplay.map((element) => {
             counter++;
