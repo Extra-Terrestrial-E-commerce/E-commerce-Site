@@ -150,5 +150,26 @@ export default {
           "value": "Skinny"
       }
   ]
+  },
+  // for product_id: 40345, relatedItems[3]
+  review: {
+    "product_id": "40345",
+    "ratings": {
+        "1": "6",
+        "2": "4",
+        "3": "8",
+        "4": "129",
+        "5": "26"
+    },
+    "recommended": {
+        "false": "28",
+        "true": "145"
+    },
+    "characteristics": {
+        "Quality": {
+            "id": 135223,
+            "value": "3.5208333333333333"
+        }
+    }
   }
 }

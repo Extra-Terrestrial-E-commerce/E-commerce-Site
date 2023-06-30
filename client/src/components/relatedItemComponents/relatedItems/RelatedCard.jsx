@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-const { useState, useEffect } = React;
+const { useEffect } = React;
 import apiClient from '../../config/config.js';
 import AllStars from '../../Stars/AllStars.jsx';
 import OneStar from '../../Stars/OneStar.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 
 const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {
-  const [numberOfReviews, setNumberOfReviews] = useState(null);
-  const [starRating, setStarRating] = useState(null);
-  const [isComparing, setIsComparing] = useState(false);
+  const [starRating, setStarRating] = React.useState(null);
+  const [isComparing, setIsComparing] = React.useState(false);
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -27,9 +26,7 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
         .then((data) => {
           var ratings = data.data.ratings;
           var aggregatedData = aggregate(ratings);
-          setNumberOfReviews(aggregatedData[0]);
           var stars = aggregatedData[1]/aggregatedData[0];
-
           setStarRating(stars.toFixed(2));
         })
         .catch((error) => {
@@ -63,7 +60,6 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
 
   const handleComparison = (event) => {
     event.stopPropagation();
-    console.log('booleans in handle compare: ', isAnyComparing, isComparing);
     if (!isAnyComparing) {
       if (!isComparing) {
         setIsComparing(true);

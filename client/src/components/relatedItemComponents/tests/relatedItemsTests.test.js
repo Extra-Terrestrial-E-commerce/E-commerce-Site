@@ -11,6 +11,7 @@ import sampleData from './sampleData.js';
 jest.mock('../../config/config.js');
 const currentProduct = sampleData.currentProduct;
 const relatedItems = sampleData.relatedItems;
+const review = sampleData.review;
 
 jest.mock('../relatedItems/ComparisonModal', () => {
   return jest.fn().mockImplementation(({ product, currentProduct }) => {
@@ -52,7 +53,6 @@ describe('should display related items', () => {
   })
 
   it('should toggle visibility of comparison modal', async () => {
-
     function TestWrapper({ initialIsAnyComparing }) {
       const [isAnyComparing, setIsAnyComparing] = useState(initialIsAnyComparing);
       return (
@@ -84,6 +84,37 @@ describe('should display related items', () => {
     fireEvent.click(starButton);
     var currentStyle = window.getComputedStyle(modalContainer);
     expect(currentStyle._values.display).toBe('none');
+  })
+
+  it('should make an api call in relatedCard to get the review data, set the starRating', async () => {
+
+    const setState = jest.fn();
+    jest
+      .spyOn(React, 'useState')
+      .mockImplementationOnce(initState => [initState, setState]);
+
+    apiClient.get.mockResolvedValue({data: review})
+    await act(async () => {
+      render(
+         <RelatedCard product={relatedItems[3]} />
+      );
+    });
+
+    const aggregate = (objectOfReviews) => {
+      var count = 0;
+      var total = 0;
+      for (let key in objectOfReviews) {
+        count = count +  parseInt(objectOfReviews[key]);
+        total = total + (key * objectOfReviews[key]);
+      }
+      return [count, total];
+    }
+
+    var aggregatedData = aggregate(review.ratings);
+    var stars = aggregatedData[1]/aggregatedData[0];
+    var stars = stars.toFixed(2);
+    expect(setState).toHaveBeenCalledWith(stars);
+
   })
 
 })
