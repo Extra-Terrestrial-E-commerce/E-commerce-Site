@@ -9,6 +9,8 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   const [allRelatedItems, setAllRelatedItems] = useState([]);
   const [leftmostItem, setLeftmostItem] = useState(0);
   const [isAnyComparing, setIsAnyComparing] = useState(false);
+  const [leftDisplay, setLeftDisplay] = useState(false);
+  const [rightDisplay, setRightDisplay] = useState(false);
 
   useEffect(() => {
     if (currentProduct.id) {
@@ -39,74 +41,111 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
     }
   }, [currentProduct])
 
+  useEffect(() => {
+    if (allRelatedItems.length > 3) {
+      var rightButton = document.getElementById('rightButton');
+      rightButton.innerHTML = '&#8618;'
+      setRightDisplay(true);
+    } else {
+      var rightButton = document.getElementById('rightButton');
+      rightButton.innerHTML = '';
+      setRightDisplay(false);
+    }
+  }, [allRelatedItems])
+
+  useEffect(() => {
+    if (leftmostItem === 0) {
+      var leftButton = document.getElementById('leftButton');
+      leftButton.innerHTML = ''
+      setLeftDisplay(false);
+    } else if (!leftDisplay) {
+      var leftButton = document.getElementById('leftButton');
+      leftButton.innerHTML = '&#8617;'
+      setLeftDisplay(true);
+    }
+
+    if (leftmostItem >= allRelatedItems.length - 3 && rightDisplay) {
+      var rightButton = document.getElementById('rightButton');
+      rightButton.innerHTML = '';
+      setRightDisplay(false);
+    } else if (!rightDisplay) {
+      var rightButton = document.getElementById('rightButton');
+      rightButton.innerHTML = '&#8618;'
+      setRightDisplay(true)
+    }
+  }, [leftmostItem])
+
+
+  const scrollLeft = () => {
+    if (leftDisplay) {
+      var nextLeft = leftmostItem - 1;
+      setLeftmostItem(nextLeft);
+      setRelatedItemsOnDisplay(allRelatedItems.slice(nextLeft, nextLeft + 3))
+    }
+  }
+
+  const scrollRight = () => {
+    if (rightDisplay) {
+      var nextLeft = leftmostItem + 1;
+      setLeftmostItem(nextLeft);
+      setRelatedItemsOnDisplay(allRelatedItems.slice(nextLeft, nextLeft + 3))
+    }
+  }
+
   const carouselStyle = {
     width: '100%',
     height: '200px',
     display: 'flex',
     flexDirection: 'row',
-    margin: '5px'
-  }
-  const scrollButton = {
-    display: 'flex',
-    backgroundColor: leftmostItem >= allRelatedItems.length - 3 ? '#e9ecef' : 'white',
-    borderRadius: '5px',
-    height: '100%',
-    width: '20px',
     margin: '5px',
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around',
   }
 
-  const scrollLeftButton = {
+  var scrollButton = {
     display: 'flex',
-    backgroundColor: leftmostItem === 0 ? '#e9ecef' : 'white',
+    backgroundColor: !rightDisplay ? '#e9ecef' : 'white',
     borderRadius: '5px',
-    height: '100%',
-    width: '20px',
+    height: '90%',
+    width: '75px',
     margin: '5px',
+    padding: '5px',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'right'
   }
 
-  const scrollLeft = () => {
-    var nextLeft = leftmostItem - 1;
-    if (nextLeft < allRelatedItems.length - 3) {
-      var rightButton = document.getElementById('rightButton');
-      rightButton.innerHTML = '&#8618;';
-    }
+  var leftFade = {
+    background: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+    transition: 'background-color 0.5s'
+  }
 
-    if (nextLeft === 0) {
-      var leftButton = document.getElementById('leftButton');
-      leftButton.innerHTML = '';
-      setLeftmostItem(nextLeft);
-    } else {
-      var leftButton = document.getElementById('leftButton');
-      leftButton.innerHTML = '&#8617;'
-      var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 3);
-      setLeftmostItem(nextLeft);
-      setRelatedItemsOnDisplay(nextDisplay);
+  if (rightDisplay) {
+    scrollButton = {
+      ...scrollButton,
+      ...leftFade
     }
   }
 
-  const scrollRight = () => {
-    var nextLeft = leftmostItem + 1;
-    if (nextLeft !== 0) {
-      var leftButton = document.getElementById('leftButton');
-      leftButton.innerHTML = '&#8617;'
-    }
+  var scrollLeftButton = {
+    display: 'flex',
+    backgroundColor: !leftDisplay ? '#e9ecef' : 'white',
+    borderRadius: '5px',
+    height: '90%',
+    width: '75px',
+    margin: '5px',
+    padding: '5px',
+    alignItems: 'center',
+    justifyContent: 'left'
+  }
 
-    if (nextLeft > allRelatedItems.length - 3) {
-      //do nothing
-    } else if (nextLeft === allRelatedItems.length - 3) {
-      var rightButton = document.getElementById('rightButton');
-      rightButton.innerHTML = ''
-      var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 3);
-      setLeftmostItem(nextLeft);
-      setRelatedItemsOnDisplay(nextDisplay);
-    } else {
-      var nextDisplay = allRelatedItems.slice(nextLeft, nextLeft + 3);
-      setLeftmostItem(nextLeft);
-      setRelatedItemsOnDisplay(nextDisplay);
+  var rightFade = {
+    background: 'linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+    transition: 'background-color 0.5s'
+  }
+
+  if (leftDisplay) {
+    scrollLeftButton = {
+      ...scrollLeftButton,
+      ...rightFade
     }
   }
 
@@ -121,7 +160,7 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
               return <RelatedCard key={counter} product={element} currentProduct={currentProduct} isAnyComparing={isAnyComparing} setIsAnyComparing={setIsAnyComparing} setCurrentProduct={setCurrentProduct}/>
             })}
         </div>
-        <div id='rightButton' style={scrollButton} onClick={scrollRight}>&#8618;</div>
+        <div id='rightButton' style={scrollButton} onClick={scrollRight}> </div>
       </div>
     </>
   )

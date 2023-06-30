@@ -9,6 +9,9 @@ import ComparisonModal from './ComparisonModal.jsx';
 const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {
   const [starRating, setStarRating] = React.useState(null);
   const [isComparing, setIsComparing] = React.useState(false);
+  const [imageUrl, setImageUrl] = React.useState(null);
+  const [styles, setStyles] = React.useState(null);
+
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -24,6 +27,7 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     if (product.id) {
       apiClient.get('/reviews/meta', { params: {product_id: product.id} })
         .then((data) => {
+          console.log(data.data);
           var ratings = data.data.ratings;
           var aggregatedData = aggregate(ratings);
           var stars = aggregatedData[1]/aggregatedData[0];
@@ -32,8 +36,22 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
         .catch((error) => {
           console.error(error);
         })
+      apiClient.get(`/products/${product.id}/styles`)
+        .then(result => setStyles(result.data.results))
+        .catch(err => console.log('failed to get styles, ', err));
     }
   }, [product])
+
+  React.useEffect (() => {
+    if (styles) {
+      var defaultStyle = styles.find(style => style['default?']);
+      if(!defaultStyle) {
+        setImageUrl(styles[0].photos[0].thumbnail_url);
+      } else {
+        setImageUrl(defaultStyle.photos[0].thumbnail_url);
+      }
+    }
+  }, [styles])
 
 
 
@@ -58,6 +76,17 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     right: '5px',
   }
 
+  const imageStyle = {
+    maxWidth: '100%',
+    maxHeight: '67%',
+  }
+
+  const imageContainerSyle = {
+    maxWidth: '100%',
+    flex: '0 0 67%',
+    padding: '10px'
+  }
+
   const handleComparison = (event) => {
     event.stopPropagation();
     if (!isAnyComparing) {
@@ -78,7 +107,6 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     setCurrentProduct(product)
   }
 
-
   return (
     <div role="relatedItemCard" id="relatedItemContainer" style={containerStyle} onClick={(event) => {
       handleProductChange(event)
@@ -92,17 +120,22 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
       }}>
         <OneStar percentFill={0} size={15} />
       </div>
-      <p>
-        {product.category}
-      </p>
-      <p>
-        {product.name}
-      </p>
-      <p>
-        {product.default_price}
-      </p>
-      <div>
-        {starRating && <AllStars rating={starRating} size={12} />}
+      <div style={imageContainerSyle} id="previewImage">
+        <img style={imageStyle} src={imageUrl} />
+      </div>
+      <div id="productInfo">
+        <p>
+          {product.category}
+        </p>
+        <p>
+          {product.name}
+        </p>
+        <p>
+          {product.default_price}
+        </p>
+        <div>
+          {starRating && <AllStars rating={starRating} size={12} />}
+        </div>
       </div>
     </div>
   )
