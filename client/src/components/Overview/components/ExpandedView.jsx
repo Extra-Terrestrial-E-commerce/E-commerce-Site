@@ -4,8 +4,10 @@ const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableN
   const [zoomIn, setZoomIn] = React.useState(false);
   const [touch, setTouch] = React.useState({x:0, y:0});
   const [movement, setMovement] = React.useState({deltaX: 0, deltaY:0})
+  const mainImageStyle = {
+  }
   const zoomInStyle = {
-    'transform-origin':`${touch.x}px ${touch.y}px`,
+    tranformOrigin: `${touch.x}px ${touch.y}px`,
     transform: `scale(2.5) translateX(${movement.deltaX * -1}px) translateY(${movement.deltaY * -1}px)`
   };
   const expandedThumbnailStyles = {
@@ -23,6 +25,10 @@ const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableN
     setMovement({deltaX: e.clientX - touch.x, deltaY: e.clientY - touch.y})
   }
 
+  const handleClickToMain = (e) => {
+    setZoomIn(!zoomIn);
+  }
+
   return(
     <div>
       {enableBefore && !zoomIn&& <button onClick ={selectBefore}>left</button> }
@@ -31,12 +37,13 @@ const ExpandedView = ({imageUrl, selectNext, selectBefore, enableBefore, enableN
           className ='main-img-zoom-in'
           src ={imageUrl}
           style={zoomInStyle}
-          onClick={()=> setZoomIn(!zoomIn)}
+          onClick={handleClickToMain}
           onMouseMove={handleMouseMovement}
         /> :
         <img
           className ='main-img-zoom-out'
           src ={imageUrl}
+          style ={mainImageStyle}
           onClick={handleClick}
         />
         }
