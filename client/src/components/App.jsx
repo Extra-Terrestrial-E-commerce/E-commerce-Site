@@ -13,7 +13,7 @@ const App = () => {
     apiClient.get('/products')
       .then((data) => {
         console.log(data);
-        apiClient.get('/products/' + data.data[3].id)
+        apiClient.get('/products/' + data.data[4].id)
           .then((data) => {
             setCurrentProduct(data.data);
           })
