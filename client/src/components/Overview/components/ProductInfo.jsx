@@ -3,7 +3,7 @@ import apiClient from '../../config/config.js';
 import AllStars from '../../Stars/AllStars.jsx';
 const ProductInfo = ({product}) => {
   const[starRating, setStarRating] = React.useState(null);
-
+  const[totalReviews, setTotalReviews] = React.useState(null);
   const starStyles = {
     color:'white'
   }
@@ -26,18 +26,21 @@ const ProductInfo = ({product}) => {
           var aggregatedData = aggregate(ratings);
           var stars = aggregatedData[1]/aggregatedData[0];
           setStarRating(stars.toFixed(2));
+          var totalReviews = aggregatedData[0];
+          setTotalReviews(totalReviews);
         })
         .catch((error) => {
           console.log('get review meta failed, ',error);
         })
     }
   }, [product])
-
-  console.log('this is the star rating, ', starRating);
   return (
     <div className='overview'>
-      {starRating && <AllStars rating={starRating} size={12} />}
-      <a href='#RatingsAndReview'>Read all reviews</a>
+      <div className='stars-reviews'>
+      {starRating &&<AllStars rating={starRating} size={16} /> }
+      {totalReviews && <a href='#RatingsAndReview'>Read all {totalReviews} reviews</a>}
+      </div>
+
       <div>{product.category}</div>
       <h3>{product.name}</h3>
       <p>{product.default_price}</p>

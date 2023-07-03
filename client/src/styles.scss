@@ -156,7 +156,11 @@ table {
   width:70%;
   height: 70%;
 }
-
+.stars-reviews {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
 .shadow-box {
   margin: 20px;
