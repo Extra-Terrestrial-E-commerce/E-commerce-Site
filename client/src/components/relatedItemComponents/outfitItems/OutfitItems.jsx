@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import NewOutfitCard from "./NewOutfitCard.jsx";
 import OutfitCard from './OutfitCard.jsx';
+import apiClient from '../../config/config.js';
 const { useState, useEffect } = React;
 
 const OutfitItems = ( {currentProduct} ) => {
@@ -12,6 +13,26 @@ const OutfitItems = ( {currentProduct} ) => {
   const [rightDisplay, setRightDisplay] = useState(false);
 
   useEffect(() => {
+    var itemsOnLoad = localStorage.getItem('outfitItems');
+    var idsOnLoad = itemsOnLoad.split('_');
+    var queries = [];
+    idsOnLoad.forEach((id) => {
+      if (id !== '') {
+        queries.push(apiClient.get('/products/' + id));
+      }
+    })
+    Promise.all(queries)
+      .then((values) => {
+        var finalData = [];
+        for (var i = 0; i < values.length; i++) {
+          finalData.push(values[i].data)
+        }
+        setAllOutfitItems(finalData);
+      })
+  }, [])
+
+  useEffect(() => {
+    console.log(localStorage.getItem('outfitItems'));
     var newDisplayItems = allOutfitItems.slice(0, 2);
     if (allOutfitItems.length > 2) {
       var rightButton = document.getElementById('rightOutfitButton');
@@ -48,9 +69,6 @@ const OutfitItems = ( {currentProduct} ) => {
     setOutfitItemsOnDisplay(newDisplayItems);
   }, [leftmostItem])
 
-
-
-
   const scrollLeft = () => {
     if (leftDisplay) {
       var nextLeft = leftmostItem - 1;
@@ -65,40 +83,57 @@ const OutfitItems = ( {currentProduct} ) => {
     }
   }
 
-  const carouselStyle = {
-    width: '100%',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'row'
-  }
-
-  const scrollOutfitButton = {
+  var scrollOutfitButton = {
     display: 'flex',
     backgroundColor: !rightDisplay ? '#e9ecef' : 'white',
     borderRadius: '5px',
     height: '100%',
-    width: '20px',
+    width: '75px',
+    margin: '5px',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+  var leftFade = {
+    background: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+    transition: 'background-color 0.5s'
+  }
+
+  if (rightDisplay) {
+    scrollOutfitButton = {
+      ...scrollOutfitButton,
+      ...leftFade
+    }
+  }
+
+  var scrollLeftOutfitButton = {
+    display: 'flex',
+    backgroundColor: !leftDisplay ? '#e9ecef' : 'white',
+    borderRadius: '5px',
+    height: '100%',
+    width: '75px',
     margin: '5px',
     alignItems: 'center',
     justifyContent: 'center'
   }
 
-  const scrollLeftOutfitButton = {
-    display: 'flex',
-    backgroundColor: !leftDisplay ? '#e9ecef' : 'white',
-    borderRadius: '5px',
-    height: '100%',
-    width: '20px',
-    margin: '5px',
-    alignItems: 'center',
-    justifyContent: 'center'
+  var rightFade = {
+    background: 'linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+    transition: 'background-color 0.5s'
+  }
+
+  if (leftDisplay) {
+    scrollLeftOutfitButton = {
+      ...scrollLeftOutfitButton,
+      ...rightFade
+    }
   }
 
   var counter = 0;
   return (
     <>
-      <div style={carouselStyle}>
-        <div style={carouselStyle}>
+      <div id="carousel" >
+        <div id="carousel" >
+
           <NewOutfitCard currentProduct={currentProduct} allOutfitItems={allOutfitItems} setAllOutfitItems={setAllOutfitItems}/>
 
           <div id='leftOutfitButton' style={scrollLeftOutfitButton} onClick={scrollLeft} > </div>

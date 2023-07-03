@@ -27,7 +27,6 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     if (product.id) {
       apiClient.get('/reviews/meta', { params: {product_id: product.id} })
         .then((data) => {
-          console.log(data.data);
           var ratings = data.data.ratings;
           var aggregatedData = aggregate(ratings);
           var stars = aggregatedData[1]/aggregatedData[0];
@@ -53,38 +52,11 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     }
   }, [styles])
 
-
-
-  const containerStyle = {
-    width: '100px',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
-  const relatedItemButtonStyle = {
-    position: 'relative',
-    textAlign: 'right',
-    top: '5px',
-    right: '5px',
-  }
-
   const comparisonStyle = {
     position: 'relative',
     display: isComparing ? 'flex' : 'none',
     top: '5px',
     right: '5px',
-  }
-
-  const imageStyle = {
-    maxWidth: '100%',
-    maxHeight: '67%',
-  }
-
-  const imageContainerSyle = {
-    maxWidth: '100%',
-    flex: '0 0 67%',
-    padding: '10px'
   }
 
   const handleComparison = (event) => {
@@ -108,32 +80,32 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
   }
 
   return (
-    <div role="relatedItemCard" id="relatedItemContainer" style={containerStyle} onClick={(event) => {
+    <div role="relatedItemCard" id="relatedItemContainer" onClick={(event) => {
       handleProductChange(event)
       }
     } >
       <div data-testid="comparisonModalContainer" style={comparisonStyle}>
         <ComparisonModal product={product} currentProduct={currentProduct} />
       </div>
-      <div role="openCompare" style={relatedItemButtonStyle} onClick={(event) => {
-        handleComparison(event);
-      }}>
-        <OneStar percentFill={0} size={15} />
-      </div>
-      <div style={imageContainerSyle} id="previewImage">
-        <img style={imageStyle} src={imageUrl} />
+      <span role="openCompare" id="compareButton" onClick={(event) => {
+          handleComparison(event);
+        }}>
+          <OneStar percentFill={0} size={15} />
+      </span>
+      <div id="previewImage">
+        <img id="relatedCardThumbnail" src={imageUrl} />
       </div>
       <div id="productInfo">
-        <p>
+        <span id="productCategory">
           {product.category}
-        </p>
-        <p>
+        </span>
+        <span id="productName">
           {product.name}
-        </p>
-        <p>
+        </span>
+        <span id="pruductPrice">
           {product.default_price}
-        </p>
-        <div>
+        </span>
+        <div id="productStars">
           {starRating && <AllStars rating={starRating} size={12} />}
         </div>
       </div>

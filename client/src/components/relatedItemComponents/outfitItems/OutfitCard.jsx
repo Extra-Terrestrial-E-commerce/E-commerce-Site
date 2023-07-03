@@ -60,8 +60,8 @@ const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct
 
 
   return (
-    <div id="relatedItemContainer" style={containerStyle}>
-      <div style={outfitItemButtonStyle}>
+    <div id="relatedItemContainer" >
+      <div id="compareButton">
         <XButton size={10} toDoOnClick={handleRemove} />
       </div>
       <p>

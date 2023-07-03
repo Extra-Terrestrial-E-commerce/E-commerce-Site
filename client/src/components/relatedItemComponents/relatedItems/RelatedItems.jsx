@@ -92,20 +92,11 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
     }
   }
 
-  const carouselStyle = {
-    width: '100%',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'row',
-    margin: '5px',
-    justifyContent: 'space-around',
-  }
-
   var scrollButton = {
     display: 'flex',
     backgroundColor: !rightDisplay ? '#e9ecef' : 'white',
     borderRadius: '5px',
-    height: '90%',
+    height: '100%',
     width: '75px',
     margin: '5px',
     padding: '5px',
@@ -129,7 +120,7 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
     display: 'flex',
     backgroundColor: !leftDisplay ? '#e9ecef' : 'white',
     borderRadius: '5px',
-    height: '90%',
+    height: '100%',
     width: '75px',
     margin: '5px',
     padding: '5px',
@@ -152,9 +143,9 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
   var counter = 0;
   return (
     <>
-      <div role="relatedItemsCarousel" style={carouselStyle}>
+      <div role="relatedItemsCarousel" id="carousel">
         <div id='leftButton' style={scrollLeftButton} onClick={scrollLeft} > </div>
-        <div style={carouselStyle} >
+        <div id="carousel">
             {relatedItemsOnDisplay.map((element) => {
               counter++;
               return <RelatedCard key={counter} product={element} currentProduct={currentProduct} isAnyComparing={isAnyComparing} setIsAnyComparing={setIsAnyComparing} setCurrentProduct={setCurrentProduct}/>
