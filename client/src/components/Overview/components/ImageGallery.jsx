@@ -81,13 +81,13 @@ const ImageGallery = ({style}) => {
   return (
     <div  className='row'>
 
-      <div style ={thumbNailStyles} className=''>
+      <div style ={thumbNailStyles} className='oneThird'>
         {styleStart > 0 && <button onClick={moveUp}>up</button> }
 
         {style.photos && thumbNailGallery('default')}
         {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
-      <div className=''>
+      <div className='twoThirds'>
         {mainImageId > 0 && <button onClick ={selectBefore}>left </button>}
         <img id ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
         <Modal
