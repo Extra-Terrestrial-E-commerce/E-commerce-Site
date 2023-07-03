@@ -1,12 +1,10 @@
 import React from 'react';
 import apiClient from '../../config/config.js';
 import AllStars from '../../Stars/AllStars.jsx';
-const ProductInfo = ({product}) => {
+const ProductInfo = ({product, style}) => {
   const[starRating, setStarRating] = React.useState(null);
   const[totalReviews, setTotalReviews] = React.useState(null);
-  const starStyles = {
-    color:'white'
-  }
+
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -16,6 +14,9 @@ const ProductInfo = ({product}) => {
       total = total + (key * objectOfReviews[key]);
     }
     return [count, total];
+  }
+  const salePriceStyle = {
+    color:'red'
   }
 
   React.useEffect(() => {
@@ -34,16 +35,25 @@ const ProductInfo = ({product}) => {
         })
     }
   }, [product])
+
+  console.log('this is the currently selected style price, ', style.sale_price);
   return (
     <div className='overview'>
       <div className='stars-reviews'>
-      {starRating &&<AllStars rating={starRating} size={16} /> }
-      {totalReviews && <a href='#RatingsAndReview'>Read all {totalReviews} reviews</a>}
+        {starRating &&<AllStars rating={starRating} size={16} /> }
+        {totalReviews && <a href='#RatingsAndReview'>Read all {totalReviews} reviews</a>}
       </div>
 
       <div>{product.category}</div>
       <h3>{product.name}</h3>
-      <p>{product.default_price}</p>
+      {style.sale_price ?
+        <section>
+          <span style={salePriceStyle}>{style.sale_price} </span>
+          <s>{product.default_price}</s>
+        </section>:
+        <span>{product.default_price}</span>
+      }
+
     </div>
   )
 }

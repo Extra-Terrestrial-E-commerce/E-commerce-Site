@@ -24,7 +24,7 @@ const Overview = ({currentProduct}) => {
 
 
       {selectedStyle.name && <ImageGallery style = {selectedStyle}/>}
-      <ProductInfo product ={currentProduct}/>
+      <ProductInfo product ={currentProduct} style={selectedStyle}/>
       <ProductStyle styles ={styles} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle}/>
       <ProductOverview product={currentProduct}/>
 
