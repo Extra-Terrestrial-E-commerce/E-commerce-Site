@@ -18,7 +18,7 @@ const ProductStyle = ({styles, selectedStyle, setSelectedStyle}) => {
     setSelectedStyle (style);
   }
   return (
-    <div className ='overview'>
+    <div className =''>
       <span>Style &#62; </span>
       <span>{selectedStyle.name}</span>
       <div className='style-display'>

@@ -20,12 +20,16 @@ const Overview = ({currentProduct}) => {
   }, [currentProduct])
 
   return (
-    <div className='overview'>
+    <div className=''>
+      <div className='main-overview'>
+        {selectedStyle.name && <ImageGallery style = {selectedStyle}/>}
 
+        <div className = ''>
+          <ProductInfo product ={currentProduct} style={selectedStyle}/>
+          <ProductStyle styles ={styles} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle}/>
+        </div>
+      </div>
 
-      {selectedStyle.name && <ImageGallery style = {selectedStyle}/>}
-      <ProductInfo product ={currentProduct} style={selectedStyle}/>
-      <ProductStyle styles ={styles} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle}/>
       <ProductOverview product={currentProduct}/>
 
 

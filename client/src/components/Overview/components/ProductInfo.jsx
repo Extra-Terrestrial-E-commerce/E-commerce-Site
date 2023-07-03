@@ -36,9 +36,8 @@ const ProductInfo = ({product, style}) => {
     }
   }, [product])
 
-  console.log('this is the currently selected style price, ', style.sale_price);
   return (
-    <div className='overview'>
+    <div className=''>
       <div className='stars-reviews'>
         {starRating &&<AllStars rating={starRating} size={16} /> }
         {totalReviews && <a href='#RatingsAndReview'>Read all {totalReviews} reviews</a>}

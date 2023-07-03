@@ -7,7 +7,9 @@ const ImageGallery = ({style}) => {
   const[mainImageId, setMainImageId] = React.useState(0);
   const[styleStart, setStyleStart] = React.useState(0);
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
+  const buttonStyles = {
+    height:'50px'
+  }
   const customStyles = {
     content: {
       top: '50%',
@@ -79,17 +81,17 @@ const ImageGallery = ({style}) => {
         />)
   }
   return (
-    <div  className='row'>
+    <div  className='img-gallery'>
 
-      <div style ={thumbNailStyles} className='oneThird'>
+      <div style ={thumbNailStyles} className=''>
         {styleStart > 0 && <button onClick={moveUp}>up</button> }
 
         {style.photos && thumbNailGallery('default')}
         {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
       </div>
-      <div className='twoThirds'>
-        {mainImageId > 0 && <button onClick ={selectBefore}>left </button>}
-        <img id ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
+      <div className='default-img'>
+        {mainImageId > 0 && <button style ={buttonStyles}onClick ={selectBefore}>left </button>}
+        <img className ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
         <Modal
           isOpen={modalIsOpen}
           // onAfterOpen={afterOpenModal}
@@ -105,7 +107,7 @@ const ImageGallery = ({style}) => {
               thumbNailGallery = {thumbNailGallery}
             />
           </Modal>
-        {mainImageId < style.photos.length -1 && <button onClick ={selectNext}> right </button>}
+        {mainImageId < style.photos.length -1 && <button style ={buttonStyles} onClick ={selectNext}> right </button>}
       </div>
     </div>
   )

@@ -32,9 +32,7 @@ p {
   background-color: black;
 }
 
-.overview {
-  border: solid blue;
-}
+
 .navbar {
   background-color: grey;
   position: relative;
@@ -131,7 +129,10 @@ td, th {
 table {
   width: 100%;
 }
-#img:hover {
+.img {
+
+}
+.img:hover {
 
 
   cursor:url('./mglass.png'), pointer;
@@ -160,6 +161,33 @@ table {
   display: flex;
   flex-direction: row;
   gap: 10px;
+}
+.main-overview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 80vh;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 0.25rem;
+  padding: 10px;
+}
+.img-gallery {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 67%;
+  border: solid;
+
+}
+
+.default-img {
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 15px;
 }
 
 .shadow-box {
