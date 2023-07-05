@@ -8,6 +8,7 @@ import XButton from './XButton.jsx';
 const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct} ) => {
   const [numberOfReviews, setNumberOfReviews] = useState(null);
   const [starRating, setStarRating] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -33,48 +34,56 @@ const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct
         .catch((error) => {
           console.error(error);
         })
+      apiClient.get(`/products/${product.id}/styles`)
+        .then(result => {
+          var styles = result.data.results;
+          var defaultStyle = styles.find(style => style['default?']);
+          if(!defaultStyle) {
+            setImageUrl(styles[0].photos[0].thumbnail_url);
+          } else {
+            setImageUrl(defaultStyle.photos[0].thumbnail_url);
+          }
+        })
+        .catch(err => console.log('failed to get styles, ', err));
     }
   }, [product])
-
-
-
-  const containerStyle = {
-    width: '100px',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
-  const outfitItemButtonStyle = {
-    position: 'relative',
-    textAlign: 'right',
-    top: '5px',
-    right: '5px',
-  }
 
   const handleRemove = () => {
     event.preventDefault();
     const updatedItems = allOutfitItems.filter(item => item.id !== product.id);
+    var currentStorage = localStorage.getItem('outfitItems')
+    currentStorage = currentStorage.split('_');
+    var newStorage = '';
+    for (var i = 0; i < currentStorage.length; i++) {
+      if (currentStorage[i] !== '' && currentStorage[i] !== product.id.toString()) {
+        newStorage = newStorage +  currentStorage[i] + '_';
+      }
+    }
+    localStorage.setItem('outfitItems', newStorage);
     setAllOutfitItems(updatedItems);
   };
 
-
   return (
-    <div id="relatedItemContainer" style={containerStyle}>
-      <div style={outfitItemButtonStyle}>
+    <div id="relatedItemContainer" >
+      <div id="compareButton">
         <XButton size={10} toDoOnClick={handleRemove} />
       </div>
-      <p>
-        {product.category}
-      </p>
-      <p>
-        {product.name}
-      </p>
-      <p>
-        {product.default_price}
-      </p>
-      <div>
-        {starRating && <AllStars rating={starRating} size={12} />}
+      <div id="previewImage">
+        <img id="relatedCardThumbnail" src={imageUrl} />
+      </div>
+      <div id="productInfo">
+        <span id="productCategory">
+          {product.category}
+        </span>
+        <span id="productName">
+          {product.name}
+        </span>
+        <span id="pruductPrice">
+          {product.default_price}
+        </span>
+        <div id="productStars">
+          {starRating && <AllStars rating={starRating} size={12} />}
+        </div>
       </div>
     </div>
   )

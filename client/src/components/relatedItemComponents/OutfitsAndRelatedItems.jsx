@@ -6,15 +6,26 @@ const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 import AllStars from '../Stars/AllStars.jsx';
 
+import "../../stylesTwo.scss";
+
 const OutfitsAndRelatedItems = ( {currentProduct, setCurrentProduct} ) => {
+
+  if (localStorage.getItem('outfitItems') === null) {
+    localStorage.setItem('outfitItems', '');
+  }
+
+  const temp = {
+    margin: '10px',
+    padding: '10px'
+  }
 
   return (
     <>
-      <div>
+      <div id='testId' >
         Related Items
         <RelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />
       </div>
-      <div>
+      <div style={temp}>
         Your Outfit
         <OutfitItems currentProduct={currentProduct} />
       </div>

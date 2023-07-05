@@ -9,6 +9,9 @@ import ComparisonModal from './ComparisonModal.jsx';
 const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparing, setCurrentProduct} ) => {
   const [starRating, setStarRating] = React.useState(null);
   const [isComparing, setIsComparing] = React.useState(false);
+  const [imageUrl, setImageUrl] = React.useState(null);
+  const [styles, setStyles] = React.useState(null);
+
 
   const aggregate = (objectOfReviews) => {
     var count = 0;
@@ -32,24 +35,22 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
         .catch((error) => {
           console.error(error);
         })
+      apiClient.get(`/products/${product.id}/styles`)
+        .then(result => setStyles(result.data.results))
+        .catch(err => console.log('failed to get styles, ', err));
     }
   }, [product])
 
-
-
-  const containerStyle = {
-    width: '100px',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
-  const relatedItemButtonStyle = {
-    position: 'relative',
-    textAlign: 'right',
-    top: '5px',
-    right: '5px',
-  }
+  React.useEffect (() => {
+    if (styles) {
+      var defaultStyle = styles.find(style => style['default?']);
+      if(!defaultStyle) {
+        setImageUrl(styles[0].photos[0].thumbnail_url);
+      } else {
+        setImageUrl(defaultStyle.photos[0].thumbnail_url);
+      }
+    }
+  }, [styles])
 
   const comparisonStyle = {
     position: 'relative',
@@ -78,31 +79,35 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     setCurrentProduct(product)
   }
 
-
   return (
-    <div role="relatedItemCard" id="relatedItemContainer" style={containerStyle} onClick={(event) => {
+    <div role="relatedItemCard" id="relatedItemContainer" onClick={(event) => {
       handleProductChange(event)
       }
     } >
       <div data-testid="comparisonModalContainer" style={comparisonStyle}>
         <ComparisonModal product={product} currentProduct={currentProduct} />
       </div>
-      <div role="openCompare" style={relatedItemButtonStyle} onClick={(event) => {
-        handleComparison(event);
-      }}>
-        <OneStar percentFill={0} size={15} />
+      <span role="openCompare" id="compareButton" onClick={(event) => {
+          handleComparison(event);
+        }}>
+          <OneStar percentFill={0} size={15} />
+      </span>
+      <div id="previewImage">
+        <img id="relatedCardThumbnail" src={imageUrl} />
       </div>
-      <p>
-        {product.category}
-      </p>
-      <p>
-        {product.name}
-      </p>
-      <p>
-        {product.default_price}
-      </p>
-      <div>
-        {starRating && <AllStars rating={starRating} size={12} />}
+      <div id="productInfo">
+        <span id="productCategory">
+          {product.category}
+        </span>
+        <span id="productName">
+          {product.name}
+        </span>
+        <span id="pruductPrice">
+          {product.default_price}
+        </span>
+        <div id="productStars">
+          {starRating && <AllStars rating={starRating} size={12} />}
+        </div>
       </div>
     </div>
   )
