@@ -40,7 +40,7 @@ const NewOutfitCard = ( {currentProduct, allOutfitItems, setAllOutfitItems} ) =>
     }
     if (tester) {
       var currentStorage = localStorage.getItem('outfitItems');
-      currentStorage = currentStorage + currentProduct.id + '_';
+      currentStorage = currentProduct.id + '_' + currentStorage
       localStorage.setItem('outfitItems', currentStorage);
       currentItems = [currentProduct, ...currentItems];
       setAllOutfitItems(currentItems);

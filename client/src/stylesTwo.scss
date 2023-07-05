@@ -24,15 +24,17 @@
   display: flex;
   position: relative;
   max-width: 90%;
+
   max-height: 67%;
+  min-height: 50%;
   align-items: center;
   justify-content: center;
 }
 
 #compareButton {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
 }
 
 #relatedCardThumbnail {
@@ -44,6 +46,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  padding: 2px;
   max-width: 90%;
   max-height: 33%;
   align-items: center;
@@ -52,8 +55,6 @@
 
 #productCategory {
   position: relative;
-  margin: 2px;
-  padding: 2px;
   flex: 1 0 20%;
   font-size: smaller;
   max-width: 90%;
@@ -61,26 +62,25 @@
 }
 
 #productName {
+  display: flex;
   position: relative;
   font-size: large;
   font-weight: bold;
-  align-items: center;
-  justify-content: center;
-  margin: 2px;
+  text-align: center;
+  padding: 2px;
   max-width: 90%;
   max-height: 40%;
   flex: 1 0 40%;
 }
 
 #productPrice {
+  flex: 1 0 20%;
   position: relative;
   font-size: medium;
   align-items: center;
   justify-content: center;
-  margin: 2px;
   max-width: 90%;
   max-height: 20%;
-  flex: 1 0 20%;
 }
 
 #productStars {

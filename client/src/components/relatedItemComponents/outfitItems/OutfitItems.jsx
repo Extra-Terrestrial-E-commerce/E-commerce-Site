@@ -38,6 +38,13 @@ const OutfitItems = ( {currentProduct} ) => {
       var rightButton = document.getElementById('rightOutfitButton');
       rightButton.innerHTML = '&#8618;';
       setRightDisplay(true);
+    } else {
+      setRightDisplay(false);
+      setLeftDisplay(false);
+      var left = document.getElementById('leftOutfitButton');
+      left.innerHTML = '';
+      var right = document.getElementById('rightOutfitButton');
+      right.innerHTML = '';
     }
     setOutfitItemsOnDisplay(newDisplayItems)
   }, [allOutfitItems])

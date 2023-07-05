@@ -45,13 +45,21 @@ const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct
           }
         })
         .catch(err => console.log('failed to get styles, ', err));
-
     }
   }, [product])
 
   const handleRemove = () => {
     event.preventDefault();
     const updatedItems = allOutfitItems.filter(item => item.id !== product.id);
+    var currentStorage = localStorage.getItem('outfitItems')
+    currentStorage = currentStorage.split('_');
+    var newStorage = '';
+    for (var i = 0; i < currentStorage.length; i++) {
+      if (currentStorage[i] !== '' && currentStorage[i] !== product.id.toString()) {
+        newStorage = newStorage +  currentStorage[i] + '_';
+      }
+    }
+    localStorage.setItem('outfitItems', newStorage);
     setAllOutfitItems(updatedItems);
   };
 
@@ -80,21 +88,5 @@ const OutfitCard = ( {product, allOutfitItems, setAllOutfitItems, currentProduct
     </div>
   )
 }
-
-
-// div role="relatedItemCard" id="relatedItemContainer" onClick={(event) => {
-//   handleProductChange(event)
-//   }
-// } >
-//   <div data-testid="comparisonModalContainer" style={comparisonStyle}>
-//     <ComparisonModal product={product} currentProduct={currentProduct} />
-//   </div>
-//   <span role="openCompare" id="compareButton" onClick={(event) => {
-//       handleComparison(event);
-//     }}>
-//       <OneStar percentFill={0} size={15} />
-//   </span>
-
-// </div>
 
 export default OutfitCard;
