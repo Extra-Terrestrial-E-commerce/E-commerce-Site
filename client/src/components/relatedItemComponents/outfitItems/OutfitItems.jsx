@@ -143,6 +143,7 @@ const OutfitItems = ( {currentProduct} ) => {
 
           <NewOutfitCard currentProduct={currentProduct} allOutfitItems={allOutfitItems} setAllOutfitItems={setAllOutfitItems}/>
 
+
           <div id='leftOutfitButton' style={scrollLeftOutfitButton} onClick={scrollLeft} > </div>
 
           {outfitItemsOnDisplay.map((element) => {

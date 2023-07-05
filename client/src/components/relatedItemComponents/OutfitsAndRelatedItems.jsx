@@ -6,8 +6,6 @@ const { useState, useEffect } = React;
 import apiClient from '../config/config.js';
 import AllStars from '../Stars/AllStars.jsx';
 
-import "../../stylesTwo.scss";
-
 const OutfitsAndRelatedItems = ( {currentProduct, setCurrentProduct} ) => {
 
   if (localStorage.getItem('outfitItems') === null) {

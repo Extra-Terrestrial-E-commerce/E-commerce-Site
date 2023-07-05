@@ -17,9 +17,9 @@ const ComparisonModal = ({ product, currentProduct }) => {
 
   const popUpDiv = {
     position: 'absolute',
-    left: 5,
-    top: -160,
-    width: '350px',
+    left: -175,
+    top: -200,
+    width: '400px',
     height: '150px',
     backgroundColor: '#000066',
     color: 'white',

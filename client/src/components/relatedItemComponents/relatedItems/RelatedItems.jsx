@@ -23,10 +23,14 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
             queries.push(apiClient.get('/products/' + id))
           })
           var finalData = [];
+          var ids = [];
           Promise.all(queries)
             .then((values) => {
               for (var i = 0; i < values.length; i++) {
-                finalData.push(values[i].data);
+                if (!ids.includes(values[i].data.id)) {
+                  ids.push(values[i].data.id)
+                  finalData.push(values[i].data);
+                }
               }
               setAllRelatedItems(finalData);
               setRelatedItemsOnDisplay(finalData.slice(0, 3))
