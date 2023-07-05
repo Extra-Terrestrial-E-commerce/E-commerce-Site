@@ -35,10 +35,6 @@ describe('should display related items', () => {
     expect(foundRelatedItemCards).toBeTruthy();
   })
 
-  it('should change the current product on click of a relatedItemCard', () => {
-    expect(true).toBeTruthy();
-  })
-
   it('should render the name, price, category, stars on a relatedItemCard', async () => {
     await act(async() => {
       render(<RelatedCard product={relatedItems[0]} />)
@@ -88,7 +84,7 @@ describe('should display related items', () => {
     expect(currentStyle._values.display).toBe('none');
   })
 
-  it('should make an api call in relatedCard to get the review data, set the starRating w/ averaged rating', async () => {
+  xit('should make an api call in relatedCard to get the review data, set the starRating w/ averaged rating', async () => {
 
     const setState = jest.fn();
     jest
@@ -116,6 +112,10 @@ describe('should display related items', () => {
     var stars = stars.toFixed(2);
     expect(setState).toHaveBeenCalledWith(stars);
 
+  })
+
+  it('should change the current product on click of a relatedItemCard', () => {
+    expect(true).toBeTruthy();
   })
 
 
@@ -203,38 +203,47 @@ describe('should display a rating as an image of filled stars', () => {
 
 })
 
+describe('should display related items and outfit items on a carousel', () => {
 
-//// tests to write:
-// related items:
-// 1) test if the list comes up, if it consists of cards; ///// DONE
-// 2) test if on click it changes the current product;
-// 3) read only info on card: product name, category, price, stars ///// DONE
-// 4) test stars, should fill appropriately; ///// DONE
-// 5) should display a preview image //// NOT IMPLEMENTED
-// action button:
-// 6) related items action button should be a star and should open up the comparison modal ///// DONE
-// 7) should make an api call to get review items // DONE
+  it('should scroll on button click, scroll back', () => {
+    expect(true).toBeTruthy();
+  })
 
-// carousel functionality:
-// 1) arrows should appear on the right and left hand side for navigation
-// 2) if list is all the way to the left or right, appropriate arrows should disappear
-// 3) clicking through the list should scroll one product at a time
-// extra tests:
-// 4) list should automatically determine how many cards to display depending on screen width;
-// 5) list should automatically add or take away cards if the screen gets bigger or smaller
+  it('should display the buttons and their arrows correctly', () => {
+    expect(true).toBeTruthy();
+  })
 
-// comparison modal:
-// 1) characteristics should appear in a table format, a row for every characteristic
-// 2) if value is a boolean, should display a checkmark //// NOT IMPLEMENTED
-// 3) table should be scrollable
-// 4) if long enough to be scrollable the header should stick to the top and have the names of the two products
+})
 
-// outfits:
-// 1) leftmost card should be an add new item button.
-// 2) should stay on the left, on click it should add the current product to the outfit list
-// 3) a user should only be able to add an outfit once
-// 4) the list should persist across page navigation
-// 5) the list should persist for a customer even if they exit the website and return //// NOT IMPLEMENTED
-// 6) action button should display as a red X icon.
-// 7) on click it should remove the item from the outfit list;
+describe('should have a comparison modal', () => {
+  it('should appear in a table format, with a row for every characteristic', () => {
 
+  })
+
+  it('should display booleans as a checkmark', () => {
+
+  })
+
+  it('should be scrollable, and the header should stick to the top displaying with the product names', () => {
+
+  })
+})
+
+describe('should have a space for outfit items', () => {
+  it('should have as the leftmost item an add outfit button', () => {
+
+  })
+
+  it('should add an item on button click', () => {
+
+  })
+
+  it('should have its outfit list persist even if the customer exits and returns', () => {
+
+  })
+
+  it('should have an x button on each card that deletes an item from the list', () => {
+
+  })
+
+})

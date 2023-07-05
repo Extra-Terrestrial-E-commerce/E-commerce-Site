@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-const { useEffect } = React;
 import apiClient from '../../config/config.js';
 import AllStars from '../../Stars/AllStars.jsx';
 import OneStar from '../../Stars/OneStar.jsx';
@@ -23,7 +22,7 @@ const RelatedCard = ( {product, currentProduct, isAnyComparing, setIsAnyComparin
     return [count, total];
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (product.id) {
       apiClient.get('/reviews/meta', { params: {product_id: product.id} })
         .then((data) => {

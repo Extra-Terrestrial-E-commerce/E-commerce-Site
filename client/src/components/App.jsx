@@ -29,14 +29,14 @@ const App = () => {
   return (
     <>
       <div>hello world, mars</div>
-      <div class="section">
+      <div className="section">
         {currentProduct.name && <Overview currentProduct={currentProduct}/>}
       </div>
-      <div class="section">
+      <div className="section">
         <OutfitsAndRelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct}/>
       </div>
-      <div class="section">Questions and Answers</div>
-      <div class="section">
+      <div className="section">Questions and Answers</div>
+      <div className="section">
        <a id="RatingsAndReview"></a>
        {currentProduct.name && <RatingsAndReview currentProduct={currentProduct}/>}
 
