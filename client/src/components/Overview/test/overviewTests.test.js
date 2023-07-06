@@ -24,5 +24,22 @@ describe('overview', () => {
     render(<ProductInfo product={currentProduct} style ={selectedStyles}/>)
     const category = screen.getByText("Pants");
     expect(category).toBeTruthy();
+  });
+
+  test('Product name appears in product info', () => {
+    render(<ProductInfo product={currentProduct} style ={selectedStyles}/>)
+    const name = screen.getByText("Morning Joggers");
+    expect(name).toBeTruthy();
+  });
+
+  test('Product default price appears in product info', () => {
+    render(<ProductInfo product={currentProduct} style ={selectedStyles}/>)
+    const default_price = screen.getByText("40.00");
+    expect(default_price).toBeTruthy();
+  })
+
+  test('Product should display the number of stars ', async () => {
+    render(<ProductInfo product={currentProduct} style ={selectedStyles}/>)
+    screen.debug();
   })
 })
