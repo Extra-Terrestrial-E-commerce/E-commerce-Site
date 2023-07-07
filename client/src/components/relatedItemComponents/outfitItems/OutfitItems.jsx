@@ -47,6 +47,8 @@ const OutfitItems = ( {currentProduct} ) => {
       right.innerHTML = '';
     }
     setOutfitItemsOnDisplay(newDisplayItems)
+    setLeftDisplay(false);
+    setLeftmostItem(0);
   }, [allOutfitItems])
 
 
