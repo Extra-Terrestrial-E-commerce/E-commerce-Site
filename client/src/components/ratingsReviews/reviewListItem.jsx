@@ -76,7 +76,7 @@ const ReviewListItem = ({review}) => {
     <div>
       <div className="row">
         <p>
-          <AllStars rating={review.stars}
+          <AllStars rating={review.rating}
           size={12}/>
         </p>
         <div className="row" style={{'position': 'relative', 'left': '350px'}}>

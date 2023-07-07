@@ -6,14 +6,19 @@ import OneStar from './OneStar.jsx'
 const AllStars = ( {rating, size} ) => {
 
   var fills = [];
-  var lowerBound = Math.floor(rating);
-  for (var i = 0; i < lowerBound; i++) {
-    fills.push(1);
+  if (rating === 5) {
+    fills = [1, 1, 1, 1, 1]
+  } else {
+    var lowerBound = Math.floor(rating);
+    for (var i = 0; i < lowerBound; i++) {
+      fills.push(1);
+    }
+    fills.push(rating - lowerBound);
+    while (fills.length < 5) {
+      fills.push(0);
+    }
   }
-  fills.push(rating - lowerBound);
-  while (fills.length < 5) {
-    fills.push(0);
-  }
+
 
   const handleHover = () => {
     console.log('hovering');
