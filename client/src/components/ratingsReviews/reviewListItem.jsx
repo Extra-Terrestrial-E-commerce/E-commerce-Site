@@ -74,7 +74,7 @@ const ReviewListItem = ({review}) => {
 
   return (
     <div>
-      <div class="row">
+      <div className="row">
         <p>
           <AllStars rating={review.stars}
           size={12}/>
@@ -94,7 +94,7 @@ const ReviewListItem = ({review}) => {
       {review.body.length > 250 & showMore === true ? <button style={buttonStyle} onClick={()=>{setShowMore(false)}}>Read Less</button> : <p></p>}
       {review.recommend && <p>I recommend this product</p>}
       {review.photos && review.photos.map((photo) => <img style={styles} id={photo.id} src={photo.url}/>)}
-      <div class="row">
+      <div className="row">
         <p>Helpful?</p>
         {helpfulStatus && <p>Thank you</p>}
         {helpfulStatus === false &&

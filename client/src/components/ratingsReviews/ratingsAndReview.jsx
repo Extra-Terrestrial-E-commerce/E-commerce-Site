@@ -81,8 +81,8 @@ const RatingsAndReview = ({currentProduct}) => {
 
   return (
     <>
-    <div class="row">
-      <div class="oneThird">
+    <div className="row">
+      <div className="oneThird">
         <h3>RATINGS & REVIEWS</h3>
         {filtersAdded && <><p>filters have been added </p><button onClick={()=>{removeFiltersHandler()}}>Remove Filters</button></>}
         {reviewMeta.ratings &&
@@ -91,7 +91,7 @@ const RatingsAndReview = ({currentProduct}) => {
         filterHandler={filterHandler}/>}
 
       </div>
-      <div class="twoThirds">
+      <div className="twoThirds">
         {filterReviews.length &&
         <ReviewList
         currentProduct={currentProduct}
