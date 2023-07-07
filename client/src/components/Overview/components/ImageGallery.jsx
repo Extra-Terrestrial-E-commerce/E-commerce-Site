@@ -25,7 +25,7 @@ const ImageGallery = ({style}) => {
 
 
   const LIST_MAX = 7;
-  console.log(style);
+  console.log('style: ', style);
   const mainImageUrl = style.photos[mainImageId].thumbnail_url;
   const currentPhotoArray = style.photos.slice(styleStart, styleStart + 7);
 
