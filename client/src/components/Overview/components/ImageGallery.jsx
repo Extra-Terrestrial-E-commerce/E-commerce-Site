@@ -27,10 +27,7 @@ const ImageGallery = ({style}) => {
   const LIST_MAX = 7;
   const mainImageUrl = style.photos[mainImageId].thumbnail_url;
   const currentPhotoArray = style.photos.slice(styleStart, styleStart + 7);
-  const thumbNailStyles = {
-    display:'flex',
-    flexDirection: 'column'
-  }
+
 
   function openModal() {
     setIsOpen(true);
@@ -80,15 +77,20 @@ const ImageGallery = ({style}) => {
         style={type}
         />)
   }
+
   return (
     <div  className='img-gallery'>
 
-      <div style ={thumbNailStyles} className=''>
-        {styleStart > 0 && <button onClick={moveUp}>up</button> }
-
-        {style.photos && thumbNailGallery('default')}
-        {style.photos.length >= LIST_MAX && <button onClick={moveDown}>down</button>}
+      <div className='thumbnails-list'>
+      <button  onClick={moveUp} disabled={!(styleStart > 0)}>
+        &#5169;
+        </button>
+        <div >
+          {style.photos && thumbNailGallery('default')}
+        </div>
+         <button onClick={moveDown} disabled ={(style.photos.length - LIST_MAX === styleStart)}>&#5167;</button>
       </div>
+
       <div className='default-img'>
         {mainImageId > 0 && <button style ={buttonStyles}onClick ={selectBefore}>left </button>}
         <img className ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>

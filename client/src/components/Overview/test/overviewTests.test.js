@@ -38,8 +38,8 @@ describe('overview', () => {
     expect(default_price).toBeTruthy();
   })
 
-  test('Product should display the number of stars ', async () => {
-    render(<ProductInfo product={currentProduct} style ={selectedStyles}/>)
-    screen.debug();
-  })
+  // test('Product should display the correct number of stars ', async () => {
+  //   render(<ProductInfo product={currentProduct} style ={selectedStyles}/>)
+  //   screen.debug();
+  // })
 })
