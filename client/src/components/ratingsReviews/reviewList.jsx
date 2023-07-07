@@ -67,7 +67,7 @@ const ReviewList = ({currentReviews, currentProduct, setSortParam}) => {
         )
       })}
       </div>
-      <div class="row">
+      <div className="row">
         {currentReviews.length > reviewCount-1 && <button id="moreReviews"
         onClick={displayReviews}>{buttonText}</button>}
         <button onClick={openModal}>ADD A REVIEW</button>

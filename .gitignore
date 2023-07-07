@@ -4,4 +4,5 @@
 *bundle.js
 config.js
 node_modules/
+rrTests/
 coverage/
