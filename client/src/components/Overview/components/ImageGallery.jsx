@@ -92,7 +92,7 @@ const ImageGallery = ({style}) => {
       </div>
 
       <div className='default-img'>
-        {mainImageId > 0 && <button style ={buttonStyles}onClick ={selectBefore}>left </button>}
+        {mainImageId > 0 && <button style ={buttonStyles}onClick ={selectBefore}>&#5176; </button>}
         <img className ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
         <Modal
           isOpen={modalIsOpen}
@@ -109,7 +109,7 @@ const ImageGallery = ({style}) => {
               thumbNailGallery = {thumbNailGallery}
             />
           </Modal>
-        {mainImageId < style.photos.length -1 && <button style ={buttonStyles} onClick ={selectNext}> right </button>}
+        {mainImageId < style.photos.length -1 && <button style ={buttonStyles} onClick ={selectNext}> &#5171; </button>}
       </div>
     </div>
   )
