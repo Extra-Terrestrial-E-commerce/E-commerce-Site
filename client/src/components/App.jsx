@@ -35,7 +35,6 @@ const App = () => {
       <div className="section">
         <OutfitsAndRelatedItems currentProduct={currentProduct} setCurrentProduct={setCurrentProduct}/>
       </div>
-      <div className="section">Questions and Answers</div>
       <div className="section">
        <a id="RatingsAndReview"></a>
        {currentProduct.name && <RatingsAndReview currentProduct={currentProduct}/>}
