@@ -18,7 +18,6 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
       apiClient.get(url)
         .then((data) => {
           var relatedIds = data.data;
-          console.log(relatedIds);
           var queries = [];
           relatedIds.forEach((id) => {
             queries.push(apiClient.get('/products/' + id))
@@ -33,7 +32,8 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
                   finalData.push(values[i].data);
                 }
               }
-              console.log(finalData);
+              setLeftDisplay(false);
+              setLeftmostItem(0);
               setAllRelatedItems(finalData);
               setRelatedItemsOnDisplay(finalData.slice(0, 3))
             })
