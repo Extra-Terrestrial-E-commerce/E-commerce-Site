@@ -78,6 +78,9 @@ const ImageGallery = ({style}) => {
         />)
   }
 
+  const mainImgStyle = {
+  }
+
   return (
     <div  className='img-gallery'>
 
@@ -91,9 +94,9 @@ const ImageGallery = ({style}) => {
          <button onClick={moveDown} disabled ={(style.photos.length - LIST_MAX === styleStart)}>&#5167;</button>
       </div>
 
-      <div className='default-img'>
-        {mainImageId > 0 && <button style ={buttonStyles}onClick ={selectBefore}>&#5176; </button>}
-        <img className ='img' src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
+      <div className='main-img-container'>
+        <button style ={buttonStyles}onClick ={selectBefore}disabled ={mainImageId <= 0}>&#5176; </button>
+        <img style ={mainImgStyle} src ={style.photos[mainImageId].thumbnail_url} onClick={() => setIsOpen(true)}/>
         <Modal
           isOpen={modalIsOpen}
           // onAfterOpen={afterOpenModal}
@@ -109,7 +112,7 @@ const ImageGallery = ({style}) => {
               thumbNailGallery = {thumbNailGallery}
             />
           </Modal>
-        {mainImageId < style.photos.length -1 && <button style ={buttonStyles} onClick ={selectNext}> &#5171; </button>}
+       <button style ={buttonStyles} onClick ={selectNext} disabled ={mainImageId >= style.photos.length -1}> &#5171; </button>
       </div>
     </div>
   )
