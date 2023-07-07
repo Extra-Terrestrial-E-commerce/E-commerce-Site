@@ -84,12 +84,11 @@ describe('should display related items', () => {
     expect(currentStyle._values.display).toBe('none');
   })
 
-  xit('should make an api call in relatedCard to get the review data, set the starRating w/ averaged rating', async () => {
+  it('should make an api call in relatedCard to get the review data, set the starRating w/ averaged rating', async () => {
 
     const setState = jest.fn();
-    jest
-      .spyOn(React, 'useState')
-      .mockImplementationOnce(initState => [initState, setState]);
+    jest.spyOn(React, 'useState')
+      .mockImplementation(initState => [initState, setState]);
 
     apiClient.get.mockResolvedValue({data: review})
     await act(async () => {
@@ -205,8 +204,30 @@ describe('should display a rating as an image of filled stars', () => {
 
 describe('should display related items and outfit items on a carousel', () => {
 
-  it('should scroll on button click, scroll back', () => {
-    expect(true).toBeTruthy();
+  it('should scroll on button click, scroll back', async () => {
+    const setState = jest.fn();
+    jest.spyOn(React, 'useState')
+      .mockImplementation(initState => [initState, setState]);
+    apiClient.get.mockResolvedValueOnce({ data: relatedItems });
+    await act(async () => {
+      render(<RelatedItems currentProduct={currentProduct}/>)
+    })
+
+    const stateCalls = setState.mock.calls;
+    const states = stateCalls.map((call) => call[0]);
+    console.log(states[3][0].length);
+    console.log(states[4][0].length);
+
+    expect(states.includes([relatedItems.slice(0,3)])).toBeTruthy()
+    var left = document.getElementById('leftButton');
+    var right = document.getElementById('rightButton');
+
+
+    fireEvent.click(rightButton);
+    // var currentStyle = window.getComputedStyle(modalContainer);
+    // expect(currentStyle._values.display).toBe('none');
+
+
   })
 
   it('should display the buttons and their arrows correctly', () => {
