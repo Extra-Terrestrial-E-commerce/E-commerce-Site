@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-const { useState, useEffect } = React;
+const { useEffect } = React;
 import apiClient from '../../config/config.js';
 import RelatedCard from './RelatedCard.jsx';
 
 const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
-  const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = useState([]);
-  const [allRelatedItems, setAllRelatedItems] = useState([]);
-  const [leftmostItem, setLeftmostItem] = useState(0);
-  const [isAnyComparing, setIsAnyComparing] = useState(false);
-  const [leftDisplay, setLeftDisplay] = useState(false);
-  const [rightDisplay, setRightDisplay] = useState(false);
+  const [relatedItemsOnDisplay, setRelatedItemsOnDisplay] = React.useState([]);
+  const [allRelatedItems, setAllRelatedItems] = React.useState([]);
+  const [leftmostItem, setLeftmostItem] = React.useState(0);
+  const [isAnyComparing, setIsAnyComparing] = React.useState(false);
+  const [leftDisplay, setLeftDisplay] = React.useState(false);
+  const [rightDisplay, setRightDisplay] = React.useState(false);
 
   useEffect(() => {
     if (currentProduct.id) {
@@ -18,6 +18,7 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
       apiClient.get(url)
         .then((data) => {
           var relatedIds = data.data;
+          console.log(relatedIds);
           var queries = [];
           relatedIds.forEach((id) => {
             queries.push(apiClient.get('/products/' + id))
@@ -32,6 +33,7 @@ const RelatedItems = ( {currentProduct, setCurrentProduct} ) => {
                   finalData.push(values[i].data);
                 }
               }
+              console.log(finalData);
               setAllRelatedItems(finalData);
               setRelatedItemsOnDisplay(finalData.slice(0, 3))
             })
