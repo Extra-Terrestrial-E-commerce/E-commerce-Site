@@ -7,14 +7,14 @@ const ImgStyleIcon = ({photo, updatingMainImage, id, selected, style}) => {
 
     if (style === 'default') {
       return selected ?  {
-        width: '70px',
-        height:'70px',
+        width: '50px',
+        height:'50px',
         borderRadius: '10%',
         border: '2px solid',
         margin:'5px'
       } : {
-        width: '70px',
-        height:'70px',
+        width: '50px',
+        height:'50px',
         borderRadius: '10%',
         margin:'5px'
       }

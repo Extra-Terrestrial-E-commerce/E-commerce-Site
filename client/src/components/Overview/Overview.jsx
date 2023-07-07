@@ -19,6 +19,7 @@ const Overview = ({currentProduct}) => {
     }
   }, [currentProduct])
 
+
   return (
     <div className=''>
       <div className='main-overview'>

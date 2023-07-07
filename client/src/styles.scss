@@ -178,7 +178,16 @@ table {
   justify-content: space-around;
   align-items: center;
   width: 67%;
-  border: solid;
+  position:relative;
+
+}
+.thumbnails-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 90%;
+  width:max-content;
+  position: relative;
 
 }
 
