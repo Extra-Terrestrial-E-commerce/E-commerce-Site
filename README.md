@@ -2,16 +2,12 @@
 
 # 🚀 Welcome to your new awesome project!
 
-This project has been created using **webpack-cli**, you can now run
+Before building, retrieve api key for config file. Visit github.com to generate token. Paste token in config.example and rename to config.js
 
-```
-npm run build
-```
+Run npm install on terminal to install dependencies.
 
-or
+Then run npm client-dev to compile the code.
 
-```
-yarn build
-```
+To see application in your browswer run npm run start:client
 
-to bundle your application
+
