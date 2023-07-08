@@ -1,14 +1,16 @@
 require("dotenv").config();
 const TerserPlugin = require("terser-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const path = require("path");
 
 module.exports = {
+  plugins: [new CompressionPlugin()],
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
   },
-  mode: "development",
+  mode: "production",
   entry: path.join(__dirname, "/client/src/index.jsx"),
   output: {
     path: path.join(__dirname, "/client/dist"),
