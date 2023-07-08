@@ -79,6 +79,13 @@ const ImageGallery = ({style}) => {
   }
 
   const mainImgStyle = {
+    height: '200px',
+    width: 'auto'
+  }
+  const thumbNailGalleryStyles =  {
+    position: 'absolute',
+    top: '0',
+    left: '0'
   }
 
   return (
