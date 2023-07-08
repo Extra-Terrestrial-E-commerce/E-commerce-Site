@@ -26,7 +26,8 @@ const AllStars = ( {rating, size} ) => {
 
   const starStyle = {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    zIndex: 9999
   }
 
   var counter = 0;
