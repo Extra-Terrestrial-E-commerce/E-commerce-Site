@@ -79,8 +79,9 @@ const ImageGallery = ({style}) => {
   }
 
   const mainImgStyle = {
-    height: '200px',
-    width: 'auto'
+    width: "237px",
+    height: "200px",
+    objectFit: "cover"
   }
   const thumbNailGalleryStyles =  {
     position: 'absolute',
