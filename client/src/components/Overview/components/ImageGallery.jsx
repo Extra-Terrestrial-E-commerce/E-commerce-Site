@@ -25,11 +25,6 @@ const ImageGallery = ({style}) => {
 
 
   const LIST_MAX = 7;
-<<<<<<< HEAD
-
-=======
-  console.log("style", style);
->>>>>>> 558bfeb (change)
   const mainImageUrl = style.photos[mainImageId].thumbnail_url;
   const currentPhotoArray = style.photos.slice(styleStart, styleStart + 7);
 
